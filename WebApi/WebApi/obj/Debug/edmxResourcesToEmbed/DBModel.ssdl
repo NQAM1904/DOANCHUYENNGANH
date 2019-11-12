@@ -207,7 +207,7 @@
     <Property Name="USERNAME" Type="varchar" MaxLength="50" />
     <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
     <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
-    <Property Name="IDROLE" Type="int" />
+    <Property Name="IDROLE" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK__AGENCY_CA__IDAGE__5BE2A6F2">
     <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
@@ -426,7 +426,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__USER__IDROLE__6754599E">
-    <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
     <End Role="USER" Type="Self.USER" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ROLE">

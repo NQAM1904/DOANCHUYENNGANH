@@ -212,7 +212,7 @@
           <Property Name="USERNAME" Type="varchar" MaxLength="50" />
           <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
           <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
-          <Property Name="IDROLE" Type="int" />
+          <Property Name="IDROLE" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__AGENCY_CA__IDAGE__5BE2A6F2">
           <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
@@ -431,7 +431,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__USER__IDROLE__6754599E">
-          <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROLE">
@@ -868,7 +868,7 @@
           <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDROLE" Type="Int32" />
+          <Property Name="IDROLE" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AGENCies" Relationship="Self.FK_AGENCY_USER" FromRole="USER" ToRole="AGENCY" />
           <NavigationProperty Name="CUSTOMERs" Relationship="Self.FK_CUSTOMER_USER" FromRole="USER" ToRole="CUSTOMER" />
           <NavigationProperty Name="ROLE" Relationship="Self.FK__USER__IDROLE__6754599E" FromRole="USER" ToRole="ROLE" />
@@ -1090,7 +1090,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__USER__IDROLE__6754599E">
-          <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROLE">

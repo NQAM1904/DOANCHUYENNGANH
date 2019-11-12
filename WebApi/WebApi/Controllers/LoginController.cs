@@ -70,7 +70,7 @@ namespace WebApi.Controllers
                 if (userDB is null)
                 {
                     ViewBag.Error = "Tài khoản hoặc mật khẩu không chính xác";
-                    return View("SignUp");
+                    return View();
                 }
 
                 Session["TaiKhoan"] = userDB;

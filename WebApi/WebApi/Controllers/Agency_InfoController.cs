@@ -9,10 +9,14 @@ namespace WebApi.Controllers
     public class Agency_InfoController : Controller
     {
         // GET: Agency_Info
-        public ActionResult Info(int id)
+        public ActionResult Info(int? id)
         {
-            ViewBag.Id = id;
-            return View();
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var agency = db.AGENCies.Where(x => x.IDAGENCY == id).FirstOrDefault();
+                if (agency is null) return HttpNotFound();
+                return View(agency);
+            }
         }
     }
 }
