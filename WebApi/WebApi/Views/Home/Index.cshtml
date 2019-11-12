@@ -1,0 +1,141 @@
+﻿@using WebApi.Controllers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .card-title:hover a{
+        text-decoration: none;
+    }
+   
+</style>
+<header>
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active">
+                <img src="~/img/slide1.jpg"
+                     class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/slide2.jpg"
+                     class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/event-management-company.jpg"
+                     class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <div class="carousel-caption d-none d-md-block input-find">
+            <h3>
+                Bao quanh bạn với các cơ quan tốt nhất,
+                Từ thiết kế web đến các chiến dịch quảng cáo, chúng tôi hướng dẫn bạn đến các cơ quan tiếp thị phù hợp.
+            </h3>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Tìm tổ chức..." id="form-find">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="Find"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <h4>Miễn phí 100% - Tư ván từ các nhà cung cấp sẵn sàng cộng tác với bạn.</h4>
+        </div>
+
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+    </div>
+</header>
+
+<div class="container">
+    <h1 class="my-4 text-center">DỊCH VỤ - SẢN PHẨM TRONG NGÀNH SỰ KIỆN</h1>
+    <br>
+    <div class="row">
+
+        @{
+            CategoryApiController api = new CategoryApiController();
+            foreach (var category in api.Get().ToList())
+            {
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="/Cate_Info/Info/@category.IDCATE"><img class="card-img-top" src="~/img/category/@category.IMGCATE" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="/Cate_Info/Info/@category.IDCATE">@category.NAMECATE</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="~/img/category/others.jpg" alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Khác</a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<section class="container section_home">
+    <div class="container s-center">
+        <h2 class="md-display-3 s-primary-hue-4 s-bold">Khởi động dự án của bạn ngày hôm nay!</h2>
+        <p class="md-display-1 text-center">Làm thế nào chúng tôi hướng dẫn bạn đến đúng đại lý tổ chức sự kiện.</p>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-number">1</div>
+                    <img class="card-img-top img-thumbnail rounded" src="~/img/note-2.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Xác định nhu cầu của bạn</h4>
+                        <p class="card-text">
+                            Chúng tôi giúp bạn tìm những từ thích hợp để mô tả nhu cầu của bạn bằng cách hỏi bạn những câu hỏi phù
+                            hợp.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-number">2</div>
+                    <img class="card-img-top" src="~/img/social.png" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Được giới thiệu</h4>
+                        <p class="card-text">Chúng tôi giới thiệu bạn với các đại lý có liên quan đến dự án của bạn.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-number">3</div>
+                    <img class="card-img-top" src="~/img/hop-tac.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Thuê đại lý của bạn</h4>
+                        <p class="card-text ">
+                            Bạn tương tác trên hoặc ngoại tuyến. Bạn so sánh và thuê đại lý mới của bạn khi bạn đã sẵn sàng.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end- section-->
+
+<section class="container section_home">
+    <div class="container s-center">
+        <h4 class="md-display-3 s-primary-hue-4 s-bold">Các đại lý được chọn nhiều nhất</h4>
+        <p class="md-title s-primary-hue-3 text-center">
+            Những cái tốt nhất, nhưng không nhất thiết là những cái lớn nhất.
+        </p>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="py-5 bg-white">
+    <div class="container">
+        <p class="m-0 text-center text-dark">Dev by Anh Minh &copy; Đồ án chuyên ngành</p>
+    </div>
+    <!-- /.container -->
+</footer>

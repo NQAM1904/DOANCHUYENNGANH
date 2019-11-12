@@ -1,0 +1,155 @@
+﻿@using WebApi.Controllers
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int id = (int)ViewBag.Id;
+}
+<link href="~/Content/agency_info.css" rel="stylesheet" />
+<link href="~/Content/styles.css" rel="stylesheet" />
+<div class="row all-layout">
+
+    @{
+    AgencyApiController api = new AgencyApiController();
+        var agency = api.Get(id);
+    <div class="col-lg-2">
+        <br />
+        <div class="s-agency-summary">
+            <img class="cover" src="~/img/@agency.IMGAGENCies.FirstOrDefault().FILENAME">
+            <h5>@agency.NAMEAGENCY</h5>
+            <div class='rating-stars'>
+                <ul id='stars'>
+                    <li class='star' title='Poor' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Fair' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Good' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Excellent' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='WOW!!!' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+                <a class="reviews">(5 REVIEWS)</a>
+                <button type="button" class="btn btn-primary btn-block btn-lg lien-he" id="lienhe"
+                        data-toggle="modal" data-target="#Modal2">
+                    Liên Hệ
+                </button>
+            </div>
+            <div class="certifications">
+                <h2 class="sub"><b>Chứng nhận</b>&nbsp;của @agency.NAMEAGENCY</h2>
+            </div>
+            <div class="checked">
+                <i class="fa fa-check"></i>
+                <p>Được chứng nhận Sortlist</p>
+            </div>
+            <div class="checked">
+                <i class="fa fa-check"></i>
+                <p>Được xác minh bởi chủ sở hữu</p>
+            </div>
+            <div class="location">
+                <h2 class="sub"><b>Địa chỉ</b>&nbsp;của @agency.NAMEAGENCY</h2>
+            </div>
+            <div class="map-marker">
+                <i class="fa fa-map-marker"></i>
+                <p>@agency.ADDRESSAGENCY</p>
+                <div class="map">
+
+                </div>
+            </div>
+            <div class="dich_vu">
+                <h2 class="sub"><b>Dịch vụ</b>&nbsp;được cung cấp bởi @agency.NAMEAGENCY</h2>
+            </div>
+            <div class="tag_DV">
+                <ul class="layout-row layout-wrap">
+                    <li class="tag">Web Application</li>
+                    <p class="gia_tien text-right">5.000.000VNĐ - 20.000.000VNĐ </p>
+                    <li class="tag">Motion Design</li>
+                    <p class="gia_tien text-right">10.000.000VNĐ - 60.000.000VNĐ </p>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--end col-lg-2-->
+
+    <div class="col-lg-10">
+        <br />
+        <div class="container all-box">
+            <img src="~/img/@agency.IMGAGENCies.ElementAt(2).FILENAME" class="d-block w-100" alt="...">
+            <div class="contant_info">
+                <h2 class="md-display-2">@agency.NAMEAGENCY</h2>
+                <div class="address">
+                    @*<span class="s-address">@agency.ADDRESSAGENCY</span>*@
+                </div>
+                <div class="content-info">
+                    <p>
+                        @agency.DESCRIPTION
+                    <p>
+                </div>
+            </div>
+
+            <div class="works-history">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        @*<b>Works (3) by @agency.NAMEAGENCY</b>*@
+                    </div>
+                    <div class="card-info">
+                        <div class="card card-flex" style="width: 18rem;">
+                            <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Digital Transformation: Survive and Thrive – Cách mạng số và
+                                    những bước ngoặt lịch sử
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="card card-flex" style="width: 18rem;">
+                            <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Digital Transformation: Survive and Thrive – Cách mạng số và
+                                    những bước ngoặt lịch sử
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card card-flex" style="width: 18rem;">
+                            <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Digital Transformation: Survive and Thrive – Cách mạng số và
+                                    những bước ngoặt lịch sử
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--card items-->
+            <div class="Services">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <b>Dịch vụ</b>
+                    </div>
+                </div>
+                <canvas id="sitemap" width="1108" height="300" class="arbor" style="opacity: 1;"></canvas>
+            </div>
+
+            <div class="Comment">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <b>Bình luận</b>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    }
+</div>
+

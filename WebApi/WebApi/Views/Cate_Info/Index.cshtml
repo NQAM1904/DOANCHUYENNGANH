@@ -1,0 +1,297 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3 text-center">
+        Phân nhóm
+        <small>các công ty</small>
+    </h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Các công ty</li>
+        </ol>
+    </nav>
+</div>
+<!--/container-->
+<div class="container">
+    <div class="layout-row layout-align-start-center"
+         style="padding-left:1% !important;margin-bottom: 16px; justify-content: space-between;align-items: flex-end;">
+        <div class="md-caption" style="width:30% !important; margin-right:3px">
+            <div class="md-sortlist-theme" style="font-weight: bold;">
+                Ngân Sách
+            </div>
+            <div style="margin-top: 8px">
+                <md-input-container class="s-input-container s-fluid sl-no-error md-input-has-placeholder md-sortlist-theme">
+                    <div class="md-resize-wrapper">
+                        <i class="fa fa-usd" style="font-size: 16px;position: absolute;left: 10px;top: 7px;"></i>
+                        <select id="exp-filter-budget"
+                                class="s-select ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched s-select-optimize"
+                                style="background: white;padding-left: 30px;-webkit-appearance:none; border-radius:0px !important">
+                            <option value="any">Tất cả</option>
+                            <option value="0">$1,000 - $3,000</option>,
+                            <option value="1">$3,000 - $5,000</option>,
+                            <option value="2">$5,000 - $10,000</option>,
+                            <option value="3">$10,000 - $20,000</option>,
+                            <option value="4">$20,000 - $40,000</option>
+                        </select>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div class="md-caption" style="width:30% !important; margin-right:3px">
+            <div class="md-sortlist-theme" style="font-weight: bold;">
+                Quy Mô
+            </div>
+            <div style="margin-top: 8px">
+                <md-input-container class="s-input-container s-fluid sl-no-error md-input-has-placeholder md-sortlist-theme">
+                    <div class="md-resize-wrapper">
+                        <i class="fa fa-users" style="font-size: 16px;position: absolute;left: 10px;top: 9px;"></i>
+                        <select id="exp-filter-size"
+                                class="s-select ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched s-select-optimize"
+                                style="background: white; padding-left: 30px;-webkit-appearance:none; border-radius:0px !important">
+                            <option value="any">Tất cả</option>
+                            <option value="0">Small studio (1-10 people)</option>,
+                            <option value="1">Medium agency (11-30 people)</option>,
+                            <option value="2">Big agency (31-100 people)</option>,
+                            <option value="3">Group (101+ workers)</option>
+                        </select>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div class="md-caption" style="width:30% !important; margin-right:3px">
+            <div class="md-sortlist-theme" style="font-weight: bold;">
+                Lĩnh Vực
+            </div>
+            <div style="margin-top: 8px">
+                <md-input-container class="s-input-container s-fluid sl-no-error md-input-has-placeholder md-sortlist-theme">
+                    <div class="md-resize-wrapper">
+                        <i class="fa fa-suitcase" style="font-size: 16px;position: absolute;left: 10px;top: 9px;"></i>
+                        <select id="exp-filter-industry"
+                                class="s-select ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched s-select-optimize"
+                                style="background: white;padding-left: 30px;-webkit-appearance:none; border-radius:0px !important">
+                            <option value="any">Tất cả</option>
+                            <option value="0">Automotive</option>,
+                            <option value="1">Beverage</option>,
+                            <option value="2">Clothing &amp; Accessories</option>,
+                            <option value="3">Consumer Electronics</option>,
+                            <option value="4">Energy &amp; Oil</option>,
+                            <option value="5">Banking &amp; Financials</option>,
+                            <option value="6">Government &amp; Administration</option>,
+                            <option value="7">Food</option>,
+                            <option value="8">Hospitals &amp; Healthcare</option>,
+                            <option value="9">Household Products</option>,
+                            <option value="10">Industrial Goods &amp; Services</option>,
+                            <option value="11">Media</option>,
+                            <option value="12">Military</option>,
+                            <option value="13">Non-profit</option>,
+                            <option value="14">Pharmaceuticals &amp; Biotech</option>,
+                            <option value="15">Retail</option>,
+                            <option value="16">Software &amp; Computer Services</option>,
+                            <option value="17">Technology Hardware &amp; Equipment</option>,
+                            <option value="18">Telecommunications</option>,
+                            <option value="19">Tobacco</option>,
+                            <option value="20">Toys</option>,
+                            <option value="21">Travel &amp; Leisure</option>,
+                            <option value="22">Utilities</option>,
+                            <option value="23">Real Estate</option>,
+                            <option value="24">Accounting</option>,
+                            <option value="25">Architecture &amp; Planning</option>,
+                            <option value="26">Art &amp; Handcraft</option>,
+                            <option value="27">Aviation &amp; Aerospace</option>,
+                            <option value="28">Construction</option>,
+                            <option value="29">E-commerce</option>,
+                            <option value="30">Education</option>,
+                            <option value="31">Entertainment &amp; Events</option>,
+                            <option value="32">Farming</option>,
+                            <option value="33">Home Services</option>,
+                            <option value="34">Human Resources</option>,
+                            <option value="35">Insurance</option>,
+                            <option value="36">Internet</option>,
+                            <option value="37">Legal Services</option>,
+                            <option value="38">Logistics &amp; Supply Chain</option>,
+                            <option value="39">Luxury Goods &amp; Jewelry</option>,
+                            <option value="40">Management Consulting</option>,
+                            <option value="41">Marketing &amp; Advertising</option>,
+                            <option value="42">Music</option>,
+                            <option value="43">Office/Room/Space Renting</option>,
+                            <option value="44">Pets</option>,
+                            <option value="45">Political Organization</option>,
+                            <option value="46">Restaurants</option>,
+                            <option value="47">Sports</option>,
+                            <option value="48">Storage</option>,
+                            <option value="49">Transportation</option>,
+                            <option value="50">Wine &amp; Spirits</option>,
+                            <option value="51">Publishing</option>
+                        </select>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div class="md-caption">
+            <a id="btn-md-caption" class="exp-createRequest md-truncate md-button profile md-sortlist-theme"
+               style="color:white;margin-bottom: 0; background-color:#20c5e5; border-radius:unset">Tìm Kiếm</a>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <img src="./img/logo-beast.png" class="card-logo"><a href="agency-info.html"
+                                                                             class="title-company">BEAST</a>
+                    </h5>
+                </div>
+                <img src="./img/background-beast.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Đánh giá</h5>
+                    <div class='rating-stars'>
+                        <ul id='stars'>
+                            <li class='star' title='Poor' data-value='1'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Fair' data-value='2'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Good' data-value='3'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Excellent' data-value='4'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='WOW!!!' data-value='5'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <h5 class="card-title">Tổ chức</h5>
+                    <p class="card-text"><span class="data-api">10 sự kiện</span> đã đăng lên MPCE</p>
+                    <h5 class="card-title">Quy mô</h5>
+                    <p class="card-text"><span class="data-api">10 người</span> đã thực hiện</p>
+                    <h5 class="card-title">Dịch vụ</h5>
+                    <ul class="layout-row layout-wrap">
+                        <li class="tag">Social Media</li>
+                        <li class="tag">Advertising</li>
+                        <li class="tag">Online Advertising</li>
+                        <li class="tag">Media Planning</li>
+                        <li class="tag">Web Application</li>
+                        <li class="tag">Motion Design</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
+                    <a href="#" class="btn btn-outline-success btn-sm btn-block">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <img src="./img/logo-event-degins.jpg" class="card-logo"><a href="agency-info.html"
+                                                                                    class="title-company">EVENT DESIGNS</a>
+                    </h5>
+                </div>
+                <img src="./img/event-deign.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Đánh giá</h5>
+                    <div class='rating-stars'>
+                        <ul id='stars'>
+                            <li class='star' title='Poor' data-value='1'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Fair' data-value='2'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Good' data-value='3'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Excellent' data-value='4'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='WOW!!!' data-value='5'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <h5 class="card-title">Tổ chức</h5>
+                    <p class="card-text"><span class="data-api">10 sự kiện</span> đã đăng lên MPCE</p>
+                    <h5 class="card-title">Quy mô</h5>
+                    <p class="card-text"><span class="data-api">10 người</span> đã thực hiện</p>
+                    <h5 class="card-title">Dịch vụ</h5>
+                    <ul class="layout-row layout-wrap">
+                        <li class="tag">Social Media</li>
+                        <li class="tag">Advertising</li>
+                        <li class="tag">Online Advertising</li>
+                        <li class="tag">Media Planning</li>
+                        <li class="tag">Web Application</li>
+                        <li class="tag">Motion Design</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
+                    <a href="#" class="btn btn-outline-success btn-sm btn-block">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <img src="./img/vn-summit.png" class="card-logo"><a href="agency-info.html"
+                                                                            class="title-company">VIETNAM WEB SUMMIT</a>
+                    </h5>
+                </div>
+                <img src="./img/vnweb-submit.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Đánh giá</h5>
+                    <div class='rating-stars'>
+                        <ul id='stars'>
+                            <li class='star' title='Poor' data-value='1'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Fair' data-value='2'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Good' data-value='3'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Excellent' data-value='4'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='WOW!!!' data-value='5'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <h5 class="card-title">Tổ chức</h5>
+                    <p class="card-text"><span class="data-api">10 sự kiện</span> đã đăng lên MPCE</p>
+                    <h5 class="card-title">Quy mô</h5>
+                    <p class="card-text"><span class="data-api">10 người</span> đã thực hiện</p>
+                    <h5 class="card-title">Dịch vụ</h5>
+                    <ul class="layout-row layout-wrap">
+                        <li class="tag">Social Media</li>
+                        <li class="tag">Advertising</li>
+                        <li class="tag">Online Advertising</li>
+                        <li class="tag">Media Planning</li>
+                        <li class="tag">Web Application</li>
+                        <li class="tag">Motion Design</li>
+                    </ul>
+                    <a href="agency-info.html" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
+                    <a href="#" class="btn btn-outline-success btn-sm btn-block" id="lienhe" data-toggle="modal" data-target="#Modal2">Liên hệ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+

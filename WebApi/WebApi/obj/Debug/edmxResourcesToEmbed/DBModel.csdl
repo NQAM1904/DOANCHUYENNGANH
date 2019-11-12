@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DOANCHUYENNGANHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AGENCY">
+    <Key>
+      <PropertyRef Name="IDAGENCY" />
+    </Key>
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMEAGENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PHONEAGENCY" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESSAGENCY" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="EMAILAGENCY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SUMARYAGENCY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IDSOCIAL" Type="Int32" />
+    <Property Name="STATUS" Type="Boolean" />
+    <Property Name="IDUSER" Type="Int32" Nullable="false" />
+    <Property Name="IDCATE" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AGENCY_SURVICES" Relationship="Self.FK__AGENCY_SU__IDAGE__5FB337D6" FromRole="AGENCY" ToRole="AGENCY_SURVICES" />
+    <NavigationProperty Name="COMMENTs" Relationship="Self.FK__COMMENT__IDAGENC__5CD6CB2B" FromRole="AGENCY" ToRole="COMMENT" />
+    <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDAGE__5DCAEF64" FromRole="AGENCY" ToRole="ORDER_INFO" />
+    <NavigationProperty Name="PEOPLE_AGENCY" Relationship="Self.FK__PEOPLE_AG__IDAGE__5EBF139D" FromRole="AGENCY" ToRole="PEOPLE_AGENCY" />
+    <NavigationProperty Name="CATEGORY" Relationship="Self.FK_AGENCY_CATEGORY" FromRole="AGENCY" ToRole="CATEGORY" />
+    <NavigationProperty Name="AGENCY_SOCIAL" Relationship="Self.FK_AGENCY_SOCIAL_AGENCY" FromRole="AGENCY" ToRole="AGENCY_SOCIAL" />
+    <NavigationProperty Name="USER" Relationship="Self.FK_AGENCY_USER" FromRole="AGENCY" ToRole="USER" />
+    <NavigationProperty Name="IMGAGENCies" Relationship="Self.FK_IMGAGENCY_AGENCY" FromRole="AGENCY" ToRole="IMGAGENCY" />
+    <NavigationProperty Name="CATEGORies" Relationship="Self.AGENCY_CATE" FromRole="AGENCY" ToRole="CATEGORY" />
+  </EntityType>
+  <EntityType Name="AGENCY_SOCIAL">
+    <Key>
+      <PropertyRef Name="IDAGENCY_SOCIAL" />
+    </Key>
+    <Property Name="IDAGENCY_SOCIAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDSOCIAL" Type="Int32" />
+    <Property Name="IDAGENCY" Type="Int32" />
+    <Property Name="NAME_SOCIAL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK_AGENCY_SOCIAL_AGENCY" FromRole="AGENCY_SOCIAL" ToRole="AGENCY" />
+    <NavigationProperty Name="SOCIAL" Relationship="Self.FK_AGENCY_SOCIAL_SOCIAL" FromRole="AGENCY_SOCIAL" ToRole="SOCIAL" />
+  </EntityType>
+  <EntityType Name="AGENCY_SURVICES">
+    <Key>
+      <PropertyRef Name="IDSERVICES" />
+      <PropertyRef Name="IDAGENCY" />
+    </Key>
+    <Property Name="IDSERVICES" Type="Int32" Nullable="false" />
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+    <Property Name="BEGIN_PRICE" Type="Double" />
+    <Property Name="MAX_PRICE" Type="Double" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK__AGENCY_SU__IDAGE__5FB337D6" FromRole="AGENCY_SURVICES" ToRole="AGENCY" />
+    <NavigationProperty Name="SERVICE" Relationship="Self.FK__AGENCY_SU__IDSER__656C112C" FromRole="AGENCY_SURVICES" ToRole="SERVICES" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="IDCATE" />
+    </Key>
+    <Property Name="IDCATE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMECATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IMGCATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AGENCies" Relationship="Self.FK_AGENCY_CATEGORY" FromRole="CATEGORY" ToRole="AGENCY" />
+    <NavigationProperty Name="AGENCies1" Relationship="Self.AGENCY_CATE" FromRole="CATEGORY" ToRole="AGENCY" />
+  </EntityType>
+  <EntityType Name="COMMENT">
+    <Key>
+      <PropertyRef Name="idCOMNENT" />
+    </Key>
+    <Property Name="idCOMNENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+    <Property Name="IDCUSTOMER" Type="Int32" Nullable="false" />
+    <Property Name="COMMENTSTATUS" Type="Boolean" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK__COMMENT__IDAGENC__5CD6CB2B" FromRole="COMMENT" ToRole="AGENCY" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__COMMENT__IDCUSTO__60A75C0F" FromRole="COMMENT" ToRole="CUSTOMER" />
+  </EntityType>
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="IDCUSTOMER" />
+    </Key>
+    <Property Name="IDCUSTOMER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMECUSTOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EMAILCUSTOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PHONECUSTOM" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="ADDRESSCUSTOM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IDUSER" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COMMENTs" Relationship="Self.FK__COMMENT__IDCUSTO__60A75C0F" FromRole="CUSTOMER" ToRole="COMMENT" />
+    <NavigationProperty Name="ORDERs" Relationship="Self.FK__ORDER__IDCUSTOME__628FA481" FromRole="CUSTOMER" ToRole="ORDER" />
+    <NavigationProperty Name="USER" Relationship="Self.FK_CUSTOMER_USER" FromRole="CUSTOMER" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="EVENT">
+    <Key>
+      <PropertyRef Name="IDEVENT" />
+    </Key>
+    <Property Name="IDEVENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_TIME" Type="Int32" Nullable="false" />
+    <Property Name="NAME_EVENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="STATUS" Type="Boolean" />
+    <NavigationProperty Name="TIME_EVENT" Relationship="Self.FK__EVENTS__ID_TIME__6D0D32F4" FromRole="EVENTS" ToRole="TIME_EVENT" />
+    <NavigationProperty Name="ORDERs" Relationship="Self.FK__ORDER__IDEVENT__6A30C649" FromRole="EVENTS" ToRole="ORDER" />
+    <NavigationProperty Name="SERVICES" Relationship="Self.EVENT_SERVICE" FromRole="EVENTS" ToRole="SERVICES" />
+    <NavigationProperty Name="LOCATIONs" Relationship="Self.LOC_EVENT" FromRole="EVENTS" ToRole="LOCATION" />
+  </EntityType>
+  <EntityType Name="IMGAGENCY">
+    <Key>
+      <PropertyRef Name="IDIMG" />
+    </Key>
+    <Property Name="IDIMG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK_IMGAGENCY_AGENCY" FromRole="IMGAGENCY" ToRole="AGENCY" />
+  </EntityType>
+  <EntityType Name="LOCATION">
+    <Key>
+      <PropertyRef Name="IDLOCATION" />
+    </Key>
+    <Property Name="IDLOCATION" Type="Int32" Nullable="false" />
+    <Property Name="TIME" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="EVENTS" Relationship="Self.LOC_EVENT" FromRole="LOCATION" ToRole="EVENTS" />
+  </EntityType>
+  <EntityType Name="ORDER">
+    <Key>
+      <PropertyRef Name="IDODER" />
+    </Key>
+    <Property Name="IDODER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CREATE_ORDER" Type="DateTime" Precision="3" />
+    <Property Name="IDCUSTOMER" Type="Int32" Nullable="false" />
+    <Property Name="IDEVENT" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__ORDER__IDCUSTOME__628FA481" FromRole="ORDER" ToRole="CUSTOMER" />
+    <NavigationProperty Name="EVENT" Relationship="Self.FK__ORDER__IDEVENT__6A30C649" FromRole="ORDER" ToRole="EVENTS" />
+    <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER" ToRole="ORDER_INFO" />
+  </EntityType>
+  <EntityType Name="ORDER_INFO">
+    <Key>
+      <PropertyRef Name="IDAGENCY" />
+      <PropertyRef Name="IDODER" />
+    </Key>
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+    <Property Name="IDODER" Type="Int32" Nullable="false" />
+    <Property Name="COUNT" Type="Int32" />
+    <Property Name="TOTAL_PRICE" Type="Double" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK__ORDER_INF__IDAGE__5DCAEF64" FromRole="ORDER_INFO" ToRole="AGENCY" />
+    <NavigationProperty Name="ORDER" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER_INFO" ToRole="ORDER" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="IDPEOPLE" />
+    </Key>
+    <Property Name="IDPEOPLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDPOSITION" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="POSITION" Relationship="Self.FK__PEOPLE__IDPOSITI__6EF57B66" FromRole="PEOPLE" ToRole="POSITION" />
+    <NavigationProperty Name="PEOPLE_AGENCY" Relationship="Self.FK__PEOPLE_AG__IDPEO__6E01572D" FromRole="PEOPLE" ToRole="PEOPLE_AGENCY" />
+  </EntityType>
+  <EntityType Name="PEOPLE_AGENCY">
+    <Key>
+      <PropertyRef Name="IDAGENCY" />
+      <PropertyRef Name="IDPEOPLE" />
+    </Key>
+    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+    <Property Name="IDPEOPLE" Type="Int32" Nullable="false" />
+    <Property Name="TEAM_MEMBER" Type="Int32" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK__PEOPLE_AG__IDAGE__5EBF139D" FromRole="PEOPLE_AGENCY" ToRole="AGENCY" />
+    <NavigationProperty Name="Person" Relationship="Self.FK__PEOPLE_AG__IDPEO__6E01572D" FromRole="PEOPLE_AGENCY" ToRole="PEOPLE" />
+  </EntityType>
+  <EntityType Name="POSITION">
+    <Key>
+      <PropertyRef Name="IDPOSITION" />
+    </Key>
+    <Property Name="IDPOSITION" Type="Int32" Nullable="false" />
+    <Property Name="NAME_POSITION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PEOPLE" Relationship="Self.FK__PEOPLE__IDPOSITI__6EF57B66" FromRole="POSITION" ToRole="PEOPLE" />
+  </EntityType>
+  <EntityType Name="ROLE">
+    <Key>
+      <PropertyRef Name="IDROLE" />
+    </Key>
+    <Property Name="IDROLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROLENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="USERs" Relationship="Self.FK__USER__IDROLE__6754599E" FromRole="ROLE" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="SERVICE">
+    <Key>
+      <PropertyRef Name="IDSERVICES" />
+    </Key>
+    <Property Name="IDSERVICES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMESERVICES" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SUMARYSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IMGSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AGENCY_SURVICES" Relationship="Self.FK__AGENCY_SU__IDSER__656C112C" FromRole="SERVICES" ToRole="AGENCY_SURVICES" />
+    <NavigationProperty Name="EVENTS" Relationship="Self.EVENT_SERVICE" FromRole="SERVICES" ToRole="EVENTS" />
+  </EntityType>
+  <EntityType Name="SOCIAL">
+    <Key>
+      <PropertyRef Name="IDSOCIAL" />
+    </Key>
+    <Property Name="IDSOCIAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IMG_SOCIAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AGENCY_SOCIAL" Relationship="Self.FK_AGENCY_SOCIAL_SOCIAL" FromRole="SOCIAL" ToRole="AGENCY_SOCIAL" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TIME_EVENT">
+    <Key>
+      <PropertyRef Name="ID_TIME" />
+    </Key>
+    <Property Name="ID_TIME" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BEGIN_TIME" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="END_TIME" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="EVENTS" Relationship="Self.FK__EVENTS__ID_TIME__6D0D32F4" FromRole="TIME_EVENT" ToRole="EVENTS" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="IDUSER" />
+    </Key>
+    <Property Name="IDUSER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDROLE" Type="Int32" />
+    <NavigationProperty Name="AGENCies" Relationship="Self.FK_AGENCY_USER" FromRole="USER" ToRole="AGENCY" />
+    <NavigationProperty Name="CUSTOMERs" Relationship="Self.FK_CUSTOMER_USER" FromRole="USER" ToRole="CUSTOMER" />
+    <NavigationProperty Name="ROLE" Relationship="Self.FK__USER__IDROLE__6754599E" FromRole="USER" ToRole="ROLE" />
+  </EntityType>
+  <Association Name="FK__AGENCY_SU__IDAGE__5FB337D6">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="AGENCY_SURVICES" Type="Self.AGENCY_SURVICES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="AGENCY_SURVICES">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COMMENT__IDAGENC__5CD6CB2B">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="COMMENT">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_INF__IDAGE__5DCAEF64">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="ORDER_INFO">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PEOPLE_AG__IDAGE__5EBF139D">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="PEOPLE_AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGENCY_CATEGORY">
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="IDCATE" />
+      </Principal>
+      <Dependent Role="AGENCY">
+        <PropertyRef Name="IDCATE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGENCY_SOCIAL_AGENCY">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="0..1" />
+    <End Role="AGENCY_SOCIAL" Type="Self.AGENCY_SOCIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="AGENCY_SOCIAL">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGENCY_USER">
+    <End Role="USER" Type="Self.USER" Multiplicity="1" />
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="IDUSER" />
+      </Principal>
+      <Dependent Role="AGENCY">
+        <PropertyRef Name="IDUSER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMGAGENCY_AGENCY">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="IMGAGENCY" Type="Self.IMGAGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="IMGAGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGENCY_SOCIAL_SOCIAL">
+    <End Role="SOCIAL" Type="Self.SOCIAL" Multiplicity="0..1" />
+    <End Role="AGENCY_SOCIAL" Type="Self.AGENCY_SOCIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOCIAL">
+        <PropertyRef Name="IDSOCIAL" />
+      </Principal>
+      <Dependent Role="AGENCY_SOCIAL">
+        <PropertyRef Name="IDSOCIAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AGENCY_SU__IDSER__656C112C">
+    <End Role="SERVICES" Type="Self.SERVICE" Multiplicity="1" />
+    <End Role="AGENCY_SURVICES" Type="Self.AGENCY_SURVICES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICES">
+        <PropertyRef Name="IDSERVICES" />
+      </Principal>
+      <Dependent Role="AGENCY_SURVICES">
+        <PropertyRef Name="IDSERVICES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__COMMENT__IDCUSTO__60A75C0F">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="COMMENT" Type="Self.COMMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="IDCUSTOMER" />
+      </Principal>
+      <Dependent Role="COMMENT">
+        <PropertyRef Name="IDCUSTOMER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER__IDCUSTOME__628FA481">
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUSTOMER">
+        <PropertyRef Name="IDCUSTOMER" />
+      </Principal>
+      <Dependent Role="ORDER">
+        <PropertyRef Name="IDCUSTOMER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUSTOMER_USER">
+    <End Role="USER" Type="Self.USER" Multiplicity="1" />
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="IDUSER" />
+      </Principal>
+      <Dependent Role="CUSTOMER">
+        <PropertyRef Name="IDUSER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EVENTS__ID_TIME__6D0D32F4">
+    <End Role="TIME_EVENT" Type="Self.TIME_EVENT" Multiplicity="1" />
+    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIME_EVENT">
+        <PropertyRef Name="ID_TIME" />
+      </Principal>
+      <Dependent Role="EVENTS">
+        <PropertyRef Name="ID_TIME" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER__IDEVENT__6A30C649">
+    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="1" />
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTS">
+        <PropertyRef Name="IDEVENT" />
+      </Principal>
+      <Dependent Role="ORDER">
+        <PropertyRef Name="IDEVENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_INF__IDODE__68487DD7">
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="1" />
+    <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER">
+        <PropertyRef Name="IDODER" />
+      </Principal>
+      <Dependent Role="ORDER_INFO">
+        <PropertyRef Name="IDODER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PEOPLE__IDPOSITI__6EF57B66">
+    <End Role="POSITION" Type="Self.POSITION" Multiplicity="1" />
+    <End Role="PEOPLE" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POSITION">
+        <PropertyRef Name="IDPOSITION" />
+      </Principal>
+      <Dependent Role="PEOPLE">
+        <PropertyRef Name="IDPOSITION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PEOPLE_AG__IDPEO__6E01572D">
+    <End Role="PEOPLE" Type="Self.Person" Multiplicity="1" />
+    <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="IDPEOPLE" />
+      </Principal>
+      <Dependent Role="PEOPLE_AGENCY">
+        <PropertyRef Name="IDPEOPLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USER__IDROLE__6754599E">
+    <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+    <End Role="USER" Type="Self.USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLE">
+        <PropertyRef Name="IDROLE" />
+      </Principal>
+      <Dependent Role="USER">
+        <PropertyRef Name="IDROLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AGENCY_CATE">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
+  </Association>
+  <Association Name="EVENT_SERVICE">
+    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
+    <End Role="SERVICES" Type="Self.SERVICE" Multiplicity="*" />
+  </Association>
+  <Association Name="LOC_EVENT">
+    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
+    <End Role="LOCATION" Type="Self.LOCATION" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="DOANCHUYENNGANHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AGENCies" EntityType="Self.AGENCY" />
+    <EntitySet Name="AGENCY_SOCIAL" EntityType="Self.AGENCY_SOCIAL" />
+    <EntitySet Name="AGENCY_SURVICES" EntityType="Self.AGENCY_SURVICES" />
+    <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+    <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
+    <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="EVENTS" EntityType="Self.EVENT" />
+    <EntitySet Name="IMGAGENCies" EntityType="Self.IMGAGENCY" />
+    <EntitySet Name="LOCATIONs" EntityType="Self.LOCATION" />
+    <EntitySet Name="ORDERs" EntityType="Self.ORDER" />
+    <EntitySet Name="ORDER_INFO" EntityType="Self.ORDER_INFO" />
+    <EntitySet Name="PEOPLE" EntityType="Self.Person" />
+    <EntitySet Name="PEOPLE_AGENCY" EntityType="Self.PEOPLE_AGENCY" />
+    <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
+    <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
+    <EntitySet Name="SERVICES" EntityType="Self.SERVICE" />
+    <EntitySet Name="SOCIALs" EntityType="Self.SOCIAL" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TIME_EVENT" EntityType="Self.TIME_EVENT" />
+    <EntitySet Name="USERs" EntityType="Self.USER" />
+    <AssociationSet Name="FK__AGENCY_SU__IDAGE__5FB337D6" Association="Self.FK__AGENCY_SU__IDAGE__5FB337D6">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="AGENCY_SURVICES" EntitySet="AGENCY_SURVICES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COMMENT__IDAGENC__5CD6CB2B" Association="Self.FK__COMMENT__IDAGENC__5CD6CB2B">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="COMMENT" EntitySet="COMMENTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_INF__IDAGE__5DCAEF64" Association="Self.FK__ORDER_INF__IDAGE__5DCAEF64">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PEOPLE_AG__IDAGE__5EBF139D" Association="Self.FK__PEOPLE_AG__IDAGE__5EBF139D">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGENCY_CATEGORY" Association="Self.FK_AGENCY_CATEGORY">
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+      <End Role="AGENCY" EntitySet="AGENCies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGENCY_SOCIAL_AGENCY" Association="Self.FK_AGENCY_SOCIAL_AGENCY">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="AGENCY_SOCIAL" EntitySet="AGENCY_SOCIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGENCY_USER" Association="Self.FK_AGENCY_USER">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="AGENCY" EntitySet="AGENCies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMGAGENCY_AGENCY" Association="Self.FK_IMGAGENCY_AGENCY">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="IMGAGENCY" EntitySet="IMGAGENCies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGENCY_SOCIAL_SOCIAL" Association="Self.FK_AGENCY_SOCIAL_SOCIAL">
+      <End Role="SOCIAL" EntitySet="SOCIALs" />
+      <End Role="AGENCY_SOCIAL" EntitySet="AGENCY_SOCIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AGENCY_SU__IDSER__656C112C" Association="Self.FK__AGENCY_SU__IDSER__656C112C">
+      <End Role="SERVICES" EntitySet="SERVICES" />
+      <End Role="AGENCY_SURVICES" EntitySet="AGENCY_SURVICES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__COMMENT__IDCUSTO__60A75C0F" Association="Self.FK__COMMENT__IDCUSTO__60A75C0F">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="COMMENT" EntitySet="COMMENTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER__IDCUSTOME__628FA481" Association="Self.FK__ORDER__IDCUSTOME__628FA481">
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+      <End Role="ORDER" EntitySet="ORDERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUSTOMER_USER" Association="Self.FK_CUSTOMER_USER">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EVENTS__ID_TIME__6D0D32F4" Association="Self.FK__EVENTS__ID_TIME__6D0D32F4">
+      <End Role="TIME_EVENT" EntitySet="TIME_EVENT" />
+      <End Role="EVENTS" EntitySet="EVENTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER__IDEVENT__6A30C649" Association="Self.FK__ORDER__IDEVENT__6A30C649">
+      <End Role="EVENTS" EntitySet="EVENTS" />
+      <End Role="ORDER" EntitySet="ORDERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_INF__IDODE__68487DD7" Association="Self.FK__ORDER_INF__IDODE__68487DD7">
+      <End Role="ORDER" EntitySet="ORDERs" />
+      <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PEOPLE__IDPOSITI__6EF57B66" Association="Self.FK__PEOPLE__IDPOSITI__6EF57B66">
+      <End Role="POSITION" EntitySet="POSITIONs" />
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PEOPLE_AG__IDPEO__6E01572D" Association="Self.FK__PEOPLE_AG__IDPEO__6E01572D">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
+      <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USER__IDROLE__6754599E" Association="Self.FK__USER__IDROLE__6754599E">
+      <End Role="ROLE" EntitySet="ROLEs" />
+      <End Role="USER" EntitySet="USERs" />
+    </AssociationSet>
+    <AssociationSet Name="AGENCY_CATE" Association="Self.AGENCY_CATE">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+    </AssociationSet>
+    <AssociationSet Name="EVENT_SERVICE" Association="Self.EVENT_SERVICE">
+      <End Role="EVENTS" EntitySet="EVENTS" />
+      <End Role="SERVICES" EntitySet="SERVICES" />
+    </AssociationSet>
+    <AssociationSet Name="LOC_EVENT" Association="Self.LOC_EVENT">
+      <End Role="EVENTS" EntitySet="EVENTS" />
+      <End Role="LOCATION" EntitySet="LOCATIONs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

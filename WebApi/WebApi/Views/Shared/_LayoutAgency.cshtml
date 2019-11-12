@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Content/styles.css" rel="stylesheet">
+    <link href="~/Content/agency_info.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</head>
+
+<body>
+    <style>
+        .list-info {
+            width: 105%;
+            background: #fafafa;
+            padding: 1em;
+            border-radius: .25em .25em 0 0;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1em;
+            margin: 0 0 0 0;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+            .list-info a {
+                text-decoration: none;
+            }
+    </style>
+    @if (Session["TaiKhoan"] != null)
+    {
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="/Agency">
+                <img src="~/img/logo.svg" style="height: 1.5em; max-width: 100px;">
+            </a>
+            <div class="collapse navbar-collapse">
+                <div class="btn-group">
+                    <button class="btn btn-ouline-white menu1">Cơ hội</button>
+                    <button class="btn btn-ouline-white menu2">Hồ sơ</button>
+                    <button class="btn btn-ouline-white menu2">Báo cáo</button>
+                </div>
+            </div>
+            @{
+                var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+            }
+            <div class="btn-login">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><b>@fullname</b></span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Agency/Logout">Đăng Xuất</a>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    }
+    <br>
+    <div class="row all-layout">
+        <div class="col-lg-2">
+            <div class="s-agency-summary">
+                <br />
+                <div class="list-info">
+                    <a href="/Agency"><h2 class="sub">Thông tin</h2></a>
+                </div>
+
+                <div class="list-info">
+                    <a href="/Agency/Img"><h2 class="sub">Hình Ảnh</h2></a>
+                </div>
+
+                <div class="list-info">
+                    <a href="#"><h2 class="sub">Dịch Vụ</h2></a>
+                </div>
+                <div class="list-info">
+                    <a href="#"><h2 class="sub">Công việc đã làm</h2></a>
+                </div>
+                <div class="list-info">
+                    <a href="#"><h2 class="sub">Quy Mô</h2></a>
+                </div>
+            </div>
+        </div>
+
+        <!--end col-lg-2-->
+        <div class="col-lg-10">
+            <div class=" all-box">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

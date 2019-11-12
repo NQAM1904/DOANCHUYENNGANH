@@ -1,0 +1,147 @@
+body {
+  padding-top: 56px;
+}
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.carousel-item {
+  opacity: 0.8;
+}
+.portfolio-item {
+  margin-bottom: 30px;
+}
+a{
+  color: black!important;
+}
+.btn-1{
+  color: #20C5E5;
+  box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
+  border: 1px solid #DCE2F0;
+  background-color: #fff;
+}
+.btn-2{
+  color: white;
+  box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
+  border: 1px solid #00AFCE;
+  background-color: #20C5E5;
+  margin-left: 10px;
+}
+.fixed-top{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.s.center{
+  text-align: center!important;
+}
+.section_home{
+  max-width: 100%;
+  padding: 4em 0;
+  background-color: #f3f6fb;
+}
+.s-bold{
+  font-weight: 700 !important;
+  font-size: 38px;
+  letter-spacing: -0.005em;
+  line-height: 57px;
+  color: #475067 !important;
+  text-align: center;
+}
+.mb-display-1{
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: center;
+}
+.card-number{
+  position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2em;
+    height: 2em;
+    line-height: 2;
+    margin: -1em;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: white;
+    background: #475067;
+}
+.container_slider{
+  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.content{
+  flex: 1 1 100%;
+  box-sizing: border-box;
+}
+.header.header.s.shaded {
+    position: relative;
+    background-image: url("https://www.prospectsasean.com/wp-content/uploads/2018/02/Breaking-into-Consulting-Feature-Image-e1517592514632.jpeg");
+}
+
+.header.header.s.bg {
+    color: white;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.header.header.s {
+  text-align: center;
+  min-height: 400px;
+}
+.layout-column, ng-view, md-sidenav {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  display: flex;
+}
+.layout-align-start-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  max-width: 100%;
+}
+.md-display-4 {
+  padding: 100px;
+  font-size: 42px;
+  letter-spacing: -0.010em;
+  line-height: 42px;
+}
+.md-headline {
+    font-size: 22px;
+    line-height: 32px;
+}
+.menu1, .menu2{
+  color: #044841 !important;
+  opacity: 0.8;
+  line-height: 38px;
+}
+.input-find{
+  position: absolute;
+  top: 250px;
+ 
+}
+.carousel {
+  filter:grayscale(60%);
+  background: darkblue;
+}
+.btn-0{
+    margin-left: 455px;
+}

@@ -1,0 +1,132 @@
+﻿@model WebApi.AGENCY
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+
+}
+
+<div class="">
+    @if (Session["TaiKhoan"] != null)
+    {
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                @{
+                    var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+                }
+                <li class="breadcrumb-item">
+                    Chỉnh sửa tùy chọn đại lý của
+                </li>
+                <li class="breadcrumb-item active">
+                    @fullname
+                </li>
+            </ol>
+        </nav>
+    }
+</div>
+
+<div class="container all-box">
+
+    @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
+    {
+         var idUser = ((USER)Session["TaiKhoan"]);
+
+        var item = data.AGENCies.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
+
+            <div class="col-lg-10">
+                <br />
+                <div class="container all-box">
+                    <div class="back-ground">
+                        @if (item.IMGAGENCies.FirstOrDefault() == null)
+                        {
+                            <img src="~/img/agency/no-img.jpg" class="d-block w-100" alt="...">
+                        }
+                        else
+                        {
+                            <img src="~/img/agency/@item.IMGAGENCies.FirstOrDefault().FILENAME" class="d-block w-100" alt="...">
+                        }
+                        <div class="avatar">
+                            @if (item.IMGAGENCies.FirstOrDefault() == null)
+                            {
+                                <img class="avatar" src="~/img/agency/no-img.jpg">
+                            }
+                            else
+                            {
+                                <img class="avatar" src="~/img/agency/@item.IMGAGENCies.ElementAt(1).FILENAME">
+                            }
+                        </div>
+                    </div>
+                    <div class="contant_info">
+                        <div class="name-agency">
+
+                            <h2 class="md-display-2">@item.NAMEAGENCY</h2>
+                            <span><a href="/Agency/Update/@item.IDAGENCY" class="icon"><i class="fa fa-pencil"></i></a></span>
+                        </div>
+                        <div class="address">
+                            <span class="s-address">@item.ADDRESSAGENCY</span>
+                        </div>
+                        <div class="content-info">
+                            <div class="noidung">
+                                @Html.Raw(item.DESCRIPTION)
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="works-history">
+                            <div class="card card-outline-secondary my-4">
+
+                                <div class="card-header">
+                                    <b>Đã tổ chức (3) bởi @item.NAMEAGENCY</b>
+                                </div>
+
+                                <div class="card-info">
+                                    <div class="card card-flex" style="width: 18rem;">
+                                        <img src="~/img/summit-2.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>*@
+                    <!--thông tin -->
+                    <div class="Services">
+                        <div class="card card-outline-secondary my-4">
+                            <div class="card-header">
+                                <b>Thông tin chi tiết</b>
+                            </div>
+                            <div class="card-info">
+                                <ul class="danhsach">
+                                    <li>
+                                        <b>Email:</b> @item.EMAILAGENCY
+                                    </li>
+                                    <li>
+                                        <b>Số Điện Thoại:</b>@item.PHONEAGENCY
+                                    </li>
+                                    <li>
+                                        <b>Mạng xã hội: @item.AGENCY_SOCIAL.FirstOrDefault()</b>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card items-->
+                    <div class="Services">
+                        <div class="card card-outline-secondary my-4">
+                            <div class="card-header">
+                                <b>Dịch vụ</b>
+                            </div>
+                            <div class="card-info">
+
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+    }
+
+</div>

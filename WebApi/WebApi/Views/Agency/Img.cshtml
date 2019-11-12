@@ -1,0 +1,57 @@
+﻿@model WebApi.IMGAGENCY
+
+@{
+    ViewBag.Title = "Img";
+    Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+}
+
+
+<style>
+    .box-sizing {
+        box-sizing: border-box;
+        padding: 81px;
+        border-radius: 3px;
+        margin-left: 150px;
+        margin-right: 150px;
+        align-items: center;
+        border: 2px solid #E6E7EB;
+    }
+</style>
+@using (Html.BeginForm("Img", "Agency", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <div class="box-sizing">
+        <div class="form-group">
+            <b>Ảnh Bìa</b>
+            <div class="col-md-9">
+                <input type="file" class="custom-file-input" name="files1" accept="img/agency/*">
+                <label class="custom-file-label">Hình bìa công ty</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-sizing">
+        <div class="form-group">
+            <b>Ảnh Logo</b>
+            <div class="col-md-9">
+                <input type="file" class="custom-file-input" name="files2" accept="img/agency/*">
+                <label class="custom-file-label">Hình đại diện công ty</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="text-right">
+                <button class="btn btn-success btn-lg" type="submit">  <i class="fa fa-save"></i> Lưu Lại </button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+

@@ -1,0 +1,66 @@
+.dialog_lienhe{
+    max-height: 700px;
+    min-width: 600px;
+    max-width: 600px;
+    border-radius: 8px;
+}
+.modal-lienhe{
+   box-shadow: 
+   0px 7px 8px -4px rgba(0,0,0,0.15), 
+   0px 13px 19px 2px rgba(0,0,0,0), 
+   0px 5px 24px 4px rgba(0,0,0,0.05);
+}
+.exp-choice-container{
+    display: flex;
+    margin: 1rem;
+    font-weight: bold;
+    box-sizing: inherit;
+    margin-left: 50px;
+}
+
+.exp-send-message-btn:hover{
+    background: #20C5E5;
+    text-decoration: none;
+}.who-are-you{
+    font-weight: 400;
+    font-size: 22px;
+    font-style: italic;
+    padding: 10px 30px;
+    margin-top: 30px;
+    border-left: 4px solid #20C5E5;
+}
+.form-control{
+    margin-top: 10px;
+}
+.md-resize-wrapper{
+    position: relative;
+}
+.md-input-container .md-input:invalid {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.md-resize-wrapper {
+    margin-top: 10px;
+    color: rgba(73, 80, 101, 1.0);
+    border-color: rgba(221, 226, 239, 1.0);
+
+}
+.s-textarea {
+    white-space: normal;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #dde2ef !important;
+    background-image: none !important;
+    background-color: #f3f6fb;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.07);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.07);
+    width: 536px;
+    margin-left: 20px;
+}
+.btn-send{
+    float: right;
+}
