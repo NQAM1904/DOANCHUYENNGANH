@@ -176,8 +176,7 @@
           </Key>
           <Property Name="IDSERVICES" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NAMESERVICES" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="SUMARYSERVICES" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IMGSERVICES" Type="varchar" MaxLength="50" />
+          <Property Name="SUMARYSERVICES" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="SOCIAL">
           <Key>
@@ -828,8 +827,7 @@
           </Key>
           <Property Name="IDSERVICES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAMESERVICES" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SUMARYSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IMGSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUMARYSERVICES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AGENCY_SURVICES" Relationship="Self.FK__AGENCY_SU__IDSER__656C112C" FromRole="SERVICES" ToRole="AGENCY_SURVICES" />
           <NavigationProperty Name="EVENTS" Relationship="Self.EVENT_SERVICE" FromRole="SERVICES" ToRole="EVENTS" />
         </EntityType>
@@ -1388,7 +1386,6 @@
                 <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
                 <ScalarProperty Name="NAMESERVICES" ColumnName="NAMESERVICES" />
                 <ScalarProperty Name="SUMARYSERVICES" ColumnName="SUMARYSERVICES" />
-                <ScalarProperty Name="IMGSERVICES" ColumnName="IMGSERVICES" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

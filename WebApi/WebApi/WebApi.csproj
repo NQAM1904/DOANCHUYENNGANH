@@ -279,6 +279,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\modal_show.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\service_agency.css" />
     <Content Include="Content\styles.css" />
     <Content Include="DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -653,6 +654,7 @@
     <Content Include="Views\Agency\Img.cshtml" />
     <Content Include="Views\Agency_Info\Info.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Agency\Service.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,6 +25,15 @@ namespace WebApi.Controllers
             }
             return View();
         }
+
+        // dịch vụ 
+        public ActionResult Service()
+        {
+            if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
+            return View();
+        }
+
+        // khi đăng nhập vào tài khoản
         [HttpGet]
         public ActionResult Create()
         {
@@ -102,6 +111,11 @@ namespace WebApi.Controllers
             return RedirectToAction("Index");
         }
         
+        //[HttpPost]
+        //public ActionResult Service()
+        //{
+            
+        //}
         public ActionResult Logout()
         {
             Session.Clear();

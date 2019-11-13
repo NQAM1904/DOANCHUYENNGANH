@@ -24,7 +24,6 @@ namespace WebApi
         public int IDSERVICES { get; set; }
         public string NAMESERVICES { get; set; }
         public string SUMARYSERVICES { get; set; }
-        public string IMGSERVICES { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENCY_SURVICES> AGENCY_SURVICES { get; set; }

@@ -171,8 +171,7 @@
     </Key>
     <Property Name="IDSERVICES" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NAMESERVICES" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="SUMARYSERVICES" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IMGSERVICES" Type="varchar" MaxLength="50" />
+    <Property Name="SUMARYSERVICES" Type="ntext" Nullable="false" />
   </EntityType>
   <EntityType Name="SOCIAL">
     <Key>

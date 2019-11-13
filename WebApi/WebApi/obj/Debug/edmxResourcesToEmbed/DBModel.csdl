@@ -184,8 +184,7 @@
     </Key>
     <Property Name="IDSERVICES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NAMESERVICES" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SUMARYSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IMGSERVICES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SUMARYSERVICES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AGENCY_SURVICES" Relationship="Self.FK__AGENCY_SU__IDSER__656C112C" FromRole="SERVICES" ToRole="AGENCY_SURVICES" />
     <NavigationProperty Name="EVENTS" Relationship="Self.EVENT_SERVICE" FromRole="SERVICES" ToRole="EVENTS" />
   </EntityType>

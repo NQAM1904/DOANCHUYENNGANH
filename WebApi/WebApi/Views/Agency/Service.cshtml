@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Service";
+    Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+}
+<link href="~/Content/service_agency.css" rel="stylesheet" />
+<br />
+<h2>Dịch vụ của bạn</h2>
+
+<div class="panel_service">
+    <div class="btn_table">
+        <div class="text-left">
+            <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreateService()"><i class="fa fa-plus"></i> Thêm dịch vụ</button>
+        </div>
+    </div>
+</div>
+
+<div id="create-service-model" class="modal fade create-service-md" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm dịch vụ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Tên dịch vụ</label>
+                        <input type="text" class="form-control" name="sv-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Mô tả dịch vụ</label>
+                        <textarea type="text" class="form-control" name="sv-description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Giá khởi điểm</label>
+                        <input type="number" min="0" value="0" class="form-control" name="sv-min">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Giá cao nhất</label>
+                        <input type="number" min="0" value="0" class="form-control" name="sv-max">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="SaveInfo()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var IdService = 0;
+    });
+    function CreateService() {
+        IdService = 0;
+        $("[name='sv-name']").val("");
+        $("[name='sv-description']").val("");
+        $("#create-service-model").modal("show");
+    }
+
+    function SaveInfo() {
+        var name = $("[name='sv-name']").val();
+        var description = $("[name='sv-description']").val();
+        if (name == '' || description == '') {
+            alert('Vui lòng nhập đủ thông tin');
+            return;
+        }
+        $.ajax({
+            url: '/Ajax/PostService',
+            type: 'POST',
+            dataType: 'text'
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Lưu dữ liệu thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+</script>

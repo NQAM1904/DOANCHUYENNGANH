@@ -160,7 +160,6 @@
           <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
           <ScalarProperty Name="NAMESERVICES" ColumnName="NAMESERVICES" />
           <ScalarProperty Name="SUMARYSERVICES" ColumnName="SUMARYSERVICES" />
-          <ScalarProperty Name="IMGSERVICES" ColumnName="IMGSERVICES" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

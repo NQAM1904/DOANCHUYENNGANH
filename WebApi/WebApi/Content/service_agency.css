@@ -1,0 +1,40 @@
+﻿
+
+.col-lg-10 {
+    margin-top: 10px;
+}
+
+.panel_service {
+
+    position: relative;
+    margin: 0;
+    padding: 10px 30px;
+    margin-top: 30px;
+}
+
+.btn_table {
+    border: 1px dashed #20C5E5;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.btn {
+    text-align: left;
+    font-weight: 900;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+.btn-default {
+    color: #20C5E5;
+    background: none;
+}
+
+    .btn-default:hover {
+        color: #20C5E5;
+        background-color: none !important;
+        border-color: none !important;
+    }
