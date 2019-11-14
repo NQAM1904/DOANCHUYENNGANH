@@ -28,16 +28,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AGENCY_SURVICES">
-      <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.AGENCY_SURVICES">
-        <MappingFragment StoreEntitySet="AGENCY_SURVICES">
-          <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
-          <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
-          <ScalarProperty Name="BEGIN_PRICE" ColumnName="BEGIN_PRICE" />
-          <ScalarProperty Name="MAX_PRICE" ColumnName="MAX_PRICE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CATEGORies">
       <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.CATEGORY">
         <MappingFragment StoreEntitySet="CATEGORY">
@@ -160,6 +150,9 @@
           <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
           <ScalarProperty Name="NAMESERVICES" ColumnName="NAMESERVICES" />
           <ScalarProperty Name="SUMARYSERVICES" ColumnName="SUMARYSERVICES" />
+          <ScalarProperty Name="BEGIN_PRICE" ColumnName="BEGIN_PRICE" />
+          <ScalarProperty Name="MAX_PRICE" ColumnName="MAX_PRICE" />
+          <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -27,7 +27,6 @@ namespace WebApi
     
         public virtual DbSet<AGENCY> AGENCies { get; set; }
         public virtual DbSet<AGENCY_SOCIAL> AGENCY_SOCIAL { get; set; }
-        public virtual DbSet<AGENCY_SURVICES> AGENCY_SURVICES { get; set; }
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
         public virtual DbSet<COMMENT> COMMENTs { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }

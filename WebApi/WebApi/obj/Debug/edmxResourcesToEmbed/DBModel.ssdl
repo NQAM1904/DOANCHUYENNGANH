@@ -33,16 +33,6 @@
     <Property Name="IDAGENCY" Type="int" />
     <Property Name="NAME_SOCIAL" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="AGENCY_SURVICES">
-    <Key>
-      <PropertyRef Name="IDSERVICES" />
-      <PropertyRef Name="IDAGENCY" />
-    </Key>
-    <Property Name="IDSERVICES" Type="int" Nullable="false" />
-    <Property Name="IDAGENCY" Type="int" Nullable="false" />
-    <Property Name="BEGIN_PRICE" Type="float" />
-    <Property Name="MAX_PRICE" Type="float" />
-  </EntityType>
   <EntityType Name="CATEGORY">
     <Key>
       <PropertyRef Name="IDCATE" />
@@ -172,6 +162,9 @@
     <Property Name="IDSERVICES" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NAMESERVICES" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="SUMARYSERVICES" Type="ntext" Nullable="false" />
+    <Property Name="BEGIN_PRICE" Type="int" />
+    <Property Name="MAX_PRICE" Type="int" />
+    <Property Name="IDAGENCY" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SOCIAL">
     <Key>
@@ -229,30 +222,6 @@
       </Principal>
       <Dependent Role="AGENCY_CATE">
         <PropertyRef Name="IDCATE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AGENCY_SU__IDAGE__5FB337D6">
-    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
-    <End Role="AGENCY_SURVICES" Type="Self.AGENCY_SURVICES" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AGENCY">
-        <PropertyRef Name="IDAGENCY" />
-      </Principal>
-      <Dependent Role="AGENCY_SURVICES">
-        <PropertyRef Name="IDAGENCY" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AGENCY_SU__IDSER__656C112C">
-    <End Role="SERVICES" Type="Self.SERVICES" Multiplicity="1" />
-    <End Role="AGENCY_SURVICES" Type="Self.AGENCY_SURVICES" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SERVICES">
-        <PropertyRef Name="IDSERVICES" />
-      </Principal>
-      <Dependent Role="AGENCY_SURVICES">
-        <PropertyRef Name="IDSERVICES" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -508,11 +477,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SERVICES_AGENCY">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
+    <End Role="SERVICES" Type="Self.SERVICES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="SERVICES">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DOANCHUYENNGANHModelStoreContainer">
     <EntitySet Name="AGENCY" EntityType="Self.AGENCY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AGENCY_CATE" EntityType="Self.AGENCY_CATE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AGENCY_SOCIAL" EntityType="Self.AGENCY_SOCIAL" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AGENCY_SURVICES" EntityType="Self.AGENCY_SURVICES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="COMMENT" EntityType="Self.COMMENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
@@ -539,14 +519,6 @@
     <AssociationSet Name="FK__AGENCY_CA__IDCAT__6383C8BA" Association="Self.FK__AGENCY_CA__IDCAT__6383C8BA">
       <End Role="CATEGORY" EntitySet="CATEGORY" />
       <End Role="AGENCY_CATE" EntitySet="AGENCY_CATE" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AGENCY_SU__IDAGE__5FB337D6" Association="Self.FK__AGENCY_SU__IDAGE__5FB337D6">
-      <End Role="AGENCY" EntitySet="AGENCY" />
-      <End Role="AGENCY_SURVICES" EntitySet="AGENCY_SURVICES" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AGENCY_SU__IDSER__656C112C" Association="Self.FK__AGENCY_SU__IDSER__656C112C">
-      <End Role="SERVICES" EntitySet="SERVICES" />
-      <End Role="AGENCY_SURVICES" EntitySet="AGENCY_SURVICES" />
     </AssociationSet>
     <AssociationSet Name="FK__COMMENT__IDAGENC__5CD6CB2B" Association="Self.FK__COMMENT__IDAGENC__5CD6CB2B">
       <End Role="AGENCY" EntitySet="AGENCY" />
@@ -631,6 +603,10 @@
     <AssociationSet Name="FK_IMGAGENCY_AGENCY" Association="Self.FK_IMGAGENCY_AGENCY">
       <End Role="AGENCY" EntitySet="AGENCY" />
       <End Role="IMGAGENCY" EntitySet="IMGAGENCY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SERVICES_AGENCY" Association="Self.FK_SERVICES_AGENCY">
+      <End Role="AGENCY" EntitySet="AGENCY" />
+      <End Role="SERVICES" EntitySet="SERVICES" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

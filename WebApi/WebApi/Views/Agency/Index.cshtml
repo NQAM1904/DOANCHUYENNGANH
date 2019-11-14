@@ -37,7 +37,7 @@
             <br />
             <div class="container all-box">
                 <div class="back-ground">
-                    @if (item.IMGAGENCies.FirstOrDefault() == null)
+                    @if (item.IMGAGENCies.Count() <= 1)
                     {
                         <img src="~/img/no-img.jpg" class="d-block w-100" alt="...">
                     }

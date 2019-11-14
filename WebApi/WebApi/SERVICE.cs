@@ -17,16 +17,17 @@ namespace WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SERVICE()
         {
-            this.AGENCY_SURVICES = new HashSet<AGENCY_SURVICES>();
             this.EVENTS = new HashSet<EVENT>();
         }
     
         public int IDSERVICES { get; set; }
         public string NAMESERVICES { get; set; }
         public string SUMARYSERVICES { get; set; }
+        public Nullable<int> BEGIN_PRICE { get; set; }
+        public Nullable<int> MAX_PRICE { get; set; }
+        public int IDAGENCY { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENCY_SURVICES> AGENCY_SURVICES { get; set; }
+        public virtual AGENCY AGENCY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENT> EVENTS { get; set; }
     }

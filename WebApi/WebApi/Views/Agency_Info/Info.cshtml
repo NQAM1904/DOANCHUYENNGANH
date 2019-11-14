@@ -3,7 +3,7 @@
     ViewBag.Title = "Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/agency_info.css" rel="stylesheet" />
+
 
 <div class="row all-layout">
 
@@ -80,7 +80,14 @@
         <div class="col-lg-10">
             <br />
             <div class="container all-box">
-                <img src="~/img/agency/@agency.IMGAGENCies.ElementAt(1).FILENAME" class="d-block w-100" alt="...">
+                @if (agency.IMGAGENCies.Count() <= 1)
+                {
+                    <img src="~/img/no-img.jpg" class="d-block w-100" alt="...">
+                }
+                else
+                {
+                    <img class="d-block w-100" src="~/img/agency/@agency.IMGAGENCies.ElementAt(1).FILENAME">
+                }
                 <div class="contant_info">
                     <h2 class="md-display-2">@agency.NAMEAGENCY</h2>
                     <div class="address">
@@ -99,35 +106,35 @@
                             <b>Works (3) by @agency.NAMEAGENCY</b>
                         </div>
                         @*<div class="card-info">
-                                <div class="card card-flex" style="width: 18rem;">
-                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            Digital Transformation: Survive and Thrive – Cách mạng số và
-                                            những bước ngoặt lịch sử
-                                        </h5>
-                                    </div>
-                                </div>
+                    <div class="card card-flex" style="width: 18rem;">
+                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Digital Transformation: Survive and Thrive – Cách mạng số và
+                                những bước ngoặt lịch sử
+                            </h5>
+                        </div>
+                    </div>
 
-                                <div class="card card-flex" style="width: 18rem;">
-                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            Digital Transformation: Survive and Thrive – Cách mạng số và
-                                            những bước ngoặt lịch sử
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="card card-flex" style="width: 18rem;">
-                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            Digital Transformation: Survive and Thrive – Cách mạng số và
-                                            những bước ngoặt lịch sử
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>*@
+                    <div class="card card-flex" style="width: 18rem;">
+                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Digital Transformation: Survive and Thrive – Cách mạng số và
+                                những bước ngoặt lịch sử
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card card-flex" style="width: 18rem;">
+                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Digital Transformation: Survive and Thrive – Cách mạng số và
+                                những bước ngoặt lịch sử
+                            </h5>
+                        </div>
+                    </div>
+                </div>*@
                     </div>
                 </div>
                 <!--card items-->

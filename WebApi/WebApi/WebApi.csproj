@@ -136,9 +136,6 @@
     <Compile Include="AGENCY_SOCIAL.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AGENCY_SURVICES.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -223,6 +220,7 @@
     <Compile Include="Models\Agency.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\LoginAdmin.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="ORDER.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -276,6 +274,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cate_info.css" />
+    <Content Include="Content\dataTables.bootstrap4.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\modal_show.css" />
     <Content Include="Content\PagedList.css" />
@@ -320,6 +319,8 @@
     <Content Include="img\social.png" />
     <Content Include="Scripts\arbor.js" />
     <Content Include="Scripts\arborapi.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -353,6 +354,7 @@
     <Content Include="Scripts\ckeditor.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\contact_me.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\drawnode.js" />
     <Content Include="Scripts\graphics.js" />
     <Content Include="Scripts\jqBootstrapValidation.js" />
@@ -360,6 +362,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\lang\af.js" />
     <Content Include="Scripts\lang\ar.js" />

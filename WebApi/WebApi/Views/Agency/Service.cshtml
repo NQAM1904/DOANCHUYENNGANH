@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_LayoutAgency.cshtml";
 }
 <link href="~/Content/service_agency.css" rel="stylesheet" />
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
 <br />
 <h2>Dịch vụ của bạn</h2>
 
@@ -15,6 +18,49 @@
     </div>
 </div>
 
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Dịch vụ</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Giá khởi điểm</th>
+                    <th scope="col">Giá cao nhất</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                {
+                    var idUser = ((USER)Session["TaiKhoan"]);
+
+                    var agency = db.AGENCies.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
+
+
+                    foreach (var item in db.SERVICES.Where(x=>x.IDAGENCY == agency.IDAGENCY).ToList())
+                    {
+                        <tr>
+                            <td>@item.NAMESERVICES</td>
+                            <td>@item.SUMARYSERVICES</td>
+                            <td>@item.BEGIN_PRICE</td>
+                            <td>@item.MAX_PRICE</td>
+                            <th>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-primary" onclick="EditSurvice(@item.IDSERVICES)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="DeleteService(@item.IDSERVICES)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*--Modal dialog--*@
 <div id="create-service-model" class="modal fade create-service-md" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -28,22 +74,22 @@
                 <form>
                     <div class="form-group">
                         <label class="col-form-label">Tên dịch vụ</label>
-                        <input type="text" class="form-control" name="sv-name">
+                        <input type="text" class="form-control" name="NAME">
                     </div>
 
                     <div class="form-group">
                         <label class="col-form-label">Mô tả dịch vụ</label>
-                        <textarea type="text" class="form-control" name="sv-description"></textarea>
+                        <textarea type="text" class="form-control" name="DESCRIPTION"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="col-form-label">Giá khởi điểm</label>
-                        <input type="number" min="0" value="0" class="form-control" name="sv-min">
+                        <input type="number" class="form-control" name="BEGIN_PRICE">
                     </div>
 
                     <div class="form-group">
                         <label class="col-form-label">Giá cao nhất</label>
-                        <input type="number" min="0" value="0" class="form-control" name="sv-max">
+                        <input type="number" class="form-control" name="MAX_PRICE">
                     </div>
 
 
@@ -58,26 +104,77 @@
 </div>
 <script>
     $(document).ready(function () {
-        var IdService = 0;
+        $('#myTable').DataTable();
     });
+    var IdService = 0;
+
+    function EditSurvice(id) {
+        IdService = id;
+
+        $.ajax({
+            url: '/Ajax/GetService/' + IdService,
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                id: IdService,
+            }
+        }).done(function (ketqua) {
+            var json = JSON.parse(ketqua);
+            $("[name='NAME']").val(json.NAME);
+            $("[name='DESCRIPTION']").val(json.DESCRIPTION);
+            $("[name='BEGIN_PRICE']").val(json.giakd);
+            $("[name='MAX_PRICE']").val(json.giamax);
+            $('#create-service-model').modal("show");
+        });
+    }
+
+    function DeleteService(id) {
+        if (!confirm("Bạn có thực sự muốn xóa danh mục này không?")) return;
+        $.ajax({
+            url: '/Ajax/DeleteService/' + id,
+            type: 'DELETE',
+            dataType: 'text'
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Xóa thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+
     function CreateService() {
         IdService = 0;
-        $("[name='sv-name']").val("");
-        $("[name='sv-description']").val("");
+        $("[name='NAME']").val("");
+        $("[name='DESCRIPTION']").val("");
+        $("[name='BEGIN_PRICE']").val(0);
+        $("[name='MAX_PRICE']").val(0);
         $("#create-service-model").modal("show");
     }
 
     function SaveInfo() {
-        var name = $("[name='sv-name']").val();
-        var description = $("[name='sv-description']").val();
-        if (name == '' || description == '') {
+        var name = $("[name='NAME']").val();
+        var description = $("[name='DESCRIPTION']").val();
+        var giakd = $("[name='BEGIN_PRICE']").val();
+        var giamax = $("[name='MAX_PRICE']").val();
+        if (name == '' || description == '' && giakd == 0 && giamax == 0) {
             alert('Vui lòng nhập đủ thông tin');
             return;
         }
+
+
         $.ajax({
             url: '/Ajax/PostService',
             type: 'POST',
-            dataType: 'text'
+            dataType: 'text',
+            data: {
+                IDSERVICES: IdService,
+                NAMESERVICES: name,
+                SUMARYSERVICES: description,
+                BEGIN_PRICE: giakd,
+                MAX_PRICE: giamax
+            }
         }).done(function (ketqua) {
             if (ketqua == "ok") {
                 alert("Lưu dữ liệu thành công");

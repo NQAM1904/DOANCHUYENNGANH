@@ -17,12 +17,12 @@ namespace WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AGENCY()
         {
-            this.AGENCY_SURVICES = new HashSet<AGENCY_SURVICES>();
             this.COMMENTs = new HashSet<COMMENT>();
             this.ORDER_INFO = new HashSet<ORDER_INFO>();
             this.PEOPLE_AGENCY = new HashSet<PEOPLE_AGENCY>();
             this.AGENCY_SOCIAL = new HashSet<AGENCY_SOCIAL>();
             this.IMGAGENCies = new HashSet<IMGAGENCY>();
+            this.SERVICES = new HashSet<SERVICE>();
             this.CATEGORies = new HashSet<CATEGORY>();
         }
     
@@ -39,8 +39,6 @@ namespace WebApi
         public int IDCATE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENCY_SURVICES> AGENCY_SURVICES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
@@ -52,6 +50,8 @@ namespace WebApi
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMGAGENCY> IMGAGENCies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SERVICE> SERVICES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CATEGORY> CATEGORies { get; set; }
     }
