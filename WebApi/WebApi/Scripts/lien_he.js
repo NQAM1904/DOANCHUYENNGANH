@@ -1,13 +1,12 @@
-$(document).ready(function() {
-  $("#lienhe").click(function() {
-    $("#Modal2").modal("show");
-  });
-});
-// return from loign
-$(document).ready(function() {
-  $("#contact-agency").click(function() {
-    $("#Modal3").modal("show");
-    $("#Modal2").modal("hide");
-  });
+$(document).ready(function () {
+    $("#modal_lienhe").click(function () {
+        $("#Modal1").modal("show");
+    });
 });
 
+$(document).ready(function () {
+    $("#contact-agency").click(function () {
+        $("#Modal2").modal("show");
+        $("#Modal1").modal("hide");
+    });
+});

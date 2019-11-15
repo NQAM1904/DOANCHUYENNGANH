@@ -1,10 +1,12 @@
 ﻿@model WebApi.AGENCY
+
 @{
     ViewBag.Title = "Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<link href="~/Content/agency_info.css" rel="stylesheet" />
+<link href="~/Content/modal_show.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <div class="row all-layout">
 
     @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
@@ -35,8 +37,7 @@
                         </li>
                     </ul>
                     <a class="reviews">(5 REVIEWS)</a>
-                    <button type="button" class="btn btn-primary btn-block btn-lg lien-he" id="lienhe"
-                            data-toggle="modal" data-target="#Modal2">
+                    <button type="button" class="btn btn-primary btn-block btn-lg lien-he" id="modal_lienhe">
                         Liên Hệ
                     </button>
                 </div>
@@ -61,16 +62,29 @@
 
                     </div>
                 </div>
+                <!--Dich vu-->
                 <div class="dich_vu">
                     <h2 class="sub"><b>Dịch vụ</b>&nbsp;được cung cấp bởi @agency.NAMEAGENCY</h2>
                 </div>
-                <div class="tag_DV">
-                    <ul class="layout-row layout-wrap">
-                        <li class="tag">Web Application</li>
-                        <p class="gia_tien text-right">5.000.000VNĐ - 20.000.000VNĐ </p>
-                        <li class="tag">Motion Design</li>
-                        <p class="gia_tien text-right">10.000.000VNĐ - 60.000.000VNĐ </p>
-                    </ul>
+                <div class="layout-row layout-wrap">
+                    @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
+                    {
+                        foreach (var service in data.SERVICES.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+                        {
+
+                            <a href="#" class="tag_DV">@service.NAMESERVICES</a>
+
+                        }
+                    }
+                </div>
+                <br />
+                <!--liên hệ-->
+                <div class="lienhe">
+                    <h2 class="sub"><b>Thông tin</b>&nbsp;liên hệ của @agency.NAMEAGENCY</h2>
+                </div>
+                <div class="layout-row layout-wrap">
+                    <a href="#"><i class="fa fa-envelope"></i> @agency.EMAILAGENCY</a>
+                    <a href="#"><i class="fa fa-phone"></i> @agency.PHONEAGENCY</a>
                 </div>
             </div>
         </div>
@@ -106,35 +120,35 @@
                             <b>Works (3) by @agency.NAMEAGENCY</b>
                         </div>
                         @*<div class="card-info">
-                    <div class="card card-flex" style="width: 18rem;">
-                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Digital Transformation: Survive and Thrive – Cách mạng số và
-                                những bước ngoặt lịch sử
-                            </h5>
-                        </div>
-                    </div>
+                                <div class="card card-flex" style="width: 18rem;">
+                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Digital Transformation: Survive and Thrive – Cách mạng số và
+                                            những bước ngoặt lịch sử
+                                        </h5>
+                                    </div>
+                                </div>
 
-                    <div class="card card-flex" style="width: 18rem;">
-                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Digital Transformation: Survive and Thrive – Cách mạng số và
-                                những bước ngoặt lịch sử
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="card card-flex" style="width: 18rem;">
-                        <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                Digital Transformation: Survive and Thrive – Cách mạng số và
-                                những bước ngoặt lịch sử
-                            </h5>
-                        </div>
-                    </div>
-                </div>*@
+                                <div class="card card-flex" style="width: 18rem;">
+                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Digital Transformation: Survive and Thrive – Cách mạng số và
+                                            những bước ngoặt lịch sử
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card card-flex" style="width: 18rem;">
+                                    <img src="./img/summit-2.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Digital Transformation: Survive and Thrive – Cách mạng số và
+                                            những bước ngoặt lịch sử
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>*@
                     </div>
                 </div>
                 <!--card items-->
@@ -159,4 +173,79 @@
         </div>
     }
 </div>
+<!--modal 1-->
+@using (DOANCHUYENNGANHEntities db =  new DOANCHUYENNGANHEntities())
+{
+     var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
+    foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+    {
+        <div class="modal fade" id="Modal1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content dialog_lienhe">
+                    <div class="modal-header modal-lienhe">
+                        <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body exp-choice-container">
+                        <a id="contact-agency" href="#Modal2" class="exp-send-message-btn" data-dismiss="modal"
+                           style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
+                            <span class="" style="display:block;">
+                                <i class="fa fa-envelope-o" style="font-size: 6rem;"></i>
+                            </span>
+                            <span style="display: block; line-height: 1.25;">
+                                Gửi email đến
+                                <span class="exp-agency-name">@item.NAMEAGENCY</span>
+                            </span>
+                        </a>
+                        <span style="display: block; border-left: solid 1px rgb(221, 226, 239); border-top: solid 1px rgb(221, 226, 239); margin: 1rem;"></span>
+                        <a id="login" href="#" data-toggle="modal" data-dismiss="modal" class="exp-send-message-btn"
+                           style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
+                            <span class="" style="display:block;">
+                                <i class="fa fa-calendar-o" style="font-size: 6rem;"></i>
+                            </span>
+                            <span style="display: block; line-height: 1.25;">
+                               @item.NAMEAGENCY
+                                <span class="exp-agency-name">có phù hợp với dự án của tôi?</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+<!--modal 2-->
+<div class="modal fade" id="Modal2" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content dialog_lienhe">
+            <div class="modal-header modal-lienhe">
+                <h4 class="modal-title">Liên hệ Viet Nam Web Summit</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <h4 class="who-are-you">Bạn là ai?</h4>
+            <div class="modal-body">
+                <div class="form-group container">
+                    <input class="form-control" type="text" placeholder="Họ & tên">
+                    <input class="form-control" type="email" placeholder="Email">
+                    <input type="text" class="form-control" name="myText"
+                           selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico">
+                </div>
+            </div>
+            <h4 class="who-are-you">Nội dung tin nhắn </h4>
+            <div class="modal-body">
+                <div class="md-resize-wrapper">
+                    <textarea required="" minlength="5" maxlength="6000"
+                              class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
+                              rows="6" name="contact-message" id="exp-contact-message"
+                              placeholder="Enter your message here..." style="height: 168px;"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary btn-send">Gửi tin nhắn</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
 
+</script>

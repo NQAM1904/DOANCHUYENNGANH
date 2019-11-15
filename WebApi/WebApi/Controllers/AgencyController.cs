@@ -38,9 +38,12 @@ namespace WebApi.Controllers
         public ActionResult Create()
         {
             if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
+            var user = (USER)Session["TaiKhoan"];
             using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
             {
+                var agency = db.AGENCies.Where(x => x.IDUSER == user.IDUSER).FirstOrDefault();
                 ViewBag.IDCATE = db.CATEGORies.FirstOrDefault().IDCATE;
+                if (agency != null) return RedirectToAction("Index");
             }
 
             return View();
@@ -62,7 +65,7 @@ namespace WebApi.Controllers
                 }
                 catch (Exception ex)
                 {
-
+                    ViewBag.Error = ex.Message;
                 }
 
             }
@@ -111,11 +114,6 @@ namespace WebApi.Controllers
             return RedirectToAction("Index");
         }
         
-        //[HttpPost]
-        //public ActionResult Service()
-        //{
-            
-        //}
         public ActionResult Logout()
         {
             Session.Clear();

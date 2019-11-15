@@ -275,6 +275,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cate_info.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\layout_agency.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\modal_show.css" />
     <Content Include="Content\PagedList.css" />
@@ -655,9 +656,9 @@
     <Content Include="Scripts\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\plugins\wsc\README.md" />
     <Content Include="Views\Agency\Img.cshtml" />
-    <Content Include="Views\Agency_Info\Info.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Agency\Service.cshtml" />
+    <Content Include="Views\Agency_Info\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
