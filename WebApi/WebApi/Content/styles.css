@@ -1,65 +1,85 @@
 body {
-  padding-top: 56px;
-}
-.carousel-item {
-  height: 65vh;
-  min-height: 300px;
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.carousel-item {
-  opacity: 0.8;
-}
-.portfolio-item {
-  margin-bottom: 30px;
-}
-a{
-  color: black!important;
-}
-.btn-1{
-  color: #20C5E5;
-  box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
-  border: 1px solid #DCE2F0;
-  background-color: #fff;
-}
-.btn-2{
-  color: white;
-  box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
-  border: 1px solid #00AFCE;
-  background-color: #20C5E5;
-  margin-left: 10px;
-}
-.fixed-top{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top: 56px;
 }
 
-.s.center{
-  text-align: center!important;
+#carousel {
+    height: 900px;
 }
-.section_home{
-  max-width: 100%;
-  padding: 4em 0;
-  background-color: #f3f6fb;
+
+.img-header {
+    height: 100%;
+    object-fit: cover;
 }
-.s-bold{
-  font-weight: 700 !important;
-  font-size: 38px;
-  letter-spacing: -0.005em;
-  line-height: 57px;
-  color: #475067 !important;
-  text-align: center;
+
+.carousel-item {
+    height: 900px;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;*/
+    background-size: cover;
 }
-.mb-display-1{
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 40px;
-  text-align: center;
+
+.carousel-item {
+    opacity: 0.8;
 }
-.card-number{
-  position: absolute;
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+a {
+    color: black !important;
+}
+
+.btn-1 {
+    color: #20C5E5;
+    box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
+    border: 1px solid #DCE2F0;
+    background-color: #fff;
+}
+
+.btn-2 {
+    color: white;
+    box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
+    border: 1px solid #00AFCE;
+    background-color: #20C5E5;
+    margin-left: 10px;
+}
+
+.fixed-top {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.s.center {
+    text-align: center !important;
+}
+
+.section_home {
+    max-width: 100%;
+    padding: 4em 0;
+    background-color: #f3f6fb;
+}
+
+.s-bold {
+    font-weight: 700 !important;
+    font-size: 38px;
+    letter-spacing: -0.005em;
+    line-height: 57px;
+    color: #475067 !important;
+    text-align: center;
+}
+
+.mb-display-1 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+}
+
+.card-number {
+    position: absolute;
     top: 0;
     left: 50%;
     width: 2em;
@@ -73,17 +93,20 @@ a{
     color: white;
     background: #475067;
 }
-.container_slider{
-  flex: 1;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
+
+.container_slider {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
-.content{
-  flex: 1 1 100%;
-  box-sizing: border-box;
+
+.content {
+    flex: 1 1 100%;
+    box-sizing: border-box;
 }
+
 .header.header.s.shaded {
     position: relative;
     background-image: url("https://www.prospectsasean.com/wp-content/uploads/2018/02/Breaking-into-Consulting-Feature-Image-e1517592514632.jpeg");
@@ -96,52 +119,141 @@ a{
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .header.header.s {
-  text-align: center;
-  min-height: 400px;
+    text-align: center;
+    min-height: 400px;
 }
+
 .layout-column, ng-view, md-sidenav {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    display: flex;
 }
+
 .layout-align-start-center {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-box-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-  max-width: 100%;
+    max-width: 100%;
 }
+
 .md-display-4 {
-  padding: 100px;
-  font-size: 42px;
-  letter-spacing: -0.010em;
-  line-height: 42px;
+    padding: 100px;
+    font-size: 42px;
+    letter-spacing: -0.010em;
+    line-height: 42px;
 }
+
 .md-headline {
     font-size: 22px;
     line-height: 32px;
 }
-.menu1, .menu2{
-  color: #044841 !important;
-  opacity: 0.8;
-  line-height: 38px;
+
+.menu1, .menu2 {
+    color: #044841 !important;
+    opacity: 0.8;
+    line-height: 38px;
 }
-.input-find{
-  position: absolute;
-  top: 250px;
- 
+
+.input-find {
+    position: absolute;
+    top: 350px;
 }
+
 .carousel {
-  filter:grayscale(60%);
-  background: darkblue;
+    filter: grayscale(60%);
+    background: darkblue;
 }
-.btn-0{
+
+.btn-0 {
     margin-left: 455px;
+}
+
+#Find {
+    color: white;
+    box-shadow: 0 2px 8px 0 rgba(191,199,217,0.4);
+    border: 1px solid #00AFCE;
+    background-color: #20C5E5;
+}
+
+.input_css {
+    height: 50px;
+}
+
+footer {
+    border-top: 5px solid rgba(0,0,0,0.1);
+}
+
+#contact-left h3,
+#contact-right h3 {
+    color: black !important;
+    font-size: 27px;
+    font-weight: 400;
+}
+
+#contact-left p {
+    margin-bottom: 30px;
+    font-family: Arial;
+}
+
+#contact-info {
+}
+
+.address {
+    font-family: Arial;
+}
+
+    .address strong {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+form .form-control {
+    background: transparent;
+    border-radius: 0;
+    font-size: 17px;
+    font-weight: 300;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+}
+
+ul.social-list {
+    display: flex;
+    list-style: none;
+    margin-left: -40px;
+}
+
+    ul.social-list a {
+        margin-right: 50px;
+    }
+
+.btn-primary {
+    border-color: #20C5E5;
+    background-color: #20C5E5;
+    text-decoration: none;
+}
+    .btn-primary:hover {
+        border-color: #20C5E5;
+        background: #20C5E5;
+    }
+#footer-copyright{
+    margin-top: 60px;
+}
+img.lazy.load {
+    animation: fadein 1s;
+}
+.cover{
+    display: block;
+}
+.animation:hover {
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }

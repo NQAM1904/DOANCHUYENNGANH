@@ -294,6 +294,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\jobs-header-bg-account.jpg" />
     <Content Include="img\agency\logo-event-degins.jpg" />
     <Content Include="img\ava.png" />
     <Content Include="img\category\do-hoa.jpg" />
@@ -307,7 +308,10 @@
     <Content Include="img\chat-icon-8.jpg" />
     <Content Include="img\event-deign.jpg" />
     <Content Include="img\event-management-company.jpg" />
+    <Content Include="img\home-header-bg-client.jpg" />
     <Content Include="img\hop-tac.jpg" />
+    <Content Include="img\logo-sl.png" />
+    <Content Include="img\logo-sl.svg" />
     <Content Include="img\logo.svg" />
     <Content Include="img\no-image.jpg" />
     <Content Include="img\no-img.jpg" />

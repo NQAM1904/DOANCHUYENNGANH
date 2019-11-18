@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 .layout-row{
     padding-left: 1% !important;
@@ -227,4 +227,45 @@ ul:not(.browser-default) {
 a:hover{
     
     text-decoration: none;
+}
+.layout-wrap {
+    flex-wrap: wrap;
+    border-radius: .25em .25em 0 0;
+    display: flex;
+    margin-left: 10px;
+}
+
+.tag_DV {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+    color: #20C5E5 !important;
+    white-space: nowrap;
+    margin: 0 7px 7px 0;
+    display: inline-block;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    padding: 4px 10px 4px 10px;
+    border: 1px solid #64D9F4;
+    background-color: #D3F4FB;
+}
+.btn-outline-danger:hover {
+    background: none;
+    border-color: none;
+    border: 1px #20C5E5 solid;
+}
+.btn-outline-warning:hover {
+    background: none;
+    border-color: none;
+    border: 1px #28a745 solid;
+}
+.btn-outline-primary {
+    line-height: 36px;
+    color: #20C5E5 !important;
+    border: 1px #20C5E5 solid;
+}
+.btn-outline-warning {
+    line-height: 36px;
+    color: #28a745 !important;
+    border: 1px #28a745 solid;
 }

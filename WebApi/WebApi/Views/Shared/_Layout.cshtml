@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+  
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/img/logo-sl.png"  rel="shortcut icon" type="image/x-icon"  />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/styles.css" rel="stylesheet" />
-   
+
 </head>
 <body>
 
@@ -28,7 +31,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                <button class="btn btn-ouline-white menu2" data-toggle="dropdown">Công ty</button>
+                <button class="btn btn-ouline-white menu2" data-toggle="dropdown">Nhà cung cấp</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Giá cả</a>
                     <a class="dropdown-item" href="#">Sự kiện nổi bật</a>
@@ -36,17 +39,17 @@
             </div>
 
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <a href="@Url.Action("SignUp","Login")" class="btn btn-ouline-white btn-0">Đăng nhập</a>
+               
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item">
                         <button class="btn btn-outline-primary btn-1" type="button"
-                                onclick="window.location.href='login_agency.html';">
+                                onclick="window.location.href = '@Url.Action("SignUp","Login")';">
                             Nhà cung cấp
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary btn-2" type="button" data-toggle="modal" data-target="#myModal" data-url="@Url.Action("SignUp","Login")" id="Mybtn">
+                        <button class="btn btn-primary btn-2" type="button" data-toggle="modal" data-target="#myModal" data-url="" id="Mybtn">
                             Tìm đối tác
                         </button>
                     </li>
@@ -103,6 +106,6 @@
     <script src="~/Scripts/modal_login.js"></script>
     <script src="~/Scripts/login-form.js"></script>
     <script src="~/Scripts/lien_he.js"></script>
-    <script src="~/Scripts/carouse.js"></script>
+    @*<script src="~/Scripts/carouse.js"></script>*@
 </body>
 </html>

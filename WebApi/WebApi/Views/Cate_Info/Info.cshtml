@@ -207,16 +207,19 @@
                             <h5 class="card-title">Quy mô</h5>
                             <p class="card-text"><span class="data-api">10 người</span> đã thực hiện</p>
                             <h5 class="card-title">Dịch vụ</h5>
-                            <ul class="layout-row layout-wrap">
-                                <li class="tag">Social Media</li>
-                                <li class="tag">Advertising</li>
-                                <li class="tag">Online Advertising</li>
-                                <li class="tag">Media Planning</li>
-                                <li class="tag">Web Application</li>
-                                <li class="tag">Motion Design</li>
-                            </ul>
-                            <a href="/Agency_Info/Info/@ViewBag.Id" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
-                            <a href="#" class="btn btn-outline-success btn-sm btn-block">Liên hệ</a>
+                            <div class="layout-row layout-wrap">
+                                @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
+                                {
+                                    foreach (var service in data.SERVICES.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+                                    {
+
+                                        <a href="#" class="tag_DV">@service.NAMESERVICES</a>
+
+                                    }
+                                }
+                            </div>
+                            <a href="/Agency_Info/Info/@agency.IDAGENCY" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
+                            <a href="#" class="btn btn-outline-warning btn-sm btn-block">Liên hệ</a>
                         </div>
                     </div>
                 </div>
