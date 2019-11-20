@@ -11,7 +11,77 @@ namespace WebApi.Controllers
     public class AjaxController : Controller
     {
         // GET: Ajax
-       public JsonResult GetService(int id)
+        // category của agency
+        public JsonResult GetCategory(int id)
+        {
+            if (Session["login"] is null) return null;
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var category = db.CATEGORies.Where(x => x.IDCATE == id).FirstOrDefault();
+                if (category is null) return null;
+                return new JsonResult()
+                {
+                    Data = new { NAME = category.NAMECATE },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+        [HttpPost]
+        public string PostCategory(CATEGORY cate)
+        {
+            if (Session["login"] is null) return "";
+            var user = (USER)Session["login"];
+
+            if (String.IsNullOrEmpty(cate.NAMECATE))
+            {
+                return "Vui lòng không bỏ trống thông tin";
+            }
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+
+                CATEGORY c = new CATEGORY();
+                if (cate.IDCATE > 0) c = db.CATEGORies.Where(x => x.IDCATE == cate.IDCATE).FirstOrDefault();
+                if (c is null) return "Dữ liệu bất thường vui lòng thử lại sau";
+                c.IDCATE = cate.IDCATE;
+                c.NAMECATE = cate.NAMECATE;
+                if (cate.IDCATE == 0) db.CATEGORies.Add(c);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+
+            }
+            return "ok";
+        }
+        [HttpDelete]
+        public string DeleteCategory(int id)
+        {
+            if (Session["TaiKhoan"] is null) return null;
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var cate = db.CATEGORies.Where(x => x.IDCATE == id).FirstOrDefault();
+                if (cate is null) return "Không tìm thấy đối tượng này";
+                db.CATEGORies.Remove(cate);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "ok";
+        }
+        // dịch vụ của agency
+        public JsonResult GetService(int id)
         {
             if (Session["TaiKhoan"] is null) return null;
             
@@ -26,6 +96,7 @@ namespace WebApi.Controllers
                 };
             }
         }
+
         [HttpPost]
         public string PostService(ServiceModel service)
         {
@@ -82,6 +153,94 @@ namespace WebApi.Controllers
             }
             return "ok";
         }
+
+
+        // position của admin
+        
+        public JsonResult GetPosition(int id)
+        {
+            if (Session["login"] is null) return null;
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var position = db.POSITIONs.Where(x => x.IDPOSITION == id).FirstOrDefault();
+                if (position is null) return null;
+                return new JsonResult()
+                {
+                    Data = new { NAME = position.NAME_POSITION },
+                    JsonRequestBehavior = JsonRequestBehavior.DenyGet
+                };
+            }
+        }
+        [HttpPost]
+        public string EditPosition(POSITION position)
+        {
+            if (Session["login"] is null) return "";
+            var user = (USER)Session["login"];
+
+            if (String.IsNullOrEmpty(position.NAME_POSITION))
+            {
+                return "Vui lòng không bỏ trống thông tin";
+            }
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+               
+                POSITION p = new POSITION();
+                if (position.IDPOSITION > 0) p = db.POSITIONs.Where(x => x.IDPOSITION == position.IDPOSITION).FirstOrDefault();
+                if (p is null) return "Dữ liệu bất thường vui lòng thử lại sau";
+                p.IDPOSITION = position.IDPOSITION;
+                p.NAME_POSITION = position.NAME_POSITION;
+                if (position.IDPOSITION == 0) db.POSITIONs.Add(p);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+
+            }
+            return "ok";
+        }
+        [HttpDelete]
+        public string DeletePosition(int id)
+        {
+            if (Session["login"] is null) return null;
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var service = db.SERVICES.Where(x => x.IDSERVICES == id).FirstOrDefault();
+                if (service is null) return "Không tìm thấy đối tượng này";
+                db.SERVICES.Remove(service);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "ok";
+        }
+        // user của admin 
+        public JsonResult User(int id)
+        {
+            if (Session["login"] is null) return null;
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var userDB = db.USERs.Where(x => x.IDUSER == id).FirstOrDefault();
+                if (userDB is null) return null;
+                return new JsonResult()
+                {
+                    Data = new { fullname = userDB.FULLNAME, Name = userDB.USERNAME, role = userDB.IDROLE },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+        //category của admin
 
     }
 }

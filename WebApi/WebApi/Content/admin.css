@@ -1,0 +1,16 @@
+﻿.btn {
+    text-align: right;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+.btn-default {
+    color: #20C5E5;
+    background: none;
+}
+
+    .btn-default:hover {
+        color: #20C5E5;
+        background-color: none !important;
+        border-color: none !important;
+    }

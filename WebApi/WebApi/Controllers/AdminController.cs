@@ -16,7 +16,7 @@ namespace WebApi.Controllers
             int idRole = ((USER)Session["login"]).IDROLE;
             if (idRole != 1)
             {
-                return RedirectToAction("login");
+                return RedirectToAction("Login");
             }
             return View();
         }
@@ -42,6 +42,27 @@ namespace WebApi.Controllers
                 return RedirectToAction("Index");
             }
 
+        }
+        public ActionResult Category() 
+        {
+            if (Session["login"] is null) return RedirectToAction("Login");
+            return View();
+        }
+        public ActionResult User()
+        {
+            if (Session["login"] is null) return RedirectToAction("Login");
+            return View();
+        }
+
+        public ActionResult Position()
+        {
+            if (Session["login"] is null) return RedirectToAction("Login","Admin");
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login","Admin");
         }
     }
 }

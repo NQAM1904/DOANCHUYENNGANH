@@ -187,72 +187,14 @@ a {
 .input_css {
     height: 50px;
 }
-
-footer {
-    border-top: 5px solid rgba(0,0,0,0.1);
-}
-
-#contact-left h3,
-#contact-right h3 {
-    color: black !important;
-    font-size: 27px;
-    font-weight: 400;
-}
-
-#contact-left p {
-    margin-bottom: 30px;
-    font-family: Arial;
-}
-
-#contact-info {
-}
-
-.address {
-    font-family: Arial;
-}
-
-    .address strong {
-        font-size: 16px;
-        letter-spacing: 1px;
-    }
-
-form .form-control {
-    background: transparent;
-    border-radius: 0;
-    font-size: 17px;
-    font-weight: 300;
-    padding: 8px 16px;
-    margin-bottom: 20px;
-}
-
-ul.social-list {
-    display: flex;
-    list-style: none;
-    margin-left: -40px;
-}
-
-    ul.social-list a {
-        margin-right: 50px;
-    }
-
-.btn-primary {
-    border-color: #20C5E5;
-    background-color: #20C5E5;
-    text-decoration: none;
-}
-    .btn-primary:hover {
-        border-color: #20C5E5;
-        background: #20C5E5;
-    }
-#footer-copyright{
-    margin-top: 60px;
-}
 img.lazy.load {
     animation: fadein 1s;
 }
-.cover{
+
+.cover {
     display: block;
 }
+
 .animation:hover {
     transition: box-shadow 0.3s ease-in-out;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);

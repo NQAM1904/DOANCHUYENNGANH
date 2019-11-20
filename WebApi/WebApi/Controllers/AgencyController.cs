@@ -32,7 +32,11 @@ namespace WebApi.Controllers
             if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
             return View();
         }
-
+        public ActionResult People()
+        {
+            if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
+            return View();
+        }
         // khi đăng nhập vào tài khoản
         [HttpGet]
         public ActionResult Create()
@@ -77,6 +81,8 @@ namespace WebApi.Controllers
             if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
             return View();
         }
+      
+
         [HttpPost]
         public ActionResult Img(HttpPostedFileBase files1, HttpPostedFileBase files2)
         {
@@ -87,7 +93,7 @@ namespace WebApi.Controllers
                 if (files1 == null && files2 == null)
                 {
                     ViewBag.Error = "Vui lòng chọn ảnh";
-                  
+
                 }
                 else
                 {
@@ -105,15 +111,16 @@ namespace WebApi.Controllers
                         files2.SaveAs(path1);
                         IMGAGENCY img = new IMGAGENCY();
                         img.FILENAME = files1.FileName;
+                        img.FILENAME = files2.FileName;
                         agency.IMGAGENCies.Add(img);
                         db.SaveChanges();
                     }
                 }
-                
+
             }
             return RedirectToAction("Index");
         }
-        
+
         public ActionResult Logout()
         {
             Session.Clear();

@@ -1,0 +1,150 @@
+﻿
+
+@{
+    ViewBag.Title = "Position";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+    <link href="~/Content/admin.css" rel="stylesheet" />
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+
+<h2>Chức vụ của người quản lý công ty</h2>
+
+<div class="panel_service">
+    <div class="btn_table">
+        <div class="text-left">
+            <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreatePosition()"><i class="fa fa-plus"></i> Tạo chức vụ</button>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Chức vụ</th>
+                   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                {
+                  
+                    foreach (var item in db.POSITIONs.ToList())
+                    {
+                        <tr>
+                            <td>@item.NAME_POSITION</td>
+                            <th>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-primary" onclick="EditPosition(@item.IDPOSITION)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="DeletePosition(@item.IDPOSITION)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </th>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*--Modal dialog--*@
+<div id="create-position-model" class="modal fade create-service-md" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm dịch vụ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Tên Chức vụ</label>
+                        <input type="text" class="form-control" name="NAME">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="SaveInfo()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+    var idPosition = 0;
+
+    function EditPosition(id) {
+        idPosition = id;
+
+        $.ajax({
+            url: '/Ajax/GetPosition/' + idPosition,
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                id: idPosition,
+            }
+        }).done(function (ketqua) {
+            var json = JSON.parse(ketqua);
+            $("[name='NAME']").val(json.NAME);
+            $('#create-position-model').modal("show");
+        });
+    }
+
+    function DeletePosition(id) {
+        if (!confirm("Bạn có thực sự muốn xóa chức vụ này không?")) return;
+        $.ajax({
+            url: '/Ajax/DeletePosition/' + id,
+            type: 'DELETE',
+            dataType: 'text'
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Xóa thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+
+    function CreatePosition() {
+        IdService = 0;
+        $("[name='NAME']").val("");
+        $("#create-position-model").modal("show");
+    }
+
+    function SaveInfo() {
+        var name = $("[name='NAME']").val();
+        if (name == '') {
+            alert('Vui lòng nhập đủ thông tin');
+            return;
+        }
+
+
+        $.ajax({
+            url: '/Ajax/EditPosition',
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                IDPOSITION: idPosition,
+                NAME_POSITION: name,
+            }
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Lưu dữ liệu thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+</script>

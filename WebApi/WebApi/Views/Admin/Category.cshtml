@@ -1,19 +1,19 @@
-﻿
+﻿@model WebApi.COMMENT
+
 @{
-    ViewBag.Title = "Service";
-    Layout = "~/Views/Shared/_LayoutAgency.cshtml";
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<link href="~/Content/service_agency.css" rel="stylesheet" />
 <link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Content/admin.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
-<br />
-<h2>Dịch vụ của bạn</h2>
+<h2>Danh sách danh mục</h2>
 
 <div class="panel_service">
     <div class="btn_table">
-        <div class="text-left">
-            <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreateService()"><i class="fa fa-plus"></i> Thêm dịch vụ</button>
+        <div class="text-right">
+            <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreateCategory()"><i class="fas fa-plus"></i> Tạo danh mục</button>
         </div>
     </div>
 </div>
@@ -23,32 +23,23 @@
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th scope="col">Tên Dịch vụ</th>
-                    <th scope="col">Mô tả</th>
-                    <th scope="col">Giá khởi điểm</th>
-                    <th scope="col">Giá cao nhất</th>
+                    <th scope="col">Tên danh mục</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
                 {
-                    var idUser = ((USER)Session["TaiKhoan"]);
-
-                    var agency = db.AGENCies.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
 
 
-                    foreach (var item in db.SERVICES.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+                    foreach (var item in db.CATEGORies.ToList())
                     {
                         <tr>
-                            <td>@item.NAMESERVICES</td>
-                            <td>@item.SUMARYSERVICES</td>
-                            <td>@item.BEGIN_PRICE</td>
-                            <td>@item.MAX_PRICE</td>
+                            <td>@item.NAMECATE</td>
                             <th>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-primary" onclick="EditSurvice(@item.IDSERVICES)"><i class="fa fa-edit"></i></button>
-                                    <button type="button" class="btn btn-danger" onclick="DeleteService(@item.IDSERVICES)"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-primary" onclick="EditCategory(@item.IDCATE)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="DeleteCategory(@item.IDCATE)"><i class="fa fa-trash"></i></button>
                                 </div>
                             </th>
                         </tr>
@@ -59,13 +50,11 @@
         </table>
     </div>
 </div>
-
-@*--Modal dialog--*@
-<div id="create-service-model" class="modal fade create-service-md" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="create-category-model" class="modal fade create-category-md" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Thêm dịch vụ</h5>
+                <h5 class="modal-title">Thông tin danh mục</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -73,23 +62,12 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label class="col-form-label">Tên dịch vụ</label>
+                        <label class="col-form-label">Tên Danh Mục</label>
                         <input type="text" class="form-control" name="NAME">
                     </div>
-
                     <div class="form-group">
-                        <label class="col-form-label">Mô tả dịch vụ</label>
-                        <textarea type="text" class="form-control s-area" minlength="5" maxlength="6000" name="DESCRIPTION"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label">Giá khởi điểm</label>
-                        <input type="number" class="form-control" name="BEGIN_PRICE">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label">Giá cao nhất</label>
-                        <input type="number" class="form-control" name="MAX_PRICE">
+                        <label class="col-form-label">Hình ảnh</label>
+                        <input type="text" class="form-control" name="md-name">
                     </div>
 
 
@@ -102,36 +80,35 @@
         </div>
     </div>
 </div>
+
+
 <script>
     $(document).ready(function () {
         $('#myTable').DataTable();
     });
-    var IdService = 0;
+    var idCategory = 0;
 
-    function EditSurvice(id) {
-        IdService = id;
+    function EditCategory(id) {
+        idCategory = id;
 
         $.ajax({
-            url: '/Ajax/GetService/' + IdService,
+            url: '/Ajax/GetCategory/' + idCategory,
             type: 'POST',
             dataType: 'text',
             data: {
-                id: IdService,
+                id: idCategory,
             }
         }).done(function (ketqua) {
             var json = JSON.parse(ketqua);
             $("[name='NAME']").val(json.NAME);
-            $("[name='DESCRIPTION']").val(json.DESCRIPTION);
-            $("[name='BEGIN_PRICE']").val(json.giakd);
-            $("[name='MAX_PRICE']").val(json.giamax);
-            $('#create-service-model').modal("show");
+            $('#create-category-model').modal("show");
         });
     }
 
-    function DeleteService(id) {
+    function DeleteCategory(id) {
         if (!confirm("Bạn có thực sự muốn xóa danh mục này không?")) return;
         $.ajax({
-            url: '/Ajax/DeleteService/' + id,
+            url: '/Ajax/DeleteCategory/' + id,
             type: 'DELETE',
             dataType: 'text'
         }).done(function (ketqua) {
@@ -144,21 +121,15 @@
         });
     }
 
-    function CreateService() {
-        IdService = 0;
+    function CreateCategory() {
+        idCategory = 0;
         $("[name='NAME']").val("");
-        $("[name='DESCRIPTION']").val("");
-        $("[name='BEGIN_PRICE']").val(0);
-        $("[name='MAX_PRICE']").val(0);
-        $("#create-service-model").modal("show");
+        $("#create-category-model").modal("show");
     }
 
     function SaveInfo() {
         var name = $("[name='NAME']").val();
-        var description = $("[name='DESCRIPTION']").val();
-        var giakd = $("[name='BEGIN_PRICE']").val();
-        var giamax = $("[name='MAX_PRICE']").val();
-        if (name == '' || description == '' && giakd == 0 && giamax == 0) {
+        if (name == '') {
             alert('Vui lòng nhập đủ thông tin');
             return;
         }
@@ -169,7 +140,7 @@
             type: 'POST',
             dataType: 'text',
             data: {
-                IDSERVICES: IdService,
+                idCategoryS: idCategory,
                 NAMESERVICES: name,
                 SUMARYSERVICES: description,
                 BEGIN_PRICE: giakd,

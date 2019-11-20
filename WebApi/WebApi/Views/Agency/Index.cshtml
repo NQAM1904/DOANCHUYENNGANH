@@ -4,27 +4,24 @@
     Layout = "~/Views/Shared/_LayoutAgency.cshtml";
 
 }
+<link href="~/Content/createagency.css" rel="stylesheet" />
+@if (Session["TaiKhoan"] != null)
+{
 
-<div class="">
-    @if (Session["TaiKhoan"] != null)
-    {
-
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                @{
-                    var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
-                }
-                <li class="breadcrumb-item">
-                    Chỉnh sửa tùy chọn đại lý của
-                </li>
-                <li class="breadcrumb-item active">
-                    @fullname
-                </li>
-            </ol>
-        </nav>
-    }
-</div>
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            @{
+                var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+            }
+            <li class="breadcrumb-item">
+                Chỉnh sửa tùy chọn đại lý của
+            </li>
+            <li class="breadcrumb-item active">
+                @fullname
+            </li>
+        </ol>
+    </nav>
+}
 <div class="container all-box">
 
     @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
@@ -61,7 +58,8 @@
                     <div class="name-agency">
 
                         <h2 class="md-display-2">@item.NAMEAGENCY</h2>
-                        <span><a href="/Agency/Update/@item.IDAGENCY" class="icon"><i class="fa fa-pencil"></i></a></span>
+                        <span><a href="/Agency/Update/@item.IDAGENCY" class="icon"><i class="fas fa-pen"></i></a></span>
+                        @*<i class="fas fa-pen" style="float:right;" onclick="window.location.href = '@Url.Action("Update","Agency")' @item.IDAGENCY;"></i>*@
                     </div>
                     <div class="address">
                         <span class="s-address">@item.ADDRESSAGENCY</span>
@@ -73,31 +71,31 @@
                     </div>
                 </div>
 
-                @*<div class="works-history">
-                        <div class="card card-outline-secondary my-4">
+                <div class="works-history">
+                    <div class="card card-outline-secondary my-4">
 
-                            <div class="card-header">
-                                <b>Đã tổ chức (3) bởi @item.NAMEAGENCY</b>
-                            </div>
+                        <div class="card-header">
+                            <b>Đã tổ chức (3) bởi @item.NAMEAGENCY</b>
+                        </div>
 
-                            <div class="card-info">
-                                <div class="card card-flex" style="width: 18rem;">
-                                    <img src="~/img/summit-2.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-
-                                        </h5>
-                                    </div>
+                        <div class="card-info">
+                            <div class="card card-flex" style="width: 18rem;">
+                                <img src="~/img/no-image.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                    </h5>
                                 </div>
                             </div>
-
                         </div>
-                    </div>*@
+
+                    </div>
+                </div>
                 <!--thông tin -->
                 <div class="Services">
                     <div class="card card-outline-secondary my-4">
                         <div class="card-header">
                             <b>Thông tin chi tiết</b>
+                            <i class="fas fa-pen" style="float:right;" onclick="window.location.href = '@Url.Action("Update","Agency")' @item.IDAGENCY;"></i>
                         </div>
                         <div class="card-info">
                             <ul class="danhsach">
@@ -108,7 +106,8 @@
                                     <b>Số Điện Thoại:</b>@item.PHONEAGENCY
                                 </li>
                                 <li>
-                                    <b>Mạng xã hội: @item.AGENCY_SOCIAL.FirstOrDefault()</b>
+                                    <b>
+                                        Mạng xã hội: <i class="fab fa-facebook-f" style="margin-left:10px;"></i> <i class="fa fa-envelope" style="margin-left:10px;"></i>  <i class="fab fa-google-plus-g"  style="margin-left:10px;"></i> </b>
                                 </li>
                             </ul>
                         </div>
@@ -119,9 +118,18 @@
                     <div class="card card-outline-secondary my-4">
                         <div class="card-header">
                             <b>Dịch vụ</b>
+                            <i class="fas fa-pen" style="float:right;" onclick="window.location.href = '@Url.Action("Service","Agency")';"></i>
                         </div>
                         <div class="card-info">
+                            @foreach (var service in data.SERVICES.Where(x => x.IDAGENCY == item.IDAGENCY).ToList())
+                            {
+                                <div class="list-group">
+                                    <a href="#" class="tag_DV">@service.NAMESERVICES</a>
+                                    <a class="tag_number">@service.BEGIN_PRICE - @service.MAX_PRICE</a>
+                                </div>
+                           
 
+                            }
                         </div>
                     </div>
                 </div>

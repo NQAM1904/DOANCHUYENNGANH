@@ -134,7 +134,7 @@
           </Key>
           <Property Name="IDPEOPLE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IMG" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IMG" Type="varchar" MaxLength="255" />
           <Property Name="IDPOSITION" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PEOPLE_AGENCY">
@@ -142,7 +142,7 @@
             <PropertyRef Name="IDAGENCY" />
             <PropertyRef Name="IDPEOPLE" />
           </Key>
-          <Property Name="IDAGENCY" Type="int" Nullable="false" />
+          <Property Name="IDAGENCY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDPEOPLE" Type="int" Nullable="false" />
           <Property Name="TEAM_MEMBER" Type="int" />
         </EntityType>
@@ -150,8 +150,8 @@
           <Key>
             <PropertyRef Name="IDPOSITION" />
           </Key>
-          <Property Name="IDPOSITION" Type="int" Nullable="false" />
-          <Property Name="NAME_POSITION" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="IDPOSITION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME_POSITION" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -753,7 +753,7 @@
           </Key>
           <Property Name="IDPEOPLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IDPOSITION" Type="Int32" Nullable="false" />
           <NavigationProperty Name="POSITION" Relationship="Self.FK__PEOPLE__IDPOSITI__6EF57B66" FromRole="PEOPLE" ToRole="POSITION" />
           <NavigationProperty Name="PEOPLE_AGENCY" Relationship="Self.FK__PEOPLE_AG__IDPEO__6E01572D" FromRole="PEOPLE" ToRole="PEOPLE_AGENCY" />
@@ -763,7 +763,7 @@
             <PropertyRef Name="IDAGENCY" />
             <PropertyRef Name="IDPEOPLE" />
           </Key>
-          <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
+          <Property Name="IDAGENCY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDPEOPLE" Type="Int32" Nullable="false" />
           <Property Name="TEAM_MEMBER" Type="Int32" />
           <NavigationProperty Name="AGENCY" Relationship="Self.FK__PEOPLE_AG__IDAGE__5EBF139D" FromRole="PEOPLE_AGENCY" ToRole="AGENCY" />
@@ -773,8 +773,8 @@
           <Key>
             <PropertyRef Name="IDPOSITION" />
           </Key>
-          <Property Name="IDPOSITION" Type="Int32" Nullable="false" />
-          <Property Name="NAME_POSITION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDPOSITION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME_POSITION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PEOPLE" Relationship="Self.FK__PEOPLE__IDPOSITI__6EF57B66" FromRole="POSITION" ToRole="PEOPLE" />
         </EntityType>
         <EntityType Name="ROLE">

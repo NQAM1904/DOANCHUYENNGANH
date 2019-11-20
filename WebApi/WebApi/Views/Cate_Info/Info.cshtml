@@ -7,6 +7,7 @@
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="~/Content/agency.css" rel="stylesheet" />
 
+
 <div class="container_slider">
     <div class="content">
         <header class="s header layout-column layout-align-center-center md-padding bg lazy shaded longtail-page-header load">
@@ -96,6 +97,7 @@
             </div>
             <div style="margin-top: 8px">
                 <md-input-container class="s-input-container s-fluid sl-no-error md-input-has-placeholder md-sortlist-theme">
+
                     <div class="md-resize-wrapper">
                         <i class="fa fa-suitcase" style="font-size: 16px;position: absolute;left: 10px;top: 9px;"></i>
                         <select id="exp-filter-industry"
@@ -168,15 +170,16 @@
 
 <div class="container">
     <div class="row">
-        @{
-            foreach (var agency in api.Get(id).ToList())
+        @using ( DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+        {
+            foreach (var agency in db.AGENCies.Where(x=>x.IDCATE == id).ToList())
             {
 
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">
-                                <img src="~/img/agency/@agency.IMGAGENCies.FirstOrDefault().FILENAME" class="card-logo" />
+                                <img src="~/img/agency/@(agency.IMGAGENCies.FirstOrDefault() == null ? "" : agency.IMGAGENCies.FirstOrDefault().FILENAME)" class="card-logo" />
                                 <a href="/Agency_Info/Info/@agency.IDAGENCY" class="title-company">@agency.NAMEAGENCY</a>
                             </h5>
                         </div>
@@ -185,6 +188,7 @@
                             <h5 class="card-title">Đánh giá</h5>
                             <div class='rating-stars'>
                                 <ul id='stars'>
+
                                     <li class='star' title='Poor' data-value='1'>
                                         <i class='fa fa-star fa-fw'></i>
                                     </li>
@@ -218,7 +222,7 @@
                                     }
                                 }
                             </div>
-                            <a href="/Agency_Info/Info/@agency.IDAGENCY" class="btn btn-outline-primary btn-sm btn-block">Xem chi tiết</a>
+                            <a href="/Agency_Info/Info/@agency.IDAGENCY" class="btn btn-outline-default btn-sm btn-block">Xem chi tiết</a>
                             <a href="#" class="btn btn-outline-warning btn-sm btn-block">Liên hệ</a>
                         </div>
                     </div>

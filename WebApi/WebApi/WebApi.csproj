@@ -266,8 +266,11 @@
     <Content Include="AdminAssets\js\sb-admin-2.js" />
     <Content Include="AdminAssets\js\sb-admin-2.min.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\admin.css" />
     <Content Include="Content\agency.css" />
+    <Content Include="Content\createagency.css" />
     <Content Include="Content\agency_info.css" />
+    <Content Include="Content\all.min.css" />
     <Content Include="Content\arbor.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -275,6 +278,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cate_info.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\footer.css" />
     <Content Include="Content\layout_agency.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\modal_show.css" />
@@ -294,6 +298,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\define-your-needs.png" />
+    <Content Include="img\get-introduced.png" />
+    <Content Include="img\hire-your-agency.png" />
     <Content Include="img\jobs-header-bg-account.jpg" />
     <Content Include="img\agency\logo-event-degins.jpg" />
     <Content Include="img\ava.png" />
@@ -347,6 +354,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
     <EntityDeploy Include="DBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
@@ -663,6 +673,22 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Agency\Service.cshtml" />
     <Content Include="Views\Agency_Info\Info.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="Views\Admin\User.cshtml" />
+    <Content Include="Views\Agency\People.cshtml" />
+    <Content Include="Views\Admin\Position.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

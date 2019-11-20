@@ -129,7 +129,7 @@
     </Key>
     <Property Name="IDPEOPLE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IMG" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="IMG" Type="varchar" MaxLength="255" />
     <Property Name="IDPOSITION" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PEOPLE_AGENCY">
@@ -137,7 +137,7 @@
       <PropertyRef Name="IDAGENCY" />
       <PropertyRef Name="IDPEOPLE" />
     </Key>
-    <Property Name="IDAGENCY" Type="int" Nullable="false" />
+    <Property Name="IDAGENCY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDPEOPLE" Type="int" Nullable="false" />
     <Property Name="TEAM_MEMBER" Type="int" />
   </EntityType>
@@ -145,8 +145,8 @@
     <Key>
       <PropertyRef Name="IDPOSITION" />
     </Key>
-    <Property Name="IDPOSITION" Type="int" Nullable="false" />
-    <Property Name="NAME_POSITION" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDPOSITION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME_POSITION" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="ROLE">
     <Key>

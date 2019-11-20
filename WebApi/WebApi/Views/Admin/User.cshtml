@@ -1,0 +1,181 @@
+﻿@model WebApi.USER
+
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách tài khoản</h2>
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Content/admin.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+
+<div class="panel_service">
+    <div class="btn_table">
+        <div class="text-right">
+            <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreateUser()"><i class="fas fa-plus"></i> TạoTài Khoản</button>
+        </div>
+    </div>
+</div>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Tài Khoản</th>
+                    <th scope="col">Tên đăng nhập</th>
+                    <th scope="col">Tên chức năng</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                {
+
+
+                    foreach (var item in db.USERs.ToList())
+                    {
+                <tr>
+                    <td>@item.FULLNAME</td>
+                    <td>@item.USERNAME</td>
+                    @if (@item.IDROLE == 1)
+                    {
+                        <td>Quản trị viên</td>
+                    }
+                    else
+                    {
+                        <td>người dùng</td>
+                    }
+
+                    <th>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary" onclick="EditCategory(@item.IDUSER)"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" onclick="DeleteCategory(@item.IDUSER)"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </th>
+                </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="create-user-model" class="modal fade create-category-md" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="col-form-label">Họ và Tên</label>
+                        <input type="text" class="form-control" name="FULLNAME">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="USERNAME">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Mật Khẩu</label>
+                        <input type="password" class="form-control" name="PASSWORD">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Email</label>
+                        <input type="email" class="form-control" name="EMAIL">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="SaveInfo()">Lưu lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+    var idUser = 0;
+
+    function EditUser(id) {
+        idCategory = id;
+
+        $.ajax({
+            url: '/Ajax/GetCategory/' + idUser,
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                id: idUser,
+            }
+        }).done(function (ketqua) {
+            var json = JSON.parse(ketqua);
+            $("[name='NAME']").val(json.NAME);
+            $('#create-user-model').modal("show");
+        });
+    }
+
+    function DeleteCategory(id) {
+        if (!confirm("Bạn có thực sự muốn xóa danh mục này không?")) return;
+        $.ajax({
+            url: '/Ajax/DeleteCategory/' + id,
+            type: 'DELETE',
+            dataType: 'text'
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Xóa thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+
+    function CreateUser() {
+        idUser = 0;
+        $("[name='FULLNAME']").val("");
+        $("[name='USERNAME']").val("");
+        $("[name='PASSWORD']").val("");
+        $("[name='EMAIL']").val("");
+        $("#create-user-model").modal("show");
+    }
+
+    function SaveInfo() {
+        var name = $("[name='NAME']").val();
+        if (name == '') {
+            alert('Vui lòng nhập đủ thông tin');
+            return;
+        }
+
+
+        $.ajax({
+            url: '/Ajax/PostService',
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                idCategoryS: idUser,
+                NAMESERVICES: name,
+                SUMARYSERVICES: description,
+                BEGIN_PRICE: giakd,
+                MAX_PRICE: giamax
+            }
+        }).done(function (ketqua) {
+            if (ketqua == "ok") {
+                alert("Lưu dữ liệu thành công");
+                location.reload();
+                return;
+            }
+            alert(ketqua);
+        });
+    }
+</script>

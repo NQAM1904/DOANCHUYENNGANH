@@ -259,7 +259,7 @@ a:hover{
     border-color: none;
     border: 1px #28a745 solid;
 }
-.btn-outline-primary {
+.btn-outline-default {
     line-height: 36px;
     color: #20C5E5 !important;
     border: 1px #20C5E5 solid;
