@@ -177,6 +177,7 @@
 <!--modal 1-->
 @if (Session["TaiKhoan"] != null && ((USER)Session["TaiKhoan"]).IDROLE == 3)
 {
+    var user = (USER)Session["TaiKhoan"];
     using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
     {
         var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
@@ -234,7 +235,12 @@
                             <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
-
+                        <h4 class="who-are-you">Thông tin của bạn</h4>
+                        <div class="card-body">
+                            <p class="thongtin">Tên: @user.FULLNAME</p>
+                            <p class="thongtin">Email: @*@(user.CUSTOMERs.FirstOrDefault() == null ? "" : user.CUSTOMERs.FirstOrDefault().EMAILCUSTOM)*@</p>
+                            
+                        </div>
                         <h4 class="who-are-you">Chọn dịch vụ</h4>
                         <div class="modal-body">
 
@@ -249,13 +255,13 @@
                             </select>
                         </div>
 
-                        <h4 class="who-are-you">Nội dung tin nhắn </h4>
+                        <h4 class="who-are-you">Ghi chú </h4>
                         <div class="modal-body">
                             <div class="md-resize-wrapper">
                                 <textarea required="" minlength="5" maxlength="6000"
                                           class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
                                           rows="6" name="contact-message" id="exp-contact-message"
-                                          placeholder="Enter your message here..." style="height: 168px;"></textarea>
+                                          placeholder="ghi chú của bạn" style="height: 168px;"></textarea>
                             </div>
                             <button type="button" class="btn btn-primary btn-send">Gửi tin nhắn</button>
                         </div>

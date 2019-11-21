@@ -1,0 +1,28 @@
+﻿@model WebApi.CUSTOMER
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<h2>Thông tin của bạn</h2>
+@using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+{
+    var idUser = ((USER)Session["TaiKhoan"]);
+    var item = db.CUSTOMERs.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <div class="col-md-10">
+                    Tên khách hàng hoặc công ty cần tổ chức *
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control"value="@item.NAMECUSTOM" />
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+}

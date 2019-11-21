@@ -277,6 +277,7 @@
     <Content Include="Content\cate_info.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
     <Content Include="Content\footer.css" />
+    <Content Include="Content\LayoutCustom.css" />
     <Content Include="Content\layout_agency.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\modal_show.css" />
@@ -687,12 +688,14 @@
     <Content Include="Views\Admin\User.cshtml" />
     <Content Include="Views\Agency\People.cshtml" />
     <Content Include="Views\Admin\Position.cshtml" />
+    <Content Include="Views\Customer\Info.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\manger\" />
     <Folder Include="Views\Ajax\" />
-    <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

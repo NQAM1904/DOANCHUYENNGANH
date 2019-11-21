@@ -1,28 +1,21 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/img/logo-sl.png" rel="shortcut icon" type="image/x-icon" />
     @Scripts.Render("~/bundles/modernizr")
-
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/login.css" rel="stylesheet" />
     <link href="~/Content/all.min.css" rel="stylesheet" />
     <link href="~/Content/styles.css" rel="stylesheet" />
-    <link href="~/Content/footer.css" rel="stylesheet" />
+    <link href="~/Content/LayoutCustom.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
     <script src="~/Scripts/bootstrap.min.js"></script>
     @RenderSection("scripts", required: false)
-
-    @*<script src="~/Scripts/carouse.js"></script>*@
 </head>
 <body>
-
-    <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/Home/Index">
@@ -84,62 +77,40 @@
         </div>
     </nav>
 
-    <!-- Page Content -->
-    @RenderBody()
-    <!-- /.container -->
-
-    <div class="modal fade" id="Modal" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><img src="~/img/logo.svg" style="height: 1.5em; max-width: 100px;"></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="row all-layout">
+        <div class="col-lg-2">
+            <div class="s-custom-summary">
+                <br />
+                <div class="list-info">
+                    <a href="/Customer"><h2 class="sub">Thông tin</h2></a>
                 </div>
-                <div class="modal-body">
-                    <div class="container layout-login">
-                        <div class="login">Đăng nhập</div>
-                        <div class="signup">Đăng Ký</div>
-                        <!--form login-->
 
-                        <div class="login-form">
-                            <form method="post" action="/Home/DangNhap">
-                                @if (!String.IsNullOrEmpty(ViewBag.Error))
-                                {
-                                    <div class="alert alert-danger" role="alert">
-                                        @ViewBag.Error
-                                    </div>
-                                }
-                                <input type="text" placeholder="Nhập tên đăng nhập" name="USERNAME" class="input"><br>
-                                <input type="password" placeholder="Nhập mật khẩu" name="PASSWORD" class="input"><br>
-                                <input id="login" class="btn btn-primary btn-login" type="submit" value="Đăng Nhập">
-                            </form>
-                        </div>
-
-                        <form method="post" action="/Home/DangKy">
-                            <!--form sign-->
-                            <div class="signup-form">
-                                @if (!String.IsNullOrEmpty(ViewBag.Error))
-                                {
-                                    <div class="alert alert-danger" role="alert">
-                                        @ViewBag.Error
-                                    </div>
-
-                                }
-                                <input type="text" placeholder="Họ và Tên" name="hoten" class="input" id="hoten" />
-                                <input type="text" placeholder="Tên Đăng Nhập" name="tendn" class="input" id="tendn"><br>
-                                <input type="password" placeholder="Mật khẩu" name="matkhau" class="input" id="matkhau"><br>
-                                <input class="btn btn-primary btn-signin" type="submit" id="dangky" value="Đăng ký">
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+
+        <!--end col-lg-2-->
+        <div class="col-lg-10">
+            <div class="all-box">
+                @if (Session["TaiKhoan"] != null)
+                {
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @{
+                                var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+                            }
+                            <li class="breadcrumb-item">
+                                chỉnh sửa thông tin cá nhân
+                            </li>
+                            <li class="breadcrumb-item active">
+                                @fullname
+                            </li>
+                        </ol>
+                    </nav>
+                }
+                 </div>
+                @RenderBody()
+            </div>
+        </div>
 </body>
 </html>
-
-<script src="~/Scripts/modal_login.js"></script>
-<script src="~/Scripts/login-form.js"></script>
-<script src="~/Scripts/lien_he.js"></script>
