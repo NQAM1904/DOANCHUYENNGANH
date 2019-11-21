@@ -17,3 +17,15 @@
     });
 
 });
+
+$(document).ready(function () {
+    $("#login").click(function () {
+        var name = $("[name='NAME']").val();
+        var pass = $("[name='PASSWORD']").val();
+        if (name == '' || pass == '') {
+            $('.toast').toast('show');
+            return;
+        }
+    });
+
+});

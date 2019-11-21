@@ -45,18 +45,18 @@ namespace WebApi.Controllers
         }
         public ActionResult Category() 
         {
-            if (Session["login"] is null) return RedirectToAction("Login");
+            if (Session["login"] is null) return RedirectToAction("Index");
             return View();
         }
         public ActionResult User()
         {
-            if (Session["login"] is null) return RedirectToAction("Login");
+            if (Session["login"] is null) return RedirectToAction("Index");
             return View();
         }
 
         public ActionResult Position()
         {
-            if (Session["login"] is null) return RedirectToAction("Login","Admin");
+            if (Session["login"] is null) return RedirectToAction("Index");
             return View();
         }
         public ActionResult Logout()

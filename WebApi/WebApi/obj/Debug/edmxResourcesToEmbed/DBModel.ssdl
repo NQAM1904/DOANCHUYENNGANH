@@ -15,6 +15,7 @@
     <Property Name="STATUS" Type="bit" />
     <Property Name="IDUSER" Type="int" Nullable="false" />
     <Property Name="IDCATE" Type="int" Nullable="false" />
+    <Property Name="IDPEOPLE" Type="int" />
   </EntityType>
   <EntityType Name="AGENCY_CATE">
     <Key>
@@ -112,6 +113,7 @@
     <Property Name="CREATE_ORDER" Type="datetime" />
     <Property Name="IDCUSTOMER" Type="int" Nullable="false" />
     <Property Name="IDEVENT" Type="int" Nullable="false" />
+    <Property Name="STATUS" Type="bit" />
   </EntityType>
   <EntityType Name="ORDER_INFO">
     <Key>
@@ -131,15 +133,6 @@
     <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IMG" Type="varchar" MaxLength="255" />
     <Property Name="IDPOSITION" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PEOPLE_AGENCY">
-    <Key>
-      <PropertyRef Name="IDAGENCY" />
-      <PropertyRef Name="IDPEOPLE" />
-    </Key>
-    <Property Name="IDAGENCY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IDPEOPLE" Type="int" Nullable="false" />
-    <Property Name="TEAM_MEMBER" Type="int" />
   </EntityType>
   <EntityType Name="POSITION">
     <Key>
@@ -369,30 +362,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PEOPLE_AG__IDAGE__5EBF139D">
-    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
-    <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AGENCY">
-        <PropertyRef Name="IDAGENCY" />
-      </Principal>
-      <Dependent Role="PEOPLE_AGENCY">
-        <PropertyRef Name="IDAGENCY" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__PEOPLE_AG__IDPEO__6E01572D">
-    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="1" />
-    <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PEOPLE">
-        <PropertyRef Name="IDPEOPLE" />
-      </Principal>
-      <Dependent Role="PEOPLE_AGENCY">
-        <PropertyRef Name="IDPEOPLE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__USER__IDROLE__6754599E">
     <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
     <End Role="USER" Type="Self.USER" Multiplicity="*" />
@@ -414,6 +383,18 @@
       </Principal>
       <Dependent Role="AGENCY">
         <PropertyRef Name="IDCATE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AGENCY_PEOPLE">
+    <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEOPLE">
+        <PropertyRef Name="IDPEOPLE" />
+      </Principal>
+      <Dependent Role="AGENCY">
+        <PropertyRef Name="IDPEOPLE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -504,7 +485,6 @@
     <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDER_INFO" EntityType="Self.ORDER_INFO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PEOPLE" EntityType="Self.PEOPLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PEOPLE_AGENCY" EntityType="Self.PEOPLE_AGENCY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SERVICES" EntityType="Self.SERVICES" Schema="dbo" store:Type="Tables" />
@@ -568,20 +548,16 @@
       <End Role="POSITION" EntitySet="POSITION" />
       <End Role="PEOPLE" EntitySet="PEOPLE" />
     </AssociationSet>
-    <AssociationSet Name="FK__PEOPLE_AG__IDAGE__5EBF139D" Association="Self.FK__PEOPLE_AG__IDAGE__5EBF139D">
-      <End Role="AGENCY" EntitySet="AGENCY" />
-      <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-    </AssociationSet>
-    <AssociationSet Name="FK__PEOPLE_AG__IDPEO__6E01572D" Association="Self.FK__PEOPLE_AG__IDPEO__6E01572D">
-      <End Role="PEOPLE" EntitySet="PEOPLE" />
-      <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-    </AssociationSet>
     <AssociationSet Name="FK__USER__IDROLE__6754599E" Association="Self.FK__USER__IDROLE__6754599E">
       <End Role="ROLE" EntitySet="ROLE" />
       <End Role="USER" EntitySet="USER" />
     </AssociationSet>
     <AssociationSet Name="FK_AGENCY_CATEGORY" Association="Self.FK_AGENCY_CATEGORY">
       <End Role="CATEGORY" EntitySet="CATEGORY" />
+      <End Role="AGENCY" EntitySet="AGENCY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AGENCY_PEOPLE" Association="Self.FK_AGENCY_PEOPLE">
+      <End Role="PEOPLE" EntitySet="PEOPLE" />
       <End Role="AGENCY" EntitySet="AGENCY" />
     </AssociationSet>
     <AssociationSet Name="FK_AGENCY_SOCIAL_AGENCY" Association="Self.FK_AGENCY_SOCIAL_AGENCY">

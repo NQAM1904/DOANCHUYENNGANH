@@ -20,6 +20,7 @@
           <Property Name="STATUS" Type="bit" />
           <Property Name="IDUSER" Type="int" Nullable="false" />
           <Property Name="IDCATE" Type="int" Nullable="false" />
+          <Property Name="IDPEOPLE" Type="int" />
         </EntityType>
         <EntityType Name="AGENCY_CATE">
           <Key>
@@ -117,6 +118,7 @@
           <Property Name="CREATE_ORDER" Type="datetime" />
           <Property Name="IDCUSTOMER" Type="int" Nullable="false" />
           <Property Name="IDEVENT" Type="int" Nullable="false" />
+          <Property Name="STATUS" Type="bit" />
         </EntityType>
         <EntityType Name="ORDER_INFO">
           <Key>
@@ -136,15 +138,6 @@
           <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IMG" Type="varchar" MaxLength="255" />
           <Property Name="IDPOSITION" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PEOPLE_AGENCY">
-          <Key>
-            <PropertyRef Name="IDAGENCY" />
-            <PropertyRef Name="IDPEOPLE" />
-          </Key>
-          <Property Name="IDAGENCY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDPEOPLE" Type="int" Nullable="false" />
-          <Property Name="TEAM_MEMBER" Type="int" />
         </EntityType>
         <EntityType Name="POSITION">
           <Key>
@@ -374,30 +367,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PEOPLE_AG__IDAGE__5EBF139D">
-          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
-          <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGENCY">
-              <PropertyRef Name="IDAGENCY" />
-            </Principal>
-            <Dependent Role="PEOPLE_AGENCY">
-              <PropertyRef Name="IDAGENCY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PEOPLE_AG__IDPEO__6E01572D">
-          <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="1" />
-          <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PEOPLE">
-              <PropertyRef Name="IDPEOPLE" />
-            </Principal>
-            <Dependent Role="PEOPLE_AGENCY">
-              <PropertyRef Name="IDPEOPLE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__USER__IDROLE__6754599E">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
@@ -419,6 +388,18 @@
             </Principal>
             <Dependent Role="AGENCY">
               <PropertyRef Name="IDCATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENCY_PEOPLE">
+          <End Role="PEOPLE" Type="Self.PEOPLE" Multiplicity="0..1" />
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEOPLE">
+              <PropertyRef Name="IDPEOPLE" />
+            </Principal>
+            <Dependent Role="AGENCY">
+              <PropertyRef Name="IDPEOPLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -509,7 +490,6 @@
           <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDER_INFO" EntityType="Self.ORDER_INFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PEOPLE" EntityType="Self.PEOPLE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PEOPLE_AGENCY" EntityType="Self.PEOPLE_AGENCY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SERVICES" EntityType="Self.SERVICES" Schema="dbo" store:Type="Tables" />
@@ -573,20 +553,16 @@
             <End Role="POSITION" EntitySet="POSITION" />
             <End Role="PEOPLE" EntitySet="PEOPLE" />
           </AssociationSet>
-          <AssociationSet Name="FK__PEOPLE_AG__IDAGE__5EBF139D" Association="Self.FK__PEOPLE_AG__IDAGE__5EBF139D">
-            <End Role="AGENCY" EntitySet="AGENCY" />
-            <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PEOPLE_AG__IDPEO__6E01572D" Association="Self.FK__PEOPLE_AG__IDPEO__6E01572D">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-          </AssociationSet>
           <AssociationSet Name="FK__USER__IDROLE__6754599E" Association="Self.FK__USER__IDROLE__6754599E">
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
           <AssociationSet Name="FK_AGENCY_CATEGORY" Association="Self.FK_AGENCY_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="AGENCY" EntitySet="AGENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENCY_PEOPLE" Association="Self.FK_AGENCY_PEOPLE">
+            <End Role="PEOPLE" EntitySet="PEOPLE" />
             <End Role="AGENCY" EntitySet="AGENCY" />
           </AssociationSet>
           <AssociationSet Name="FK_AGENCY_SOCIAL_AGENCY" Association="Self.FK_AGENCY_SOCIAL_AGENCY">
@@ -634,10 +610,11 @@
           <Property Name="STATUS" Type="Boolean" />
           <Property Name="IDUSER" Type="Int32" Nullable="false" />
           <Property Name="IDCATE" Type="Int32" Nullable="false" />
+          <Property Name="IDPEOPLE" Type="Int32" />
           <NavigationProperty Name="COMMENTs" Relationship="Self.FK__COMMENT__IDAGENC__5CD6CB2B" FromRole="AGENCY" ToRole="COMMENT" />
           <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDAGE__5DCAEF64" FromRole="AGENCY" ToRole="ORDER_INFO" />
-          <NavigationProperty Name="PEOPLE_AGENCY" Relationship="Self.FK__PEOPLE_AG__IDAGE__5EBF139D" FromRole="AGENCY" ToRole="PEOPLE_AGENCY" />
           <NavigationProperty Name="CATEGORY" Relationship="Self.FK_AGENCY_CATEGORY" FromRole="AGENCY" ToRole="CATEGORY" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_AGENCY_PEOPLE" FromRole="AGENCY" ToRole="PEOPLE" />
           <NavigationProperty Name="AGENCY_SOCIAL" Relationship="Self.FK_AGENCY_SOCIAL_AGENCY" FromRole="AGENCY" ToRole="AGENCY_SOCIAL" />
           <NavigationProperty Name="USER" Relationship="Self.FK_AGENCY_USER" FromRole="AGENCY" ToRole="USER" />
           <NavigationProperty Name="IMGAGENCies" Relationship="Self.FK_IMGAGENCY_AGENCY" FromRole="AGENCY" ToRole="IMGAGENCY" />
@@ -731,6 +708,7 @@
           <Property Name="CREATE_ORDER" Type="DateTime" Precision="3" />
           <Property Name="IDCUSTOMER" Type="Int32" Nullable="false" />
           <Property Name="IDEVENT" Type="Int32" Nullable="false" />
+          <Property Name="STATUS" Type="Boolean" />
           <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__ORDER__IDCUSTOME__628FA481" FromRole="ORDER" ToRole="CUSTOMER" />
           <NavigationProperty Name="EVENT" Relationship="Self.FK__ORDER__IDEVENT__6A30C649" FromRole="ORDER" ToRole="EVENTS" />
           <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER" ToRole="ORDER_INFO" />
@@ -755,19 +733,8 @@
           <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IDPOSITION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AGENCies" Relationship="Self.FK_AGENCY_PEOPLE" FromRole="PEOPLE" ToRole="AGENCY" />
           <NavigationProperty Name="POSITION" Relationship="Self.FK__PEOPLE__IDPOSITI__6EF57B66" FromRole="PEOPLE" ToRole="POSITION" />
-          <NavigationProperty Name="PEOPLE_AGENCY" Relationship="Self.FK__PEOPLE_AG__IDPEO__6E01572D" FromRole="PEOPLE" ToRole="PEOPLE_AGENCY" />
-        </EntityType>
-        <EntityType Name="PEOPLE_AGENCY">
-          <Key>
-            <PropertyRef Name="IDAGENCY" />
-            <PropertyRef Name="IDPEOPLE" />
-          </Key>
-          <Property Name="IDAGENCY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDPEOPLE" Type="Int32" Nullable="false" />
-          <Property Name="TEAM_MEMBER" Type="Int32" />
-          <NavigationProperty Name="AGENCY" Relationship="Self.FK__PEOPLE_AG__IDAGE__5EBF139D" FromRole="PEOPLE_AGENCY" ToRole="AGENCY" />
-          <NavigationProperty Name="Person" Relationship="Self.FK__PEOPLE_AG__IDPEO__6E01572D" FromRole="PEOPLE_AGENCY" ToRole="PEOPLE" />
         </EntityType>
         <EntityType Name="POSITION">
           <Key>
@@ -862,18 +829,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PEOPLE_AG__IDAGE__5EBF139D">
-          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
-          <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGENCY">
-              <PropertyRef Name="IDAGENCY" />
-            </Principal>
-            <Dependent Role="PEOPLE_AGENCY">
-              <PropertyRef Name="IDAGENCY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AGENCY_CATEGORY">
           <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
           <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
@@ -883,6 +838,18 @@
             </Principal>
             <Dependent Role="AGENCY">
               <PropertyRef Name="IDCATE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENCY_PEOPLE">
+          <End Role="PEOPLE" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PEOPLE">
+              <PropertyRef Name="IDPEOPLE" />
+            </Principal>
+            <Dependent Role="AGENCY">
+              <PropertyRef Name="IDPEOPLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1030,18 +997,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PEOPLE_AG__IDPEO__6E01572D">
-          <End Role="PEOPLE" Type="Self.Person" Multiplicity="1" />
-          <End Role="PEOPLE_AGENCY" Type="Self.PEOPLE_AGENCY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PEOPLE">
-              <PropertyRef Name="IDPEOPLE" />
-            </Principal>
-            <Dependent Role="PEOPLE_AGENCY">
-              <PropertyRef Name="IDPEOPLE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__USER__IDROLE__6754599E">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
@@ -1078,7 +1033,6 @@
           <EntitySet Name="ORDERs" EntityType="Self.ORDER" />
           <EntitySet Name="ORDER_INFO" EntityType="Self.ORDER_INFO" />
           <EntitySet Name="PEOPLE" EntityType="Self.Person" />
-          <EntitySet Name="PEOPLE_AGENCY" EntityType="Self.PEOPLE_AGENCY" />
           <EntitySet Name="POSITIONs" EntityType="Self.POSITION" />
           <EntitySet Name="ROLEs" EntityType="Self.ROLE" />
           <EntitySet Name="SERVICES" EntityType="Self.SERVICE" />
@@ -1094,12 +1048,12 @@
             <End Role="AGENCY" EntitySet="AGENCies" />
             <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
           </AssociationSet>
-          <AssociationSet Name="FK__PEOPLE_AG__IDAGE__5EBF139D" Association="Self.FK__PEOPLE_AG__IDAGE__5EBF139D">
-            <End Role="AGENCY" EntitySet="AGENCies" />
-            <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-          </AssociationSet>
           <AssociationSet Name="FK_AGENCY_CATEGORY" Association="Self.FK_AGENCY_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="AGENCY" EntitySet="AGENCies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENCY_PEOPLE" Association="Self.FK_AGENCY_PEOPLE">
+            <End Role="PEOPLE" EntitySet="PEOPLE" />
             <End Role="AGENCY" EntitySet="AGENCies" />
           </AssociationSet>
           <AssociationSet Name="FK_AGENCY_SOCIAL_AGENCY" Association="Self.FK_AGENCY_SOCIAL_AGENCY">
@@ -1150,10 +1104,6 @@
             <End Role="POSITION" EntitySet="POSITIONs" />
             <End Role="PEOPLE" EntitySet="PEOPLE" />
           </AssociationSet>
-          <AssociationSet Name="FK__PEOPLE_AG__IDPEO__6E01572D" Association="Self.FK__PEOPLE_AG__IDPEO__6E01572D">
-            <End Role="PEOPLE" EntitySet="PEOPLE" />
-            <End Role="PEOPLE_AGENCY" EntitySet="PEOPLE_AGENCY" />
-          </AssociationSet>
           <AssociationSet Name="FK__USER__IDROLE__6754599E" Association="Self.FK__USER__IDROLE__6754599E">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="USER" EntitySet="USERs" />
@@ -1191,6 +1141,7 @@
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
                 <ScalarProperty Name="IDCATE" ColumnName="IDCATE" />
+                <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1272,6 +1223,7 @@
                 <ScalarProperty Name="CREATE_ORDER" ColumnName="CREATE_ORDER" />
                 <ScalarProperty Name="IDCUSTOMER" ColumnName="IDCUSTOMER" />
                 <ScalarProperty Name="IDEVENT" ColumnName="IDEVENT" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1292,15 +1244,6 @@
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="IMG" ColumnName="IMG" />
                 <ScalarProperty Name="IDPOSITION" ColumnName="IDPOSITION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PEOPLE_AGENCY">
-            <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.PEOPLE_AGENCY">
-              <MappingFragment StoreEntitySet="PEOPLE_AGENCY">
-                <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
-                <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
-                <ScalarProperty Name="TEAM_MEMBER" ColumnName="TEAM_MEMBER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

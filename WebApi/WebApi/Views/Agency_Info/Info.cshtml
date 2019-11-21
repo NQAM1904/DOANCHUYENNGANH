@@ -175,84 +175,146 @@
 </div>
 
 <!--modal 1-->
-@using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+@if (Session["TaiKhoan"] != null && ((USER)Session["TaiKhoan"]).IDROLE == 3)
 {
-    var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
-    foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+    using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
     {
-        <div class="modal fade" id="Modal1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content dialog_lienhe">
-                    <div class="modal-header modal-lienhe">
-                        <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body exp-choice-container">
-                        <a id="contact-agency" href="#Modal2" class="exp-send-message-btn" data-dismiss="modal"
-                           style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
-                            <span class="" style="display:block;">
+        var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
+        foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+        {
+            <div class="modal fade" id="Modal1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content dialog_lienhe">
+                        <div class="modal-header modal-lienhe">
+                            <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body exp-choice-container">
+                            <a id="contact-agency" href="#Modal2" class="exp-send-message-btn" data-dismiss="modal"
+                               style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
+                                <span class="" style="display:block;">
 
-                                <i class="fas fa-envelope" style="font-size: 6rem;"></i>
-                            </span>
-                            <span style="display: block; line-height: 1.25;">
-                                Gửi email đến
-                                <span class="exp-agency-name">@item.NAMEAGENCY</span>
-                            </span>
-                        </a>
-                        <span style="display: block; border-left: solid 1px rgb(221, 226, 239); border-top: solid 1px rgb(221, 226, 239); margin: 1rem;"></span>
-                        <a id="login" href="#" data-toggle="modal" data-dismiss="modal" class="exp-send-message-btn"
-                           style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
-                            <span class="" style="display:block;">
-                                <i class="far fa-calendar" style="font-size: 6rem;"></i>
-                            </span>
-                            <span style="display: block; line-height: 1.25;">
-                                @item.NAMEAGENCY
-                                <span class="exp-agency-name">có phù hợp với dự án của tôi?</span>
-                            </span>
-                        </a>
+                                    <i class="fas fa-envelope" style="font-size: 6rem;"></i>
+                                </span>
+                                <span style="display: block; line-height: 1.25;">
+                                    Gửi yêu cầu đến
+                                    <span class="exp-agency-name">@item.NAMEAGENCY</span>
+                                </span>
+                            </a>
+                            <span style="display: block; border-left: solid 1px rgb(221, 226, 239); border-top: solid 1px rgb(221, 226, 239); margin: 1rem;"></span>
+                            <a id="login" href="#" data-toggle="modal" data-dismiss="modal" class="exp-send-message-btn"
+                               style="color: rgba(73, 80, 101, 1.0); text-align: center; display: block; padding: 2rem; border-radius: 6px;">
+                                <span class="" style="display:block;">
+                                    <i class="far fa-calendar" style="font-size: 6rem;"></i>
+                                </span>
+                                <span style="display: block; line-height: 1.25;">
+                                    @item.NAMEAGENCY
+                                    <span class="exp-agency-name">có phù hợp với dự án của tôi?</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+    {
+        var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
+        foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
+        {
+            <!--modal 2-->
+            <div class="modal fade" id="Modal2" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content dialog_lienhe">
+                        <div class="modal-header modal-lienhe">
+                            <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <h4 class="who-are-you">Chọn dịch vụ</h4>
+                        <div class="modal-body">
+
+                            <select name="idPosition" class="form-control">
+                                @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
+                                {
+                                    foreach (var service in data.SERVICES.Where(x => x.IDAGENCY == item.IDAGENCY).ToList())
+                                    {
+                                        <option value="@service.IDSERVICES">@service.NAMESERVICES</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <h4 class="who-are-you">Nội dung tin nhắn </h4>
+                        <div class="modal-body">
+                            <div class="md-resize-wrapper">
+                                <textarea required="" minlength="5" maxlength="6000"
+                                          class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
+                                          rows="6" name="contact-message" id="exp-contact-message"
+                                          placeholder="Enter your message here..." style="height: 168px;"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-send">Gửi tin nhắn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+else
+{
+    <div class="modal fade" id="Modal1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><img src="~/img/logo.svg" style="height: 1.5em; max-width: 100px;"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container layout-login">
+                        <div class="login">Đăng nhập</div>
+                        <div class="signup">Đăng Ký</div>
+                        <!--form login-->
+
+                        <div class="login-form">
+                            <form method="post" action="/Home/DangNhap">
+                                @if (!String.IsNullOrEmpty(ViewBag.Error))
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewBag.Error
+                                    </div>
+                                }
+                                <input type="text" placeholder="Nhập tên đăng nhập" name="USERNAME" class="input"><br>
+                                <input type="password" placeholder="Nhập mật khẩu" name="PASSWORD" class="input"><br>
+                                <input id="login" class="btn btn-primary btn-login" type="submit" value="Đăng Nhập">
+                            </form>
+                        </div>
+
+                        <form method="post" action="/Home/DangKy">
+                            <!--form sign-->
+                            <div class="signup-form">
+                                @if (!String.IsNullOrEmpty(ViewBag.Error))
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewBag.Error
+                                    </div>
+
+                                }
+                                <input type="text" placeholder="Họ và Tên" name="hoten" class="input" id="hoten" />
+                                <input type="text" placeholder="Tên Đăng Nhập" name="tendn" class="input" id="tendn"><br>
+                                <input type="password" placeholder="Mật khẩu" name="matkhau" class="input" id="matkhau"><br>
+                                <input class="btn btn-primary btn-signin" type="submit" id="dangky" value="Đăng ký">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    }
+    </div>
 }
 
-@using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
-{
-    var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
-    foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
-    {
-        <!--modal 2-->
-        <div class="modal fade" id="Modal2" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content dialog_lienhe">
-                    <div class="modal-header modal-lienhe">
-                        <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <h4 class="who-are-you">Bạn là ai?</h4>
-                    <div class="modal-body">
-                        <div class="form-group container">
-                            <input class="form-control" type="text" placeholder="Họ & tên">
-                            <input class="form-control" type="email" placeholder="Email">
-                            <input type="text" class="form-control" name="myText"
-                                   selectBoxOptions="Canada;Denmark;Finland;Germany;Mexico">
-                        </div>
-                    </div>
-                    <h4 class="who-are-you">Nội dung tin nhắn </h4>
-                    <div class="modal-body">
-                        <div class="md-resize-wrapper">
-                            <textarea required="" minlength="5" maxlength="6000"
-                                      class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
-                                      rows="6" name="contact-message" id="exp-contact-message"
-                                      placeholder="Enter your message here..." style="height: 168px;"></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary btn-send">Gửi tin nhắn</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-}

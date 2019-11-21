@@ -36,7 +36,6 @@ namespace WebApi
         public virtual DbSet<ORDER> ORDERs { get; set; }
         public virtual DbSet<ORDER_INFO> ORDER_INFO { get; set; }
         public virtual DbSet<Person> PEOPLE { get; set; }
-        public virtual DbSet<PEOPLE_AGENCY> PEOPLE_AGENCY { get; set; }
         public virtual DbSet<POSITION> POSITIONs { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<SERVICE> SERVICES { get; set; }

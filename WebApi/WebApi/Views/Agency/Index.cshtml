@@ -5,23 +5,7 @@
 
 }
 <link href="~/Content/createagency.css" rel="stylesheet" />
-@if (Session["TaiKhoan"] != null)
-{
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            @{
-                var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
-            }
-            <li class="breadcrumb-item">
-                Chỉnh sửa tùy chọn đại lý của
-            </li>
-            <li class="breadcrumb-item active">
-                @fullname
-            </li>
-        </ol>
-    </nav>
-}
 <div class="container all-box">
 
     @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())

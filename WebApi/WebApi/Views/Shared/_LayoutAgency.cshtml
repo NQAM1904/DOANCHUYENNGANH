@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title>@ViewBag.Title</title>
     <link href="~/img/logo-sl.png" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -99,6 +100,23 @@
         <!--end col-lg-2-->
         <div class="col-lg-10">
             <div class="all-box">
+                @if (Session["TaiKhoan"] != null)
+                {
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @{
+                                var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+                            }
+                            <li class="breadcrumb-item">
+                                Chỉnh sửa tùy chọn đại lý của
+                            </li>
+                            <li class="breadcrumb-item active">
+                                @fullname
+                            </li>
+                        </ol>
+                    </nav>
+                }
                 @RenderBody()
             </div>
         </div>

@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\CategoryApiController.cs" />
     <Compile Include="Controllers\Cate_InfoController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ServiceApiController.cs" />
@@ -225,9 +226,6 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORDER_INFO.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PEOPLE_AGENCY.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
@@ -692,7 +690,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\manger\" />
     <Folder Include="Views\Ajax\" />
+    <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

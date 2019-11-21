@@ -24,6 +24,7 @@ namespace WebApi
         public Nullable<System.DateTime> CREATE_ORDER { get; set; }
         public int IDCUSTOMER { get; set; }
         public int IDEVENT { get; set; }
+        public Nullable<bool> STATUS { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }
         public virtual EVENT EVENT { get; set; }

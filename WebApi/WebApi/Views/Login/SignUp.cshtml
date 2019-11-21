@@ -2,7 +2,8 @@
 @{
     Layout = null;
 }
-
+<link href="~/img/logo-sl.png" rel="shortcut icon" type="image/x-icon" />
+<link href="~/Content/all.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/login.css" rel="stylesheet" />
 
@@ -25,17 +26,25 @@
                             }
                             <input type="text" placeholder="Nhập tên đăng nhập" name="USERNAME" class="input"><br>
                             <input type="password" placeholder="Nhập mật khẩu" name="PASSWORD" class="input"><br>
-                            <input class="btn btn-primary btn-login" type="submit" value="Đăng Nhập">
+                            <input id="login" class="btn btn-primary btn-login" type="submit" value="Đăng Nhập">
                         </form>
                     </div>
 
-                    <form method="post" action="/Login/SignUp">
+                    <form method="post" action="/Login/SignIn">
                         <!--form sign-->
                         <div class="signup-form">
                             @if (!String.IsNullOrEmpty(ViewBag.Error))
                             {
                                 <div class="alert alert-danger" role="alert">
                                     @ViewBag.Error
+                                </div>
+                                <div class="toast">
+                                    <div class="toast-header">
+                                        <img src="//s3-eu-west-1.amazonaws.com/magicagencies/externals/logo-sl-square.svg">
+                                    </div>
+                                    <div class="toast-body">
+                                        <p>Đăng nhập không thành công</p>
+                                    </div>
                                 </div>
                             }
                             <input type="text" placeholder="Họ và Tên" name="hoten" class="input" id="hoten" />
@@ -57,5 +66,3 @@
 </div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/login-form.js"></script>
-<script type="text/javascript">
-</script>

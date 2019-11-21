@@ -15,6 +15,7 @@
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
           <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
           <ScalarProperty Name="IDCATE" ColumnName="IDCATE" />
+          <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,6 +97,7 @@
           <ScalarProperty Name="CREATE_ORDER" ColumnName="CREATE_ORDER" />
           <ScalarProperty Name="IDCUSTOMER" ColumnName="IDCUSTOMER" />
           <ScalarProperty Name="IDEVENT" ColumnName="IDEVENT" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,15 +118,6 @@
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="IMG" ColumnName="IMG" />
           <ScalarProperty Name="IDPOSITION" ColumnName="IDPOSITION" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PEOPLE_AGENCY">
-      <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.PEOPLE_AGENCY">
-        <MappingFragment StoreEntitySet="PEOPLE_AGENCY">
-          <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
-          <ScalarProperty Name="IDPEOPLE" ColumnName="IDPEOPLE" />
-          <ScalarProperty Name="TEAM_MEMBER" ColumnName="TEAM_MEMBER" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -19,7 +19,6 @@ namespace WebApi
         {
             this.COMMENTs = new HashSet<COMMENT>();
             this.ORDER_INFO = new HashSet<ORDER_INFO>();
-            this.PEOPLE_AGENCY = new HashSet<PEOPLE_AGENCY>();
             this.AGENCY_SOCIAL = new HashSet<AGENCY_SOCIAL>();
             this.IMGAGENCies = new HashSet<IMGAGENCY>();
             this.SERVICES = new HashSet<SERVICE>();
@@ -37,14 +36,14 @@ namespace WebApi
         public Nullable<bool> STATUS { get; set; }
         public int IDUSER { get; set; }
         public int IDCATE { get; set; }
+        public Nullable<int> IDPEOPLE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PEOPLE_AGENCY> PEOPLE_AGENCY { get; set; }
         public virtual CATEGORY CATEGORY { get; set; }
+        public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AGENCY_SOCIAL> AGENCY_SOCIAL { get; set; }
         public virtual USER USER { get; set; }

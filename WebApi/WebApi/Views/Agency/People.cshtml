@@ -1,9 +1,104 @@
-﻿
+﻿@model WebApi.Person
 @{
     ViewBag.Title = "People";
     Layout = "~/Views/Shared/_LayoutAgency.cshtml";
 }
-<br />
-<h2>Danh sách người quản lý</h2>
+<link href="~/Content/service_agency.css" rel="stylesheet" />
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+<h2>Quản lý của bạn</h2>
+<style>
+    .custom-file-input {
+        opacity: 1.2 !important;
+    }
+</style>
+@if (Session["TaiKhoan"] != null)
+{
+
+    var fullname = ((USER)Session["TaiKhoan"]).FULLNAME;
+
+    <p>Tại đây, bạn có thể chỉnh sửa quyền của người quản lý cho đại lý của mình. Họ sẽ có quyền quản lý các cơ hội và sở thích thay mặt cho <b>@fullname</b>, tên của họ sẽ không xuất hiện trên hồ sơ cơ quan.</p>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="myTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên Người quản lý</th>
+                            <th scope="col">Chức vụ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                        {
+                            var idUser = ((USER)Session["TaiKhoan"]);
+
+                            var agency = db.AGENCies.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
 
 
+                            foreach (var item in db.PEOPLE.Where(x => x.IDPEOPLE == agency.IDAGENCY).ToList())
+                            {
+                                <tr>
+                                    <td>@item.NAME</td>
+                                    <td>@item.IMG</td>
+                                    <td>@item.POSITION</td>
+                                    <td></td>
+
+                                    <th>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary" onclick="EditSurvice(@item.IDPEOPLE)"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-danger" onclick="DeleteService(@item.IDPEOPLE)"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </th>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+                <b>Thêm người quản lý</b>
+            </div>
+            <div class="card-body">
+                <label class="col-form-label">Tên người quản lý</label>
+                <input type="text" class="form-control" name="name_position">
+                <label class="col-form-label">Hình</label>
+
+                <input type="file" class="custom-file-input" name="files" accept="img/manger/*">
+
+                <label class="col-form-label">Chức vụ</label>
+                <div>
+                    <select name="idPosition" class="form-control">
+                        @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                        {
+                            foreach (var item in db.POSITIONs.ToList())
+                            {
+                                <option value="@item.IDPOSITION">@item.NAME_POSITION</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <br />
+                <button class="btn btn-outline-success" style="float:right;"><i class="fa fa-save"> Lưu</i></button>
+            </div>
+           
+        </div>
+    </div>
+   
+</div>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+</script>   

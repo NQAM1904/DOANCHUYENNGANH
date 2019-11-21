@@ -14,6 +14,7 @@ namespace WebApi.Controllers
         // GET: Agency
         public ActionResult Index()
         {
+            ViewBag.Title = "SortList";
             if (Session["TaiKhoan"] is null) return RedirectToAction("SignUp", "Login");
             var idRole = ((USER)Session["TaiKhoan"]).IDROLE;
             if (idRole != 2) return RedirectToAction("Index");
@@ -121,6 +122,7 @@ namespace WebApi.Controllers
             return RedirectToAction("Index");
         }
 
+     
         public ActionResult Logout()
         {
             Session.Clear();

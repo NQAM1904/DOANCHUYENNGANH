@@ -17,7 +17,7 @@ namespace WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            this.PEOPLE_AGENCY = new HashSet<PEOPLE_AGENCY>();
+            this.AGENCies = new HashSet<AGENCY>();
         }
     
         public int IDPEOPLE { get; set; }
@@ -25,8 +25,8 @@ namespace WebApi
         public string IMG { get; set; }
         public int IDPOSITION { get; set; }
     
-        public virtual POSITION POSITION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PEOPLE_AGENCY> PEOPLE_AGENCY { get; set; }
+        public virtual ICollection<AGENCY> AGENCies { get; set; }
+        public virtual POSITION POSITION { get; set; }
     }
 }
