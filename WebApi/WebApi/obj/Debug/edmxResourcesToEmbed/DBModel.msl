@@ -61,6 +61,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EVENT_SERVICE">
+      <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.EVENT_SERVICE">
+        <MappingFragment StoreEntitySet="EVENT_SERVICE">
+          <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
+          <ScalarProperty Name="IDEVENT" ColumnName="IDEVENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EVENTS">
       <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.EVENT">
         <MappingFragment StoreEntitySet="EVENTS">
@@ -94,9 +102,9 @@
       <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.ORDER">
         <MappingFragment StoreEntitySet="ORDER">
           <ScalarProperty Name="IDODER" ColumnName="IDODER" />
-          <ScalarProperty Name="CREATE_ORDER" ColumnName="CREATE_ORDER" />
+          <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
           <ScalarProperty Name="IDCUSTOMER" ColumnName="IDCUSTOMER" />
-          <ScalarProperty Name="IDEVENT" ColumnName="IDEVENT" />
+          <ScalarProperty Name="CREATE_ORDER" ColumnName="CREATE_ORDER" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -104,9 +112,9 @@
     <EntitySetMapping Name="ORDER_INFO">
       <EntityTypeMapping TypeName="DOANCHUYENNGANHModel.ORDER_INFO">
         <MappingFragment StoreEntitySet="ORDER_INFO">
-          <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
           <ScalarProperty Name="IDODER" ColumnName="IDODER" />
-          <ScalarProperty Name="COUNT" ColumnName="COUNT" />
+          <ScalarProperty Name="IDSERVICE" ColumnName="IDSERVICE" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
           <ScalarProperty Name="TOTAL_PRICE" ColumnName="TOTAL_PRICE" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -194,14 +202,6 @@
       </EndProperty>
       <EndProperty Name="CATEGORY">
         <ScalarProperty Name="IDCATE" ColumnName="IDCATE" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EVENT_SERVICE" TypeName="DOANCHUYENNGANHModel.EVENT_SERVICE" StoreEntitySet="EVENT_SERVICE">
-      <EndProperty Name="EVENTS">
-        <ScalarProperty Name="IDEVENT" ColumnName="IDEVENT" />
-      </EndProperty>
-      <EndProperty Name="SERVICES">
-        <ScalarProperty Name="IDSERVICES" ColumnName="IDSERVICES" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="LOC_EVENT" TypeName="DOANCHUYENNGANHModel.LOC_EVENT" StoreEntitySet="LOC_EVENT">

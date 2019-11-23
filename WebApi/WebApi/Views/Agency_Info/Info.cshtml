@@ -11,8 +11,8 @@
 
     @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
     {
-
-        var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
+        int IDAGENCY = Model.IDAGENCY;
+        var agency = db.AGENCies.Where(x => x.IDAGENCY == IDAGENCY).FirstOrDefault();
         <div class="col-lg-2">
             <br />
             <div class="s-agency-summary">
@@ -56,7 +56,7 @@
                     <h2 class="sub"><b>Địa chỉ</b>&nbsp;của @agency.NAMEAGENCY</h2>
                 </div>
                 <div class="map-marker">
-                    <i class="fa fa-map-marker"></i>
+                    <i class="fa fa-location-arrow" style="margin:0 10px 0 10px;"></i>
                     <p>@agency.ADDRESSAGENCY</p>
                     <div class="map">
 
@@ -84,6 +84,7 @@
                 </div>
                 <div class="layout-row layout-wrap">
                     <a href="#"><i class="fa fa-envelope"></i> @agency.EMAILAGENCY</a>
+                    <br /><br />
                     <a href="#"><i class="fa fa-phone"></i> @agency.PHONEAGENCY</a>
                 </div>
             </div>
@@ -224,53 +225,96 @@
     using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
     {
         var agency = db.AGENCies.Where(x => x.IDAGENCY == Model.IDAGENCY).FirstOrDefault();
+        var idUser = ((USER)Session["TaiKhoan"]);
+        var custom = db.CUSTOMERs.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
         foreach (var item in db.AGENCies.Where(x => x.IDAGENCY == agency.IDAGENCY).ToList())
         {
-            <!--modal 2-->
-            <div class="modal fade" id="Modal2" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content dialog_lienhe">
-                        <div class="modal-header modal-lienhe">
-                            <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <h4 class="who-are-you">Thông tin của bạn</h4>
-                        <div class="card-body">
-                            <p class="thongtin">Tên: @user.FULLNAME</p>
-                            <p class="thongtin">Email: @*@(user.CUSTOMERs.FirstOrDefault() == null ? "" : user.CUSTOMERs.FirstOrDefault().EMAILCUSTOM)*@</p>
-                            
-                        </div>
-                        <h4 class="who-are-you">Chọn dịch vụ</h4>
-                        <div class="modal-body">
-
-                            <select name="idPosition" class="form-control">
-                                @using (DOANCHUYENNGANHEntities data = new DOANCHUYENNGANHEntities())
-                                {
-                                    foreach (var service in data.SERVICES.Where(x => x.IDAGENCY == item.IDAGENCY).ToList())
-                                    {
-                                        <option value="@service.IDSERVICES">@service.NAMESERVICES</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                        <h4 class="who-are-you">Ghi chú </h4>
-                        <div class="modal-body">
-                            <div class="md-resize-wrapper">
-                                <textarea required="" minlength="5" maxlength="6000"
-                                          class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
-                                          rows="6" name="contact-message" id="exp-contact-message"
-                                          placeholder="ghi chú của bạn" style="height: 168px;"></textarea>
+            <form role="form" action="/Agency_Info/AddOrder/" method="post" class="registration-form">
+                <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
                             </div>
-                            <button type="button" class="btn btn-primary btn-send">Gửi tin nhắn</button>
+                            <div class="modal-body">
+
+                                <div class="form-top">
+                                    <div class="form-top-left">
+                                        <h6>Step 1 / 2</h6>
+                                    </div>
+                                </div>
+                                <h4 class="customer_info">Thông tin của bạn</h4>
+                                <div class="form-bottom">
+                                    <div class="form-group">
+                                        <input value="@custom.NAMECUSTOM" class="form-control" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input value="@custom.PHONECUSTOM" class="form-control" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input value="@custom.ADDRESSCUSTOM" class="form-control" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <input value="@custom.EMAILCUSTOM" class="form-control" type="text">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary btn-send btn-next">Tiếp theo</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Liên hệ @item.NAMEAGENCY</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-top">
+                                    <div class="form-top-left">
+                                        <h6>Step 2 / 2</h6>
+                                    </div>
+                                </div>
+                                <h4 class="customer_info">Chọn dịch vụ</h4>
+                                @foreach (var service in db.SERVICES.Where(x => x.IDAGENCY == item.IDAGENCY).ToList())
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="dsDV" value="@service.IDSERVICES">
+                                            @service.NAMESERVICES
+                                        </label>
+                                    </div>
+                                }
+                                <input name="IDAGENCY" value="@Model.IDAGENCY" hidden />
+                                <h4 class="customer_info">Ghi chú </h4>
+                                <div class="modal-body">
+                                    <div class="md-resize-wrapper">
+                                        <textarea required="" minlength="5" maxlength="6000" 
+                                                  class="s-textarea ng-pristine ng-valid md-input ng-empty ng-valid-required ng-touched"
+                                                  rows="6" name="note" id="exp-contact-message"
+                                                  placeholder="ghi chú của bạn" style="height: 168px;"></textarea>
+                                    </div>
+
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-prev btn-send">Quay lại</button>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary btn-send">Gửi yêu cầu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         }
     }
 }
+
 else
 {
     <div class="modal fade" id="Modal1" role="dialog">

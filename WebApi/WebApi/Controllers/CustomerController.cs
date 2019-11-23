@@ -14,7 +14,7 @@ namespace WebApi.Controllers
         public ActionResult Info()
         {
             ViewBag.Title = "SortList";
-            if (Session["TaiKhoan"] is null) return RedirectToAction("Home", "Index");
+            if (Session["TaiKhoan"] == null) return RedirectToAction("Index", "Home");
             var idRole = ((USER)Session["TaiKhoan"]).IDROLE;
             if (idRole != 3) return RedirectToAction("Index");
             var user = (USER)Session["TaiKhoan"];
@@ -46,8 +46,6 @@ namespace WebApi.Controllers
             using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
             {
                 var user = (USER)Session["TaiKhoan"];
-
-
                 custom.IDUSER = user.IDUSER;
                 db.CUSTOMERs.Add(custom);
                 try
@@ -60,10 +58,8 @@ namespace WebApi.Controllers
                 }
 
             }
-            return RedirectToAction("Info", new { id = custom.IDCUSTOMER });
+            return RedirectToAction("Info", "Customer");
         }
-
-
 
     }
 }

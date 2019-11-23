@@ -21,13 +21,13 @@ namespace WebApi
         }
     
         public int IDODER { get; set; }
+        public Nullable<int> IDAGENCY { get; set; }
+        public Nullable<int> IDCUSTOMER { get; set; }
         public Nullable<System.DateTime> CREATE_ORDER { get; set; }
-        public int IDCUSTOMER { get; set; }
-        public int IDEVENT { get; set; }
         public Nullable<bool> STATUS { get; set; }
     
+        public virtual AGENCY AGENCY { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
-        public virtual EVENT EVENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
     }

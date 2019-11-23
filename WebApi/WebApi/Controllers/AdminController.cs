@@ -59,10 +59,24 @@ namespace WebApi.Controllers
             if (Session["login"] is null) return RedirectToAction("Index");
             return View();
         }
+        public ActionResult Customer()
+        {
+            if (Session["login"] is null) return RedirectToAction("Index");
+            return View();
+        }
+        public ActionResult Event()
+        {
+            return View();
+        }
+        public ActionResult OrderWaiting()
+        {
+            if (Session["login"] is null) return RedirectToAction("Index");
+            return View();
+        }
         public ActionResult Logout()
         {
             Session.Clear();
-            return RedirectToAction("Login","Admin");
+            return RedirectToAction("Login");
         }
     }
 }

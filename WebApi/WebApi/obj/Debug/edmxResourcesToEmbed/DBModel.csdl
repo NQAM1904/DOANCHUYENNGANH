@@ -17,12 +17,12 @@
     <Property Name="IDCATE" Type="Int32" Nullable="false" />
     <Property Name="IDPEOPLE" Type="Int32" />
     <NavigationProperty Name="COMMENTs" Relationship="Self.FK__COMMENT__IDAGENC__5CD6CB2B" FromRole="AGENCY" ToRole="COMMENT" />
-    <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDAGE__5DCAEF64" FromRole="AGENCY" ToRole="ORDER_INFO" />
     <NavigationProperty Name="CATEGORY" Relationship="Self.FK_AGENCY_CATEGORY" FromRole="AGENCY" ToRole="CATEGORY" />
     <NavigationProperty Name="Person" Relationship="Self.FK_AGENCY_PEOPLE" FromRole="AGENCY" ToRole="PEOPLE" />
     <NavigationProperty Name="AGENCY_SOCIAL" Relationship="Self.FK_AGENCY_SOCIAL_AGENCY" FromRole="AGENCY" ToRole="AGENCY_SOCIAL" />
     <NavigationProperty Name="USER" Relationship="Self.FK_AGENCY_USER" FromRole="AGENCY" ToRole="USER" />
     <NavigationProperty Name="IMGAGENCies" Relationship="Self.FK_IMGAGENCY_AGENCY" FromRole="AGENCY" ToRole="IMGAGENCY" />
+    <NavigationProperty Name="ORDERs" Relationship="Self.FK_ORDER_AGENCY" FromRole="AGENCY" ToRole="ORDER" />
     <NavigationProperty Name="SERVICES" Relationship="Self.FK_SERVICES_AGENCY" FromRole="AGENCY" ToRole="SERVICES" />
     <NavigationProperty Name="CATEGORies" Relationship="Self.AGENCY_CATE" FromRole="AGENCY" ToRole="CATEGORY" />
   </EntityType>
@@ -73,6 +73,15 @@
     <NavigationProperty Name="ORDERs" Relationship="Self.FK__ORDER__IDCUSTOME__628FA481" FromRole="CUSTOMER" ToRole="ORDER" />
     <NavigationProperty Name="USER" Relationship="Self.FK_CUSTOMER_USER" FromRole="CUSTOMER" ToRole="USER" />
   </EntityType>
+  <EntityType Name="EVENT_SERVICE">
+    <Key>
+      <PropertyRef Name="IDSERVICES" />
+      <PropertyRef Name="IDEVENT" />
+    </Key>
+    <Property Name="IDSERVICES" Type="Int32" Nullable="false" />
+    <Property Name="IDEVENT" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EVENT" Relationship="Self.FK__EVENT_SER__IDEVE__6B24EA82" FromRole="EVENT_SERVICE" ToRole="EVENTS" />
+  </EntityType>
   <EntityType Name="EVENT">
     <Key>
       <PropertyRef Name="IDEVENT" />
@@ -82,9 +91,8 @@
     <Property Name="NAME_EVENT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="STATUS" Type="Boolean" />
+    <NavigationProperty Name="EVENT_SERVICE" Relationship="Self.FK__EVENT_SER__IDEVE__6B24EA82" FromRole="EVENTS" ToRole="EVENT_SERVICE" />
     <NavigationProperty Name="TIME_EVENT" Relationship="Self.FK__EVENTS__ID_TIME__6D0D32F4" FromRole="EVENTS" ToRole="TIME_EVENT" />
-    <NavigationProperty Name="ORDERs" Relationship="Self.FK__ORDER__IDEVENT__6A30C649" FromRole="EVENTS" ToRole="ORDER" />
-    <NavigationProperty Name="SERVICES" Relationship="Self.EVENT_SERVICE" FromRole="EVENTS" ToRole="SERVICES" />
     <NavigationProperty Name="LOCATIONs" Relationship="Self.LOC_EVENT" FromRole="EVENTS" ToRole="LOCATION" />
   </EntityType>
   <EntityType Name="IMGAGENCY">
@@ -110,25 +118,25 @@
       <PropertyRef Name="IDODER" />
     </Key>
     <Property Name="IDODER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDAGENCY" Type="Int32" />
+    <Property Name="IDCUSTOMER" Type="Int32" />
     <Property Name="CREATE_ORDER" Type="DateTime" Precision="3" />
-    <Property Name="IDCUSTOMER" Type="Int32" Nullable="false" />
-    <Property Name="IDEVENT" Type="Int32" Nullable="false" />
     <Property Name="STATUS" Type="Boolean" />
+    <NavigationProperty Name="AGENCY" Relationship="Self.FK_ORDER_AGENCY" FromRole="ORDER" ToRole="AGENCY" />
     <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__ORDER__IDCUSTOME__628FA481" FromRole="ORDER" ToRole="CUSTOMER" />
-    <NavigationProperty Name="EVENT" Relationship="Self.FK__ORDER__IDEVENT__6A30C649" FromRole="ORDER" ToRole="EVENTS" />
     <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER" ToRole="ORDER_INFO" />
   </EntityType>
   <EntityType Name="ORDER_INFO">
     <Key>
-      <PropertyRef Name="IDAGENCY" />
       <PropertyRef Name="IDODER" />
+      <PropertyRef Name="IDSERVICE" />
     </Key>
-    <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
     <Property Name="IDODER" Type="Int32" Nullable="false" />
-    <Property Name="COUNT" Type="Int32" />
+    <Property Name="IDSERVICE" Type="Int32" Nullable="false" />
+    <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TOTAL_PRICE" Type="Double" />
-    <NavigationProperty Name="AGENCY" Relationship="Self.FK__ORDER_INF__IDAGE__5DCAEF64" FromRole="ORDER_INFO" ToRole="AGENCY" />
     <NavigationProperty Name="ORDER" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER_INFO" ToRole="ORDER" />
+    <NavigationProperty Name="SERVICE" Relationship="Self.FK_ORDER_INFO_SERVICES" FromRole="ORDER_INFO" ToRole="SERVICES" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -168,7 +176,7 @@
     <Property Name="MAX_PRICE" Type="Int32" />
     <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AGENCY" Relationship="Self.FK_SERVICES_AGENCY" FromRole="SERVICES" ToRole="AGENCY" />
-    <NavigationProperty Name="EVENTS" Relationship="Self.EVENT_SERVICE" FromRole="SERVICES" ToRole="EVENTS" />
+    <NavigationProperty Name="ORDER_INFO" Relationship="Self.FK_ORDER_INFO_SERVICES" FromRole="SERVICES" ToRole="ORDER_INFO" />
   </EntityType>
   <EntityType Name="SOCIAL">
     <Key>
@@ -218,18 +226,6 @@
         <PropertyRef Name="IDAGENCY" />
       </Principal>
       <Dependent Role="COMMENT">
-        <PropertyRef Name="IDAGENCY" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ORDER_INF__IDAGE__5DCAEF64">
-    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
-    <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AGENCY">
-        <PropertyRef Name="IDAGENCY" />
-      </Principal>
-      <Dependent Role="ORDER_INFO">
         <PropertyRef Name="IDAGENCY" />
       </Dependent>
     </ReferentialConstraint>
@@ -294,6 +290,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ORDER_AGENCY">
+    <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="0..1" />
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AGENCY">
+        <PropertyRef Name="IDAGENCY" />
+      </Principal>
+      <Dependent Role="ORDER">
+        <PropertyRef Name="IDAGENCY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SERVICES_AGENCY">
     <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="1" />
     <End Role="SERVICES" Type="Self.SERVICE" Multiplicity="*" />
@@ -331,7 +339,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__ORDER__IDCUSTOME__628FA481">
-    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+    <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
     <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CUSTOMER">
@@ -354,6 +362,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__EVENT_SER__IDEVE__6B24EA82">
+    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="1" />
+    <End Role="EVENT_SERVICE" Type="Self.EVENT_SERVICE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EVENTS">
+        <PropertyRef Name="IDEVENT" />
+      </Principal>
+      <Dependent Role="EVENT_SERVICE">
+        <PropertyRef Name="IDEVENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__EVENTS__ID_TIME__6D0D32F4">
     <End Role="TIME_EVENT" Type="Self.TIME_EVENT" Multiplicity="1" />
     <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
@@ -366,18 +386,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ORDER__IDEVENT__6A30C649">
-    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="1" />
-    <End Role="ORDER" Type="Self.ORDER" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EVENTS">
-        <PropertyRef Name="IDEVENT" />
-      </Principal>
-      <Dependent Role="ORDER">
-        <PropertyRef Name="IDEVENT" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__ORDER_INF__IDODE__68487DD7">
     <End Role="ORDER" Type="Self.ORDER" Multiplicity="1" />
     <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
@@ -387,6 +395,18 @@
       </Principal>
       <Dependent Role="ORDER_INFO">
         <PropertyRef Name="IDODER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_INFO_SERVICES">
+    <End Role="SERVICES" Type="Self.SERVICE" Multiplicity="1" />
+    <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICES">
+        <PropertyRef Name="IDSERVICES" />
+      </Principal>
+      <Dependent Role="ORDER_INFO">
+        <PropertyRef Name="IDSERVICE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -418,10 +438,6 @@
     <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
     <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
   </Association>
-  <Association Name="EVENT_SERVICE">
-    <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
-    <End Role="SERVICES" Type="Self.SERVICE" Multiplicity="*" />
-  </Association>
   <Association Name="LOC_EVENT">
     <End Role="EVENTS" Type="Self.EVENT" Multiplicity="*" />
     <End Role="LOCATION" Type="Self.LOCATION" Multiplicity="*" />
@@ -432,6 +448,7 @@
     <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
     <EntitySet Name="COMMENTs" EntityType="Self.COMMENT" />
     <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+    <EntitySet Name="EVENT_SERVICE" EntityType="Self.EVENT_SERVICE" />
     <EntitySet Name="EVENTS" EntityType="Self.EVENT" />
     <EntitySet Name="IMGAGENCies" EntityType="Self.IMGAGENCY" />
     <EntitySet Name="LOCATIONs" EntityType="Self.LOCATION" />
@@ -448,10 +465,6 @@
     <AssociationSet Name="FK__COMMENT__IDAGENC__5CD6CB2B" Association="Self.FK__COMMENT__IDAGENC__5CD6CB2B">
       <End Role="AGENCY" EntitySet="AGENCies" />
       <End Role="COMMENT" EntitySet="COMMENTs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ORDER_INF__IDAGE__5DCAEF64" Association="Self.FK__ORDER_INF__IDAGE__5DCAEF64">
-      <End Role="AGENCY" EntitySet="AGENCies" />
-      <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
     </AssociationSet>
     <AssociationSet Name="FK_AGENCY_CATEGORY" Association="Self.FK_AGENCY_CATEGORY">
       <End Role="CATEGORY" EntitySet="CATEGORies" />
@@ -473,6 +486,10 @@
       <End Role="AGENCY" EntitySet="AGENCies" />
       <End Role="IMGAGENCY" EntitySet="IMGAGENCies" />
     </AssociationSet>
+    <AssociationSet Name="FK_ORDER_AGENCY" Association="Self.FK_ORDER_AGENCY">
+      <End Role="AGENCY" EntitySet="AGENCies" />
+      <End Role="ORDER" EntitySet="ORDERs" />
+    </AssociationSet>
     <AssociationSet Name="FK_SERVICES_AGENCY" Association="Self.FK_SERVICES_AGENCY">
       <End Role="AGENCY" EntitySet="AGENCies" />
       <End Role="SERVICES" EntitySet="SERVICES" />
@@ -493,16 +510,20 @@
       <End Role="USER" EntitySet="USERs" />
       <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
     </AssociationSet>
+    <AssociationSet Name="FK__EVENT_SER__IDEVE__6B24EA82" Association="Self.FK__EVENT_SER__IDEVE__6B24EA82">
+      <End Role="EVENTS" EntitySet="EVENTS" />
+      <End Role="EVENT_SERVICE" EntitySet="EVENT_SERVICE" />
+    </AssociationSet>
     <AssociationSet Name="FK__EVENTS__ID_TIME__6D0D32F4" Association="Self.FK__EVENTS__ID_TIME__6D0D32F4">
       <End Role="TIME_EVENT" EntitySet="TIME_EVENT" />
       <End Role="EVENTS" EntitySet="EVENTS" />
     </AssociationSet>
-    <AssociationSet Name="FK__ORDER__IDEVENT__6A30C649" Association="Self.FK__ORDER__IDEVENT__6A30C649">
-      <End Role="EVENTS" EntitySet="EVENTS" />
-      <End Role="ORDER" EntitySet="ORDERs" />
-    </AssociationSet>
     <AssociationSet Name="FK__ORDER_INF__IDODE__68487DD7" Association="Self.FK__ORDER_INF__IDODE__68487DD7">
       <End Role="ORDER" EntitySet="ORDERs" />
+      <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_INFO_SERVICES" Association="Self.FK_ORDER_INFO_SERVICES">
+      <End Role="SERVICES" EntitySet="SERVICES" />
       <End Role="ORDER_INFO" EntitySet="ORDER_INFO" />
     </AssociationSet>
     <AssociationSet Name="FK__PEOPLE__IDPOSITI__6EF57B66" Association="Self.FK__PEOPLE__IDPOSITI__6EF57B66">
@@ -516,10 +537,6 @@
     <AssociationSet Name="AGENCY_CATE" Association="Self.AGENCY_CATE">
       <End Role="AGENCY" EntitySet="AGENCies" />
       <End Role="CATEGORY" EntitySet="CATEGORies" />
-    </AssociationSet>
-    <AssociationSet Name="EVENT_SERVICE" Association="Self.EVENT_SERVICE">
-      <End Role="EVENTS" EntitySet="EVENTS" />
-      <End Role="SERVICES" EntitySet="SERVICES" />
     </AssociationSet>
     <AssociationSet Name="LOC_EVENT" Association="Self.LOC_EVENT">
       <End Role="EVENTS" EntitySet="EVENTS" />

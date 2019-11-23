@@ -30,6 +30,7 @@ namespace WebApi
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
         public virtual DbSet<COMMENT> COMMENTs { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
+        public virtual DbSet<EVENT_SERVICE> EVENT_SERVICE { get; set; }
         public virtual DbSet<EVENT> EVENTS { get; set; }
         public virtual DbSet<IMGAGENCY> IMGAGENCies { get; set; }
         public virtual DbSet<LOCATION> LOCATIONs { get; set; }

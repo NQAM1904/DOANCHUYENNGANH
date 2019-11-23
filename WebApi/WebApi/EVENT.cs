@@ -17,8 +17,7 @@ namespace WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EVENT()
         {
-            this.ORDERs = new HashSet<ORDER>();
-            this.SERVICES = new HashSet<SERVICE>();
+            this.EVENT_SERVICE = new HashSet<EVENT_SERVICE>();
             this.LOCATIONs = new HashSet<LOCATION>();
         }
     
@@ -28,11 +27,9 @@ namespace WebApi
         public string DESCRIPTION { get; set; }
         public Nullable<bool> STATUS { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EVENT_SERVICE> EVENT_SERVICE { get; set; }
         public virtual TIME_EVENT TIME_EVENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDER> ORDERs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SERVICE> SERVICES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOCATION> LOCATIONs { get; set; }
     }

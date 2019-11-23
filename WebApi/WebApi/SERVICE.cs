@@ -17,7 +17,7 @@ namespace WebApi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SERVICE()
         {
-            this.EVENTS = new HashSet<EVENT>();
+            this.ORDER_INFO = new HashSet<ORDER_INFO>();
         }
     
         public int IDSERVICES { get; set; }
@@ -29,6 +29,6 @@ namespace WebApi
     
         public virtual AGENCY AGENCY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EVENT> EVENTS { get; set; }
+        public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
     }
 }

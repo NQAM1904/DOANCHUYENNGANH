@@ -10,19 +10,51 @@
 {
     var idUser = ((USER)Session["TaiKhoan"]);
     var item = db.CUSTOMERs.Where(x => x.IDUSER == idUser.IDUSER).FirstOrDefault();
-    <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <div class="col-md-10">
-                    Tên khách hàng hoặc công ty cần tổ chức *
-                </div>
-                <div class="col-md-10">
-                    <input class="form-control"value="@item.NAMECUSTOM" />
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <div class="col-md-10">
+                Tên khách hàng hoặc công ty cần tổ chức *
+            </div>
+
+            <div class="col-md-10">
+                <input class="form-control" value="@item.NAMECUSTOM" />
+            </div>
+            <br />
+            <div class="col-md-10">
+                Số điện thoại
+            </div>
+
+            <div class="col-md-10">
+                <input class="form-control" value="@item.PHONECUSTOM" />
+            </div>
+            <br />
+            <div class="col-md-10">
+                Email
+            </div>
+            <div class="col-md-10">
+                <input class="form-control" value="@item.EMAILCUSTOM" />
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="col-md-10">
+            Địa chỉ
+        </div>
+        <div class="col-md-10">
+            <input class="form-control" value="@item.ADDRESSCUSTOM" />
+        </div>
+        <br />
+
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-11">
+                <div class="text-right">
+                    <button class="btn btn-success btn-lg" onclick="EditCustomer(@item.IDCUSTOMER)"><i class="fa fa-edit"></i> Sửa thông tin</button>
                 </div>
             </div>
         </div>
-        <div class="col-6">
-
-        </div>
     </div>
+</div>
 }

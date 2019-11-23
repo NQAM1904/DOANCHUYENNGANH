@@ -65,7 +65,7 @@ namespace WebApi.Controllers
                 Session["TaiKhoan"] = userDB;
                 var idRole = ((USER)Session["TaiKhoan"]).IDROLE;
                 if (idRole != 3) return RedirectToAction("Index");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
         }
         public ActionResult Logout()

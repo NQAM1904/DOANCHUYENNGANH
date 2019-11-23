@@ -18,9 +18,9 @@ namespace WebApi
         public AGENCY()
         {
             this.COMMENTs = new HashSet<COMMENT>();
-            this.ORDER_INFO = new HashSet<ORDER_INFO>();
             this.AGENCY_SOCIAL = new HashSet<AGENCY_SOCIAL>();
             this.IMGAGENCies = new HashSet<IMGAGENCY>();
+            this.ORDERs = new HashSet<ORDER>();
             this.SERVICES = new HashSet<SERVICE>();
             this.CATEGORies = new HashSet<CATEGORY>();
         }
@@ -40,8 +40,6 @@ namespace WebApi
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
         public virtual CATEGORY CATEGORY { get; set; }
         public virtual Person Person { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -49,6 +47,8 @@ namespace WebApi
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMGAGENCY> IMGAGENCies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER> ORDERs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SERVICE> SERVICES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -87,6 +87,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public ActionResult Img(HttpPostedFileBase files1, HttpPostedFileBase files2)
         {
+            
             using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
             {
                 int idUser = ((USER)Session["TaiKhoan"]).IDUSER;
@@ -98,30 +99,59 @@ namespace WebApi.Controllers
                 }
                 else
                 {
-                    var fileName = Path.GetFileName(files1.FileName);
-                    var fileName2 = Path.GetFileName(files2.FileName);
-                    var path = Path.Combine(Server.MapPath("~/img/agency/"), fileName);
-                    var path1 = Path.Combine(Server.MapPath("~/img/agency/"), fileName2);
-                    if (System.IO.File.Exists(path))
+                    if(files1 !=null)
                     {
-                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
-                    }
-                    else
-                    {
+                        var fileName = Path.GetFileName(files1.FileName);
+                        var path = Path.Combine(Server.MapPath("~/img/agency/"), fileName);
+                        if (System.IO.File.Exists(path))
+                        {
+
+                            System.IO.File.Delete(path);
+                        }
                         files1.SaveAs(path);
-                        files2.SaveAs(path1);
                         IMGAGENCY img = new IMGAGENCY();
                         img.FILENAME = files1.FileName;
+                        var fimage = agency.IMGAGENCies.FirstOrDefault();
+                        if (fimage == null)
+                            agency.IMGAGENCies.Add(img);
+                        else
+                        {
+                            fimage.FILENAME = files1.FileName;
+                        }
+                        db.SaveChanges();
+                    }
+                   if(files2 !=null)
+                    {
+                        var fileName2 = Path.GetFileName(files2.FileName);
+
+                        var path1 = Path.Combine(Server.MapPath("~/img/agency/"), fileName2);
+                        if (System.IO.File.Exists(path1))
+                        {
+                            System.IO.File.Delete(path1);
+                        }
+                        files2.SaveAs(path1);
+                        IMGAGENCY img = new IMGAGENCY();
+                        if (agency.IMGAGENCies.Count < 2)
+                            agency.IMGAGENCies.Add(img);
+                        else
+                        {
+                            var simage = agency.IMGAGENCies.ElementAt(1);
+                            simage.FILENAME = files2.FileName;
+                        }
                         img.FILENAME = files2.FileName;
                         agency.IMGAGENCies.Add(img);
                         db.SaveChanges();
                     }
+                    
                 }
 
             }
             return RedirectToAction("Index");
         }
-
+        public ActionResult OrderWaiting()
+        {
+            return View();
+        }
      
         public ActionResult Logout()
         {

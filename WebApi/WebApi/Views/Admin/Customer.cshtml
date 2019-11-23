@@ -1,49 +1,57 @@
 ﻿
 
 @{
-    ViewBag.Title = "Position";
+    ViewBag.Title = "Customer";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
 <link href="~/Content/admin.css" rel="stylesheet" />
 <link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
 
-<h2>Chức vụ của người quản lý công ty</h2>
+<h2>Danh sách khách hàng</h2>
 
-<div class="panel_service">
+@*<div class="panel_service">
     <div class="btn_table">
         <div class="text-left">
             <button type="button" class="btn btn-default btn-block btn-lg" onclick="CreatePosition()"><i class="fa fa-plus"></i> Tạo chức vụ</button>
         </div>
     </div>
-</div>
+</div>*@
 
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th scope="col">Tên Chức vụ</th>
-                   
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Email</th>
+
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
                 {
-                  
-                    foreach (var item in db.POSITIONs.ToList())
+
+                    foreach (var item in db.CUSTOMERs.ToList())
                     {
-                        <tr>
-                            <td>@item.NAME_POSITION</td>
-                            <th>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-primary" onclick="EditPosition(@item.IDPOSITION)"><i class="fa fa-edit"></i></button>
-                                    <button type="button" class="btn btn-danger" onclick="DeletePosition(@item.IDPOSITION)"><i class="fa fa-trash"></i></button>
-                                </div>
-                            </th>
-                        </tr>
+                <tr>
+                    <td>@item.NAMECUSTOM</td>
+                    <td>@item.PHONECUSTOM</td>
+                    <td>@item.ADDRESSCUSTOM</td>
+                    <td>@item.EMAILCUSTOM</td>
+                    <th>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary" onclick="EditCus(@item.IDCUSTOMER)"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-danger" onclick="DeleteCus(@item.IDCUSTOMER)"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </th>
+                </tr>
                     }
                 }
 
@@ -148,3 +156,4 @@
         });
     }
 </script>
+

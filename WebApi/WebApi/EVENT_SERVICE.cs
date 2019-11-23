@@ -12,14 +12,11 @@ namespace WebApi
     using System;
     using System.Collections.Generic;
     
-    public partial class ORDER_INFO
+    public partial class EVENT_SERVICE
     {
-        public int IDODER { get; set; }
-        public int IDSERVICE { get; set; }
-        public string NOTE { get; set; }
-        public Nullable<double> TOTAL_PRICE { get; set; }
+        public int IDSERVICES { get; set; }
+        public int IDEVENT { get; set; }
     
-        public virtual ORDER ORDER { get; set; }
-        public virtual SERVICE SERVICE { get; set; }
+        public virtual EVENT EVENT { get; set; }
     }
 }
