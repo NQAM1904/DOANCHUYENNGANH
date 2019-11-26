@@ -35,6 +35,7 @@ namespace WebApi
         public virtual DbSet<IMGAGENCY> IMGAGENCies { get; set; }
         public virtual DbSet<LOCATION> LOCATIONs { get; set; }
         public virtual DbSet<ORDER> ORDERs { get; set; }
+        public virtual DbSet<ORDER_HISTORY> ORDER_HISTORY { get; set; }
         public virtual DbSet<ORDER_INFO> ORDER_INFO { get; set; }
         public virtual DbSet<Person> PEOPLE { get; set; }
         public virtual DbSet<POSITION> POSITIONs { get; set; }

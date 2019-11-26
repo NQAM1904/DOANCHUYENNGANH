@@ -18,6 +18,7 @@ namespace WebApi
         public ORDER()
         {
             this.ORDER_INFO = new HashSet<ORDER_INFO>();
+            this.ORDER_HISTORY = new HashSet<ORDER_HISTORY>();
         }
     
         public int IDODER { get; set; }
@@ -25,11 +26,13 @@ namespace WebApi
         public Nullable<int> IDCUSTOMER { get; set; }
         public string NOTE { get; set; }
         public Nullable<System.DateTime> CREATE_ORDER { get; set; }
-        public Nullable<bool> STATUS { get; set; }
+        public Nullable<int> STATUS { get; set; }
     
         public virtual AGENCY AGENCY { get; set; }
         public virtual CUSTOMER CUSTOMER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDER_INFO> ORDER_INFO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_HISTORY> ORDER_HISTORY { get; set; }
     }
 }

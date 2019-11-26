@@ -68,7 +68,26 @@ namespace WebApi.Controllers
         {
             return View();
         }
+       
         public ActionResult OrderWaiting()
+        {
+            ViewBag.id = 4;
+            if (Session["login"] is null) return RedirectToAction("Index");
+            return View();
+        }
+        public ActionResult OrderDeny()
+        {
+             if (Session["login"] is null) return RedirectToAction("Login");
+            ViewBag.Id = 5;
+            return View();
+        }
+        public ActionResult OrderAccpet()
+        {
+            if (Session["login"] is null) return RedirectToAction("Login");
+            ViewBag.Id = 6;
+            return View();
+        }
+        public ActionResult OrderInfo()
         {
             if (Session["login"] is null) return RedirectToAction("Index");
             return View();

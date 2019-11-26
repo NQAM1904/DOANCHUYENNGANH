@@ -241,6 +241,82 @@ namespace WebApi.Controllers
             }
         }
         //category của admin
+        //orderaccpet
+        [HttpPost]
+        public string AccpetOrder(int id)
+        {
+            if (Session["login"] is null) return null;
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var order = db.ORDERs.Where(x => x.IDODER == id).FirstOrDefault();
+                if (order is null) return "Không tìm thấy đối tượng này";
+                try
+                {
+                    order.STATUS = 6;
+                    ORDER_HISTORY history = new ORDER_HISTORY();
+                    history.IDODER = id;
+                    history.IDUSER = (Session["login"] as USER).IDUSER;
+                    history.STATUS = order.STATUS;
+                    history.DATE = DateTime.Now;
+                    order.ORDER_HISTORY.Add(history);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "ok";
+        }
+        // orderdeny
+        [HttpPost]
+        public string DenyOrder(int id)
+        {
+            if (Session["login"] is null) return null;
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var order = db.ORDERs.Where(x => x.IDODER == id).FirstOrDefault();
+                if (order is null) return "Không tìm thấy đối tượng này";
+                
+                try
+                {
+                    order.STATUS = 4;
+                    ORDER_HISTORY history = new ORDER_HISTORY();
+                    history.IDODER = id;
+                    history.IDUSER = (Session["login"] as USER).IDUSER;
+                    history.STATUS = order.STATUS;
+                    history.DATE = DateTime.Now;
+                    order.ORDER_HISTORY.Add(history);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "ok";
+        }
+        [HttpDelete]
+        public string DeleteOrder(int id)
+        {
+            if (Session["login"] is null) return null;
+
+            using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+            {
+                var order = db.ORDERs.Where(x => x.IDODER == id).FirstOrDefault();
+                if (order is null) return "Không tìm thấy đối tượng này";
+                db.ORDERs.Remove(order);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "ok";
+        }
 
     }
 }

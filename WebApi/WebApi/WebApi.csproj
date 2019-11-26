@@ -179,7 +179,6 @@
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\Agency_InfoController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryApiController.cs" />
     <Compile Include="Controllers\Cate_InfoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -225,9 +224,11 @@
     <Compile Include="Models\Agency.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\LoginAdmin.cs" />
-    <Compile Include="Models\OrderInfo.cs" />
     <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="ORDER.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORDER_HISTORY.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ORDER_INFO.cs">
@@ -700,7 +701,9 @@
     <Content Include="Views\Admin\OrderWaiting.cshtml" />
     <Content Include="Views\Admin\Customer.cshtml" />
     <Content Include="Views\Agency\OrderWaiting.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Admin\OrderDeny.cshtml" />
+    <Content Include="Views\Admin\OrderAccpet.cshtml" />
+    <Content Include="Views\Admin\OrderInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

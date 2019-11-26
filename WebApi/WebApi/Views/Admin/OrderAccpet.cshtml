@@ -1,23 +1,20 @@
-﻿@model WebApi.ORDER
+﻿
 @{
-    ViewBag.Title = "Yêu cầu chờ duyệt";
+    ViewBag.Title = "OrderAccpet";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
-
-<h2>Yêu cầu chờ duyệt</h2>
-
+<h2>Đơn đã duyệt</h2>
 <div class="card-body">
     <div class="table-responsive">
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    
+
                     <th scope="col">Khách hàng</th>
                     <th scope="col">Công ty</th>
-                    <th scope="col">Ghi chú</th>
                     <th scope="col">Ngày tạo</th>
                     <th scope="col">Trạng thái</th>
                     <th></th>
@@ -26,24 +23,24 @@
             <tbody>
                 @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
                 {
-                    int id = ViewBag.id = 4;
+                    int id = ViewBag.id = 6;
                     var idUser = ((USER)Session["TaiKhoan"]);
                     var custom = db.CUSTOMERs.Where(x => x.IDUSER == idUser.IDUSER);
-                    foreach (var item in db.ORDERs.Where(x=>x.STATUS == id).ToList())
+                    foreach (var item in db.ORDERs.Where(x => x.STATUS == id).ToList())
 
                     {
                         <tr>
-                           
                             <td>@item.CUSTOMER.NAMECUSTOM</td>
                             <td>@item.AGENCY.NAMEAGENCY</td>
-                            <td>@item.NOTE</td>
                             <td>@item.CREATE_ORDER</td>
+                            @if (item.STATUS == 6)
+                            {
+                                <td style="color:green;">YÊU CẦU ĐÃ ĐƯỢC DUYỆT</td>
+                            }
+
                             <th>
                                 <div class="btn-group" role="group">
                                     <a role="button" class="btn btn-primary" href="/Admin/OrderInfo/@item.IDODER"><i class="fas fa-eye"></i></a>
-                                    <button type="button" class="btn btn-success" onclick="Accpet(@item.IDODER)"><i class="fas fa-check"></i></button>
-                                    <button type="button" class="btn btn-danger" onclick="Deny(@item.IDODER)"><i class="fas fa-trash-alt"></i></button>
-
                                 </div>
                             </th>
                         </tr>
@@ -55,39 +52,8 @@
     </div>
 </div>
 <script>
-   
     $(document).ready(function () {
         $('#myTable').DataTable();
     });
-    function Accpet(id) {
-        if (!confirm("Bạn muốn chuyển yêu cầu này đến công ty được giao?")) return;
-        $.ajax({
-            url: '/Ajax/AccpetOrder/' + id,
-            type: 'POST',
-            dataType: 'text'
-        }).done(function (ketqua) {
-            if (ketqua == "ok") {
-                alert("Công ty đã nhận được yêu cầu được duyệt");
-                location.reload();
-                return;
-            }
-            alert(ketqua);
-        });
-    }
-
-    function Deny(id) {
-        if (!confirm("Bạn có thực sự muốn TỪ CHỐI yêu cầu này không?")) return;
-        $.ajax({
-            url: '/Ajax/DenyOrder/' + id,
-            type: 'POST',
-            dataType: 'text'
-        }).done(function (ketqua) {
-            if (ketqua == "ok") {
-                alert("Đã từ chối yêu cầu");
-                location.reload();
-                return;
-            }
-            alert(ketqua);
-        });
-    }
+    
 </script>

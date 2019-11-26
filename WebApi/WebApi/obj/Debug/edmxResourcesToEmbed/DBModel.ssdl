@@ -114,7 +114,17 @@
     <Property Name="IDCUSTOMER" Type="int" />
     <Property Name="NOTE" Type="ntext" />
     <Property Name="CREATE_ORDER" Type="datetime" />
-    <Property Name="STATUS" Type="bit" />
+    <Property Name="STATUS" Type="int" />
+  </EntityType>
+  <EntityType Name="ORDER_HISTORY">
+    <Key>
+      <PropertyRef Name="IDHISTORY" />
+    </Key>
+    <Property Name="IDHISTORY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUSER" Type="int" />
+    <Property Name="IDODER" Type="int" />
+    <Property Name="DATE" Type="date" />
+    <Property Name="STATUS" Type="int" />
   </EntityType>
   <EntityType Name="ORDER_INFO">
     <Key>
@@ -434,6 +444,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ORDER_HISTORY_ORDER">
+    <End Role="ORDER" Type="Self.ORDER" Multiplicity="0..1" />
+    <End Role="ORDER_HISTORY" Type="Self.ORDER_HISTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER">
+        <PropertyRef Name="IDODER" />
+      </Principal>
+      <Dependent Role="ORDER_HISTORY">
+        <PropertyRef Name="IDODER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_HISTORY_USER">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="ORDER_HISTORY" Type="Self.ORDER_HISTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="IDUSER" />
+      </Principal>
+      <Dependent Role="ORDER_HISTORY">
+        <PropertyRef Name="IDUSER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ORDER_INFO_SERVICES">
     <End Role="SERVICES" Type="Self.SERVICES" Multiplicity="1" />
     <End Role="ORDER_INFO" Type="Self.ORDER_INFO" Multiplicity="*" />
@@ -471,6 +505,7 @@
     <EntitySet Name="LOC_EVENT" EntityType="Self.LOC_EVENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOCATION" EntityType="Self.LOCATION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDER" EntityType="Self.ORDER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_HISTORY" EntityType="Self.ORDER_HISTORY" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDER_INFO" EntityType="Self.ORDER_INFO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PEOPLE" EntityType="Self.PEOPLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="POSITION" EntityType="Self.POSITION" Schema="dbo" store:Type="Tables" />
@@ -559,6 +594,14 @@
     <AssociationSet Name="FK_ORDER_AGENCY" Association="Self.FK_ORDER_AGENCY">
       <End Role="AGENCY" EntitySet="AGENCY" />
       <End Role="ORDER" EntitySet="ORDER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_HISTORY_ORDER" Association="Self.FK_ORDER_HISTORY_ORDER">
+      <End Role="ORDER" EntitySet="ORDER" />
+      <End Role="ORDER_HISTORY" EntitySet="ORDER_HISTORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_HISTORY_USER" Association="Self.FK_ORDER_HISTORY_USER">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="ORDER_HISTORY" EntitySet="ORDER_HISTORY" />
     </AssociationSet>
     <AssociationSet Name="FK_ORDER_INFO_SERVICES" Association="Self.FK_ORDER_INFO_SERVICES">
       <End Role="SERVICES" EntitySet="SERVICES" />

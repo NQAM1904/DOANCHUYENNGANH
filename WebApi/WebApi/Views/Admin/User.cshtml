@@ -26,7 +26,7 @@
                 <tr>
                     <th scope="col">Tên Tài Khoản</th>
                     <th scope="col">Tên đăng nhập</th>
-                    <th scope="col">Tên chức năng</th>
+                    <th scope="col">Chức năng</th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,14 +40,7 @@
                 <tr>
                     <td>@item.FULLNAME</td>
                     <td>@item.USERNAME</td>
-                    @if (@item.IDROLE == 1)
-                    {
-                        <td>Quản trị viên</td>
-                    }
-                    else
-                    {
-                        <td>người dùng</td>
-                    }
+                    <td>@item.ROLE.ROLENAME</td>
 
                     <th>
                         <div class="btn-group" role="group">

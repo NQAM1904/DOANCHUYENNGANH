@@ -33,7 +33,7 @@ namespace WebApi.Controllers
                     o.IDCUSTOMER = custom.IDCUSTOMER;
                     o.CREATE_ORDER = DateTime.Now;
                     o.IDAGENCY = IDAGENCY;
-                    o.STATUS = false;
+                    o.STATUS = 4;
                     o.NOTE = note;
                     if (o.IDODER < 1) db.ORDERs.Add(o);
                     db.SaveChanges();

@@ -19,6 +19,7 @@ namespace WebApi
         {
             this.AGENCies = new HashSet<AGENCY>();
             this.CUSTOMERs = new HashSet<CUSTOMER>();
+            this.ORDER_HISTORY = new HashSet<ORDER_HISTORY>();
         }
     
         public int IDUSER { get; set; }
@@ -31,6 +32,8 @@ namespace WebApi
         public virtual ICollection<AGENCY> AGENCies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CUSTOMER> CUSTOMERs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_HISTORY> ORDER_HISTORY { get; set; }
         public virtual ROLE ROLE { get; set; }
     }
 }
