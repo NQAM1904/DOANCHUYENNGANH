@@ -86,7 +86,7 @@
       <PropertyRef Name="IDIMG" />
     </Key>
     <Property Name="IDIMG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FILENAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILENAME" Type="nvarchar" MaxLength="255" />
     <Property Name="IDAGENCY" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LOC_EVENT">
@@ -112,6 +112,7 @@
     <Property Name="IDODER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDAGENCY" Type="int" />
     <Property Name="IDCUSTOMER" Type="int" />
+    <Property Name="NOTE" Type="ntext" />
     <Property Name="CREATE_ORDER" Type="datetime" />
     <Property Name="STATUS" Type="bit" />
   </EntityType>
@@ -122,7 +123,6 @@
     </Key>
     <Property Name="IDODER" Type="int" Nullable="false" />
     <Property Name="IDSERVICE" Type="int" Nullable="false" />
-    <Property Name="NOTE" Type="ntext" />
     <Property Name="TOTAL_PRICE" Type="float" />
   </EntityType>
   <EntityType Name="PEOPLE">

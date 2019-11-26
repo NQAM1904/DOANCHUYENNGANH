@@ -1,9 +1,49 @@
-﻿
+﻿@model WebApi.ORDER
 @{
-    ViewBag.Title = "OrderWaiting";
+    ViewBag.Title = "Yêu cầu chờ duyệt";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
 <br />
 <h2>Yêu cầu chờ duyệt</h2>
 
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Mã đơn</th>
+                    <th scope="col">Khách hàng</th>
+                    <th scope="col">Giá tiền</th>
+                    <th scope="col">Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @using (DOANCHUYENNGANHEntities db = new DOANCHUYENNGANHEntities())
+                {
+                    var idUser = ((USER)Session["TaiKhoan"]);
+                    var custom = db.CUSTOMERs.Where(x => x.IDUSER == idUser.IDUSER);
+                    var agency = db.AGENCies.Where(x => x.IDAGENCY);
+                    foreach (var item in db.ORDERs.ToList())
+
+                    {
+                        //string tongTien = String.Format("{0:N0}");
+                        <tr>
+                            <td>@item.IDODER</td>
+                            <td>@item.CUSTOMER.NAMECUSTOM</td>
+                            @*<td>@tongTien</td>
+                            <th>
+
+
+                            </th>*@
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

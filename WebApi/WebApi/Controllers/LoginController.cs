@@ -14,6 +14,7 @@ namespace WebApi.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            ViewBag.Title = "Đăng Nhập";
             return View();
         }
 

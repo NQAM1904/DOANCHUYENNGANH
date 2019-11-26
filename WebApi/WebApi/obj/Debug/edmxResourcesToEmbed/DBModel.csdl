@@ -100,7 +100,7 @@
       <PropertyRef Name="IDIMG" />
     </Key>
     <Property Name="IDIMG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FILENAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IDAGENCY" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AGENCY" Relationship="Self.FK_IMGAGENCY_AGENCY" FromRole="IMGAGENCY" ToRole="AGENCY" />
   </EntityType>
@@ -120,6 +120,7 @@
     <Property Name="IDODER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDAGENCY" Type="Int32" />
     <Property Name="IDCUSTOMER" Type="Int32" />
+    <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CREATE_ORDER" Type="DateTime" Precision="3" />
     <Property Name="STATUS" Type="Boolean" />
     <NavigationProperty Name="AGENCY" Relationship="Self.FK_ORDER_AGENCY" FromRole="ORDER" ToRole="AGENCY" />
@@ -133,7 +134,6 @@
     </Key>
     <Property Name="IDODER" Type="Int32" Nullable="false" />
     <Property Name="IDSERVICE" Type="Int32" Nullable="false" />
-    <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="TOTAL_PRICE" Type="Double" />
     <NavigationProperty Name="ORDER" Relationship="Self.FK__ORDER_INF__IDODE__68487DD7" FromRole="ORDER_INFO" ToRole="ORDER" />
     <NavigationProperty Name="SERVICE" Relationship="Self.FK_ORDER_INFO_SERVICES" FromRole="ORDER_INFO" ToRole="SERVICES" />

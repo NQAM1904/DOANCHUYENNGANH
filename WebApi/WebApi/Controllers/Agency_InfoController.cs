@@ -34,7 +34,7 @@ namespace WebApi.Controllers
                     o.CREATE_ORDER = DateTime.Now;
                     o.IDAGENCY = IDAGENCY;
                     o.STATUS = false;
-
+                    o.NOTE = note;
                     if (o.IDODER < 1) db.ORDERs.Add(o);
                     db.SaveChanges();
                     foreach(var item in dsDV)

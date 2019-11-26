@@ -16,7 +16,6 @@ namespace WebApi
     {
         public int IDODER { get; set; }
         public int IDSERVICE { get; set; }
-        public string NOTE { get; set; }
         public Nullable<double> TOTAL_PRICE { get; set; }
     
         public virtual ORDER ORDER { get; set; }

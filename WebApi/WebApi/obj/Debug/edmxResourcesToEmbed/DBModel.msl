@@ -104,6 +104,7 @@
           <ScalarProperty Name="IDODER" ColumnName="IDODER" />
           <ScalarProperty Name="IDAGENCY" ColumnName="IDAGENCY" />
           <ScalarProperty Name="IDCUSTOMER" ColumnName="IDCUSTOMER" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
           <ScalarProperty Name="CREATE_ORDER" ColumnName="CREATE_ORDER" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
         </MappingFragment>
@@ -114,7 +115,6 @@
         <MappingFragment StoreEntitySet="ORDER_INFO">
           <ScalarProperty Name="IDODER" ColumnName="IDODER" />
           <ScalarProperty Name="IDSERVICE" ColumnName="IDSERVICE" />
-          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
           <ScalarProperty Name="TOTAL_PRICE" ColumnName="TOTAL_PRICE" />
         </MappingFragment>
       </EntityTypeMapping>

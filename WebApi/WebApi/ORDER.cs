@@ -23,6 +23,7 @@ namespace WebApi
         public int IDODER { get; set; }
         public Nullable<int> IDAGENCY { get; set; }
         public Nullable<int> IDCUSTOMER { get; set; }
+        public string NOTE { get; set; }
         public Nullable<System.DateTime> CREATE_ORDER { get; set; }
         public Nullable<bool> STATUS { get; set; }
     
